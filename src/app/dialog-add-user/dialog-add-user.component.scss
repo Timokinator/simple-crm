@@ -1,0 +1,35 @@
+.container-input-names {
+    display: flex;
+    gap: 16px;
+    padding: 4px;
+}
+
+.container-input-birthday {
+    display: flex;
+    gap: 16px;
+    padding: 4px;
+}
+
+.container-input-address-street {
+    display: flex;
+    gap: 16px;
+    padding: 4px;
+}
+
+.container-input-address-city {
+    display: flex;
+    gap: 16px;
+    padding: 4px;
+}
+
+.input-address-street, .input-birthday {
+    width: 100%;
+}
+
+.input-zip {
+    width: 30%;
+}
+
+.input-city {
+    width: 70%;
+}

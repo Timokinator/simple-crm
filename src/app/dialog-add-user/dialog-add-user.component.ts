@@ -7,26 +7,17 @@ import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, a
   templateUrl: './dialog-add-user.component.html',
   styleUrls: ['./dialog-add-user.component.scss']
 })
-export class DialogAddUserComponent implements OnInit {
+export class DialogAddUserComponent {
   firestore: Firestore = inject(Firestore);
   user = new User();
-  public listUser: any = [];
+  listUser: any = [];
   birthDate!: Date;
   unsubUser: any;
-
+  loading: boolean = false;
 
   constructor() {
     this.unsubUser = this.subUserList();
   }
-
-  ngOnInit(): void {
-    setTimeout(() => {
-      console.log(this.listUser)
-    }, 1000);
-
-  }
-
-
 
 
 
@@ -40,25 +31,28 @@ export class DialogAddUserComponent implements OnInit {
     });
   }
 
+
   setUserObject(obj: any, id: string,): User {
     return {
       id: id || "",
       firstName: obj.firstName || "",
-      lastName: obj.lastName || "note",
+      lastName: obj.lastName || "",
       birthDate: obj.birthDate || 0,
       street: obj.street || "",
       zipCode: obj.zipCode || "",
-      city: obj.city || ""
+      city: obj.city || "",
+      email: obj.email || ""
     }
   }
 
 
-  async addUser(item: User, colId: "user") {
-    if (colId == "user") {
+  async addUser(item: User, colId: "users") {
+    if (colId == "users") {
       await addDoc(this.getUserRef(), item).catch(
         (err) => { console.error(err) }
       ).then(
         (docRef) => {
+          this.loading = false;
           console.log("Document written with ID: ", docRef?.id);
         }
       )
@@ -67,24 +61,21 @@ export class DialogAddUserComponent implements OnInit {
 
 
 
-
-
   getUserRef() {
-    return collection(this.firestore, 'user');
+    return collection(this.firestore, 'users');
   }
 
 
-
-
   saveUser() {
-    if (this.user.birthDate) {
+    this.loading = true;
+    if (this.birthDate) {
       this.user.birthDate = this.birthDate.getTime();
     } else {
       this.user.birthDate = 0;
     }
 
     console.log(this.user)
-    this.addUser(this.setUserObject(this.user, ''), 'user')
+    this.addUser(this.setUserObject(this.user, ''), 'users')
   }
 
   onNoClick() {

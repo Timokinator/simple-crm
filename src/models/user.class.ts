@@ -5,7 +5,8 @@ export class User {
     birthDate!: number;
     street!: string;
     zipCode!: string;
-    city!: string
+    city!: string;
+    email!: string
 
 
 
@@ -17,9 +18,25 @@ export class User {
         this.street = obj ? obj.street : '';
         this.zipCode = obj ? obj.zipCode : '';
         this.city = obj ? obj.city : '';
+        this.email = obj ? obj.email: "";
 
 
     }
+
+
+
+    /* public toJSON(): any {
+        return {
+            id: this.id!,
+            firstName: this.firstName,
+            lastName: this.lastName,
+            birthDate: this.birthDate,
+            street: this.street,
+            zipCode: this.zipCode,
+            city: this.city
+        };
+
+    } */
 
 
 }

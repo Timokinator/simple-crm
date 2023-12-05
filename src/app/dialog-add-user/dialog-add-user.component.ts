@@ -1,6 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'src/models/user.class';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
+import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -14,12 +16,24 @@ export class DialogAddUserComponent {
   birthDate!: Date;
   unsubUser: any;
   loading: boolean = false;
+  addUserForm: any;
+  formIncomplete: boolean = true;
+
 
   constructor() {
     this.unsubUser = this.subUserList();
   }
 
 
+  checkValidation() {
+    if (this.user.firstName && this.user.lastName && this.user.email && this.birthDate && this.user.city && this.user.street && this.user.zipCode) {
+      this.formIncomplete = false;
+    } else
+      this.formIncomplete = true;
+      console.log("trigger!");
+      
+
+  }
 
 
   subUserList() {

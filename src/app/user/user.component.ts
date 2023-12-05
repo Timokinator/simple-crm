@@ -27,6 +27,7 @@ export class UserComponent {
   }
 
 
+
   subUserList() {
     return onSnapshot(this.getUserRef(), (list) => {
       this.listUser = [];
@@ -35,6 +36,7 @@ export class UserComponent {
       });
     });
   }
+
 
 
   setUserObject(obj: any, id: string,): User {

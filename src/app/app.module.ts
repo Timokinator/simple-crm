@@ -17,11 +17,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatCardModule} from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 
@@ -50,6 +51,7 @@ import {MatCardModule} from '@angular/material/card';
     FormsModule,
     MatProgressBarModule,
     MatCardModule,
+    ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp({ "projectId": "simple-crm-11490", "appId": "1:114888599173:web:a4921aa755da4c02746bec", "storageBucket": "simple-crm-11490.appspot.com", "apiKey": "AIzaSyAY2aBF17See0jJbzS9P6IapbcKeuWW1xM", "authDomain": "simple-crm-11490.firebaseapp.com", "messagingSenderId": "114888599173" })),
     provideFirestore(() => getFirestore()),
   ],

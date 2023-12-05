@@ -4,18 +4,41 @@
     right: 56px;
 }
 
+
+
 table {
+
+    line-height: 2;
+    border-collapse: collapse;
 
 
     tr {
         text-align: start;
-    }
 
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+    }
 
     th {
         text-align: start;
+
     }
 
+}
 
+.first-row {
+    background-color: #3f51b5;
+    border: none;
+    color: white;
+
+
+    &:hover {
+        background-color: #3f51b5 !important;
+        border: none !important;
+        color: white !important;
+        cursor: unset !important;
+    }
 
 }

@@ -91,7 +91,7 @@ export class DialogAddUserComponent {
   }
 
   onNoClick() {
-    console.log('no')
+    console.log('Cancel')
   }
 
 

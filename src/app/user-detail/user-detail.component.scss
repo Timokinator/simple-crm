@@ -1,0 +1,39 @@
+.mat-card-header {
+    min-height: 200px;
+    max-height: 100%;
+    background-color: rgb(236, 108, 58);
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    gap: 32px;
+    padding: 16px;
+
+
+    img {
+        width: 88px;
+        border-radius: 100px;
+        background-color: white;
+        object-fit: cover;
+    }
+
+
+}
+
+
+.user-details-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 88px;
+
+    h2 {
+        margin-bottom: 0;
+    }
+}
+
+
+.mat-card-content {
+    margin-top: 32px;
+}

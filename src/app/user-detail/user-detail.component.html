@@ -1,0 +1,23 @@
+<div class="container-mat-card">
+
+    <mat-card *ngIf="dataLoaded" class="mat-card-header">
+        <img src="../../assets/img/user-pic-male.png" alt="">
+        <div class="user-details-header">
+            <h2>{{ userData.firstName }} {{ userData.lastName}}</h2>
+            {{ userData.email }}
+        </div>
+    </mat-card>
+
+    <mat-card *ngIf="dataLoaded" class="mat-card-content">
+        <mat-card-header>
+            <mat-card-title>Address</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            {{ userData.street }} <br>
+            {{ userData.zipCode }} {{ userData.city }}
+        </mat-card-content>
+
+    </mat-card>
+
+
+</div>

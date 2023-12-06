@@ -7,11 +7,11 @@
             <th>City</th>
         </tr>
 
-        <tr *ngFor="let user of listUser; let i = index">
-            <td>{{ listUser[i]['lastName'] }}</td>
-            <td>{{ listUser[i]['firstName'] }}</td>
-            <td>{{ listUser[i]['email'] }}</td>
-            <td>{{ listUser[i]['city'] }}</td>
+        <tr *ngFor="let user of listUser" [routerLink]="['/user/' + user.id]">
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.city }}</td>
         </tr>
 
     </table>

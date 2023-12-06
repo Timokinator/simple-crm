@@ -17,6 +17,14 @@
     min-height: 56px;
     display: flex;
     align-items: center;
+    background-color: lightgray;
+
+
+    img {
+        max-width: 75%
+    }
+
+
 }
 
 mat-toolbar,

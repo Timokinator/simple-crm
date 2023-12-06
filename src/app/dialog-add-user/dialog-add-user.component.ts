@@ -30,8 +30,6 @@ export class DialogAddUserComponent {
       this.formIncomplete = false;
     } else
       this.formIncomplete = true;
-      console.log("trigger!");
-      
 
   }
 

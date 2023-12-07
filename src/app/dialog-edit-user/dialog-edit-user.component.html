@@ -1,0 +1,46 @@
+<div *ngIf="loading" class="container-progress-bar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<h1 mat-dialog-title>Edit User</h1>
+<div mat-dialog-content>
+    <div class="container-input-names">
+        <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input (keyup)="checkValidation()" required id="firstName" name="firstName" class="form-control"
+                minlength="4" #name="ngModel" [disabled]="loading" [(ngModel)]="user.firstName" matInput placeholder="">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="user.lastName" matInput
+                placeholder="">
+        </mat-form-field>
+    </div>
+
+    <div class="container-input-email">
+        <mat-form-field class="input-email" appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input (keyup)="checkValidation()" required type="email" [disabled]="loading" [(ngModel)]="user.email"
+                matInput placeholder="">
+        </mat-form-field>
+    </div>
+
+    <div class="container-input-birthday">
+        <mat-form-field class="input-birthday">
+            <mat-label>Birth Date</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="birthDate" matInput
+                [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+
+</div>
+<div mat-dialog-actions>
+    <button [disabled]="loading" mat-button (click)="onNoClick()" [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading || formIncomplete" mat-button type="submit" (click)="saveUser()" [mat-dialog-close]=""
+        cdkFocusInitial>Save</button>
+</div>

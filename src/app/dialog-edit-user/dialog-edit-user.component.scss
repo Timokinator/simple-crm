@@ -1,0 +1,27 @@
+.container-progress-bar {
+    padding: 0;
+}
+
+
+.container-input-names {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.container-input-birthday {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.container-input-email {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.input-birthday,
+.input-email {
+    width: 100%;
+}

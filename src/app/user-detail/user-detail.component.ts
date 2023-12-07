@@ -2,6 +2,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { query, orderBy, limit, where, Firestore, collection, doc, getDoc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc, DocumentData, DocumentSnapshot } from '@angular/fire/firestore';
 import { User } from 'src/models/user.class';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
+import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -14,10 +17,10 @@ export class UserDetailComponent implements OnInit {
   routeId: any;
   userID: any;
   userData: any;
-  user = new User;
+  user: User = new User();
   dataLoaded: boolean = false;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.routeId = this.route.params;
     this.userID = this.routeId['_value']['id'];
 
@@ -39,8 +42,8 @@ export class UserDetailComponent implements OnInit {
 
   writeUser(docSnap: DocumentSnapshot<DocumentData, DocumentData>) {
     if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      this.userData = docSnap.data();
+      this.user = new User(docSnap.data());
+      console.log(this.user);
       this.dataLoaded = true;
     } else {
       // docSnap.data() will be undefined in this case
@@ -49,13 +52,23 @@ export class UserDetailComponent implements OnInit {
   }
 
 
+  openAddressDialog() {
+    console.log('Hello');
+
+  }
 
 
 
+  editAddress() {
+    const dialog = this.dialog.open(DialogEditAddressComponent);
+    dialog.componentInstance.user = this.user;
+  }
 
 
-
-
+  editUserDetail() {
+    const dialog = this.dialog.open(DialogEditUserComponent);
+    dialog.componentInstance.user = this.user;
+  }
 
 
 

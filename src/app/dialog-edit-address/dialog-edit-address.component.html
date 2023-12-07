@@ -1,0 +1,42 @@
+<div *ngIf="loading" class="container-progress-bar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<h1 mat-dialog-title>Edit Address</h1>
+
+
+
+<div mat-dialog-content>
+
+    <div class="container-input-address-street">
+        <mat-form-field class="input-address-street" appearance="outline">
+            <mat-label>Street & House number</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="user.street" matInput
+                placeholder="">
+        </mat-form-field>
+
+    </div>
+
+    <div class="container-input-address-city">
+
+        <mat-form-field class="input-zip" appearance="outline">
+            <mat-label>Zip code</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="user.zipCode" type="text"
+                matInput maxlength="10" placeholder="">
+        </mat-form-field>
+
+        <mat-form-field class="input-city" appearance="outline">
+            <mat-label>City</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="user.city" matInput
+                placeholder="">
+        </mat-form-field>
+
+    </div>
+
+
+</div>
+<div mat-dialog-actions>
+    <button [disabled]="loading" mat-button (click)="onNoClick()" [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading || formIncomplete" mat-button type="submit" (click)="saveUser()" [mat-dialog-close]=""
+        cdkFocusInitial>Save</button>
+</div>

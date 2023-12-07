@@ -1,0 +1,23 @@
+.container-input-address-street {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.container-input-address-city {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.input-address-street {
+    width: 100%;
+}
+
+.input-zip {
+    width: 30%;
+}
+
+.input-city {
+    width: 70%;
+}

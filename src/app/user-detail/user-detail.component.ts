@@ -20,16 +20,20 @@ export class UserDetailComponent implements OnInit {
   user: User = new User();
   dataLoaded: boolean = false;
   birthDayShow: string | undefined;
+  unsubUser;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.routeId = this.route.params;
     this.userID = this.routeId['_value']['id'];
+    this.unsubUser = onSnapshot(doc(this.firestore, 'users', this.userID), (doc) => {
+      this.loadUser();
+    }
+    )
 
   };
 
   ngOnInit(): void {
-    console.log(this.userID)
-    this.loadUser();
+    //console.log(this.userID)
   }
 
 
@@ -51,7 +55,7 @@ export class UserDetailComponent implements OnInit {
   writeUser(docSnap: DocumentSnapshot<DocumentData, DocumentData>) {
     if (docSnap.exists()) {
       this.user = new User(docSnap.data());
-      console.log(this.user);
+      //console.log(this.user);
       this.convertBirthdayDate();
       this.dataLoaded = true;
     } else {
@@ -66,16 +70,25 @@ export class UserDetailComponent implements OnInit {
 
   editAddress() {
     const dialog = this.dialog.open(DialogEditAddressComponent);
-    dialog.componentInstance.user = this.user;
+    dialog.componentInstance.user = new User(this.user);
   }
 
 
   editUserDetail() {
     const dialog = this.dialog.open(DialogEditUserComponent);
-    dialog.componentInstance.user = this.user;
+    dialog.componentInstance.user = new User(this.user);
   }
 
 
+
+  getUserRef() {
+    return collection(this.firestore, 'users');
+  }
+
+
+  ngonDestroy() {
+    this.unsubUser();
+  }
 
 
 }

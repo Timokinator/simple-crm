@@ -9,33 +9,12 @@ import { UserDetailComponent } from '../user-detail/user-detail.component';
   templateUrl: './dialog-edit-address.component.html',
   styleUrls: ['./dialog-edit-address.component.scss']
 })
-export class DialogEditAddressComponent implements OnInit {
+export class DialogEditAddressComponent {
 
   firestore: Firestore = inject(Firestore);
   loading: boolean = false;
   formIncomplete: boolean = false;
-  userId: string | undefined;
   user!: User;
-
-
-  ngOnInit(): void {
-    this.loggingAddress();
-   
-  }
-
-
-  loggingAddress() {
-    setInterval(() => {
-      console.log(this.user.street);
-      console.log(this.user.id);
-        
-    }, 1000);
-
-  }
-
-
-
-
 
 
   getCleanJson(obj: User): {} {
@@ -53,39 +32,29 @@ export class DialogEditAddressComponent implements OnInit {
 
 
   async updateUserAddress() {
+    this.loading = true;
     const docRef = doc(this.getUserRef(), this.user.id);
-    console.log(docRef);
+    //console.log(docRef);
     await updateDoc(docRef, this.getCleanJson(this.user)).catch(
       (err) => { console.log(err); }
     ).then(
-      () => { console.log("Update") }
+      () => {
+        console.log("Update")
+        this.loading = false;
+      }
     );
   }
-
 
 
   getUserRef() {
     return collection(this.firestore, 'users');
   }
 
-
-
   checkValidation() {
     if (this.user.city && this.user.street && this.user.zipCode) {
       this.formIncomplete = false;
     } else
       this.formIncomplete = true;
-
-  }
-
-
-  onNoClick() {
-
-  }
-
-
-  saveUser() {
-
   }
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'src/models/user.class';
-import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
+import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc, DocumentReference } from '@angular/fire/firestore';
 import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
@@ -58,6 +58,20 @@ export class DialogAddUserComponent {
   }
 
 
+  getCleanJson(obj: User, newIDid: any): {} {
+    return {
+      id: newIDid,
+      firstName: obj.firstName || "",
+      lastName: obj.lastName || "",
+      birthDate: obj.birthDate || 0,
+      street: obj.street || "",
+      zipCode: obj.zipCode || "",
+      city: obj.city || "",
+      email: obj.email || ""
+    }
+  }
+
+
   async addUser(item: User, colId: "users") {
     if (colId == "users") {
       await addDoc(this.getUserRef(), item).catch(
@@ -65,10 +79,23 @@ export class DialogAddUserComponent {
       ).then(
         (docRef) => {
           this.loading = false;
-          console.log("Document written with ID: ", docRef?.id);
+          const newID = docRef?.id;
+          console.log("Document written with ID: ", newID);
+          this.updateUserWithId(item, newID);
         }
       )
     }
+  }
+
+
+  async updateUserWithId(item: User, id: any) {
+    const docRef = doc(this.getUserRef(), id);
+    await updateDoc(docRef, this.getCleanJson(item, id)).catch(
+      (err) => { console.log(err); }
+    ).then(
+      () => { console.log("Update") }
+    );
+
   }
 
 

@@ -19,9 +19,54 @@ export class DialogEditAddressComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.loggingAddress();
+   
+  }
+
+
+  loggingAddress() {
+    setInterval(() => {
+      console.log(this.user.street);
+      console.log(this.user.id);
+        
+    }, 1000);
 
   }
 
+
+
+
+
+
+  getCleanJson(obj: User): {} {
+    return {
+      id: obj.id,
+      firstName: obj.firstName || "",
+      lastName: obj.lastName || "",
+      birthDate: obj.birthDate || 0,
+      street: obj.street || "",
+      zipCode: obj.zipCode || "",
+      city: obj.city || "",
+      email: obj.email || ""
+    }
+  }
+
+
+  async updateUserAddress() {
+    const docRef = doc(this.getUserRef(), this.user.id);
+    console.log(docRef);
+    await updateDoc(docRef, this.getCleanJson(this.user)).catch(
+      (err) => { console.log(err); }
+    ).then(
+      () => { console.log("Update") }
+    );
+  }
+
+
+
+  getUserRef() {
+    return collection(this.firestore, 'users');
+  }
 
 
 

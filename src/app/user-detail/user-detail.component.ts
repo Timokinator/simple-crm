@@ -19,6 +19,7 @@ export class UserDetailComponent implements OnInit {
   userData: any;
   user: User = new User();
   dataLoaded: boolean = false;
+  birthDayShow: string | undefined;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.routeId = this.route.params;
@@ -30,6 +31,13 @@ export class UserDetailComponent implements OnInit {
     console.log(this.userID)
     this.loadUser();
   }
+
+
+  convertBirthdayDate() {
+    const date = new Date(this.user.birthDate)
+    this.birthDayShow = date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+  }
+
 
 
   async loadUser() {
@@ -44,6 +52,7 @@ export class UserDetailComponent implements OnInit {
     if (docSnap.exists()) {
       this.user = new User(docSnap.data());
       console.log(this.user);
+      this.convertBirthdayDate();
       this.dataLoaded = true;
     } else {
       // docSnap.data() will be undefined in this case
@@ -52,10 +61,6 @@ export class UserDetailComponent implements OnInit {
   }
 
 
-  openAddressDialog() {
-    console.log('Hello');
-
-  }
 
 
 

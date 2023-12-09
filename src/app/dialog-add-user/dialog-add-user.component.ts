@@ -16,7 +16,7 @@ export class DialogAddUserComponent {
   birthDate!: Date;
   unsubUser: any;
   loading: boolean = false;
-  addUserForm: any;
+  //addUserForm: any;
   formIncomplete: boolean = true;
 
 

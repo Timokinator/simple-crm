@@ -23,9 +23,16 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { DialogEditAddressComponent } from './dialog-edit-address/dialog-edit-address.component';
 import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
+import { DialogDeleteUserComponent } from './dialog-delete-user/dialog-delete-user.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { HelpSiteComponent } from './help-site/help-site.component';
+import { ImprintSiteComponent } from './imprint-site/imprint-site.component';
+import { NotesComponent } from './notes/notes.component';
+import { DialogAddNoteComponent } from './dialog-add-note/dialog-add-note.component';
+import { MatSelectModule, matSelectAnimations } from '@angular/material/select';
 
 
 
@@ -39,7 +46,12 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
     DialogAddUserComponent,
     UserDetailComponent,
     DialogEditAddressComponent,
-    DialogEditUserComponent
+    DialogEditUserComponent,
+    DialogDeleteUserComponent,
+    HelpSiteComponent,
+    ImprintSiteComponent,
+    NotesComponent,
+    DialogAddNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +72,8 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
     MatCardModule,
     ReactiveFormsModule,
     MatMenuModule,
+    MatDividerModule,
+    MatSelectModule,
     provideFirebaseApp(() => initializeApp({ "projectId": "simple-crm-11490", "appId": "1:114888599173:web:a4921aa755da4c02746bec", "storageBucket": "simple-crm-11490.appspot.com", "apiKey": "AIzaSyAY2aBF17See0jJbzS9P6IapbcKeuWW1xM", "authDomain": "simple-crm-11490.firebaseapp.com", "messagingSenderId": "114888599173" })),
     provideFirestore(() => getFirestore()),
   ],

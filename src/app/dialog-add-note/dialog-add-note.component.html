@@ -1,0 +1,41 @@
+<div *ngIf="loading" class="container-progress-bar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<h1 mat-dialog-title>Add note</h1>
+
+<div mat-dialog-content>
+    <div class="container-input-title">
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input (keyup)="checkValidation()" required id="title" name="title" class="form-control" minlength="4"
+                #name="ngModel" [disabled]="loading" [(ngModel)]="note.title" matInput placeholder="">
+        </mat-form-field>
+
+    </div>
+    <div class="container-input-content">
+        <mat-form-field appearance="outline">
+            <mat-label>Content</mat-label>
+            <textarea cols="30" rows="10" (keyup)="checkValidation()" [disabled]="loading"
+                [(ngModel)]="note.content" matInput placeholder="">
+            </textarea>
+        </mat-form-field>
+    </div>
+
+    <div class="container-input-user">
+        <mat-form-field>
+            <mat-label>User</mat-label>
+            <mat-select (selectionChange)="checkValidation()" required [disabled]="loading" [(ngModel)]="note.user">
+                <mat-option *ngFor="let user of listUser" value="{{ user.id }}">{{ user.firstName }} {{ user.lastName
+                    }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+</div>
+
+<div mat-dialog-actions>
+    <button [disabled]="loading" mat-button (click)="onNoClick()" [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading || formIncomplete" mat-button type="submit" (click)="saveNote()"
+        [mat-dialog-close]="">Save</button>
+</div>

@@ -68,3 +68,11 @@ ul {
 .container-router {
     padding: 16px 56px;
 }
+
+
+.container-drawer-content {
+    height: calc(100% - 57px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

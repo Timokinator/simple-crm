@@ -13,7 +13,17 @@
         </button>
 
         <mat-menu #menuHeader="matMenu">
-            <button mat-menu-item (click)="editUserDetail()">Edit</button>
+            <button mat-menu-item (click)="editUserDetail()">
+                <mat-icon>edit</mat-icon>
+                Edit user
+            </button>
+
+            <button mat-menu-item (click)="deleteUser()">
+                <mat-icon>delete</mat-icon>
+                Delete user
+            </button>
+
+
         </mat-menu>
 
 
@@ -40,7 +50,10 @@
         </button>
 
         <mat-menu #menuAddress="matMenu">
-            <button mat-menu-item (click)="editAddress()">Edit</button>
+            <button mat-menu-item (click)="editAddress()">
+                <mat-icon>edit</mat-icon>
+                Edit address
+            </button>
         </mat-menu>
 
     </mat-card>

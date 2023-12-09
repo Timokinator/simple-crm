@@ -21,6 +21,7 @@ export class NotesComponent {
   listNotes: any = [];
   listUser: any = [];
   note = new Note();
+  user = new User;
 
 
 

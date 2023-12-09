@@ -33,6 +33,8 @@ import { ImprintSiteComponent } from './imprint-site/imprint-site.component';
 import { NotesComponent } from './notes/notes.component';
 import { DialogAddNoteComponent } from './dialog-add-note/dialog-add-note.component';
 import { MatSelectModule, matSelectAnimations } from '@angular/material/select';
+import { DialogEditNoteComponent } from './dialog-edit-note/dialog-edit-note.component';
+import { DialogDeleteNoteComponent } from './dialog-delete-note/dialog-delete-note.component';
 
 
 
@@ -51,7 +53,9 @@ import { MatSelectModule, matSelectAnimations } from '@angular/material/select';
     HelpSiteComponent,
     ImprintSiteComponent,
     NotesComponent,
-    DialogAddNoteComponent
+    DialogAddNoteComponent,
+    DialogEditNoteComponent,
+    DialogDeleteNoteComponent
   ],
   imports: [
     BrowserModule,

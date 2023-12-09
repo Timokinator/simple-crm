@@ -4,6 +4,8 @@ import { DialogAddNoteComponent } from '../dialog-add-note/dialog-add-note.compo
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
 import { Note } from 'src/models/note.class';
 import { User } from 'src/models/user.class';
+import { DialogEditNoteComponent } from '../dialog-edit-note/dialog-edit-note.component';
+import { DialogDeleteNoteComponent } from '../dialog-delete-note/dialog-delete-note.component';
 
 
 
@@ -21,7 +23,12 @@ export class NotesComponent {
   listNotes: any = [];
   listUser: any = [];
   note = new Note();
-  user = new User;
+  
+
+
+
+
+  
 
 
 
@@ -99,6 +106,23 @@ export class NotesComponent {
     this.unsubNotes();
 
   }
+
+
+
+
+  editNote(note: any) {
+    const dialog = this.dialog.open(DialogEditNoteComponent);
+    dialog.componentInstance.note = new Note(note);
+  }
+
+
+  deleteNote(note: any) {
+    const dialog = this.dialog.open(DialogDeleteNoteComponent);
+    dialog.componentInstance.note = new Note(note);
+  }
+
+
+
 
 
 }

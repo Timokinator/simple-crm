@@ -80,7 +80,6 @@ export class DialogAddUserComponent {
         (docRef) => {
           this.loading = false;
           const newID = docRef?.id;
-          console.log("Document written with ID: ", newID);
           this.updateUserWithId(item, newID);
         }
       )

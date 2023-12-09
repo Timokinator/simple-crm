@@ -5,7 +5,7 @@ export class Note {
     id!: string;
     title!: string;
     content!: string;
-    user!: User;
+    user!: string;
 
 
 
@@ -13,7 +13,7 @@ export class Note {
         this.id = obj ? obj.id : '';
         this.title = obj ? obj.title : '';
         this.content = obj ? obj.content : '';
-        this.user = obj ? obj.user : ''
+        this.user = obj ? obj.user : '';
     }
 
 

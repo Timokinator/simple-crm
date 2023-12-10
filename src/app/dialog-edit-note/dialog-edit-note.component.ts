@@ -17,7 +17,6 @@ export class DialogEditNoteComponent implements OnInit {
   note!: Note;
   loading: boolean = false;
   formIncomplete: boolean = true;
-  userNameToAssign!: string;
   listUser: any = [];
   unsubUser: any;
 
@@ -27,7 +26,6 @@ export class DialogEditNoteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userNameToAssign = this.note.user;
     this.checkValidation();
   }
 
@@ -67,7 +65,6 @@ export class DialogEditNoteComponent implements OnInit {
 
   async updateNote() {
     const docRef = doc(this.getNoteRef(), this.note.id);
-    //console.log(docRef);
     await updateDoc(docRef, this.getCleanJson(this.note)).catch(
       (err) => { console.log(err); }
     ).then(
@@ -80,7 +77,7 @@ export class DialogEditNoteComponent implements OnInit {
 
 
   checkValidation() {
-    if (this.note.title && this.userNameToAssign) {
+    if (this.note.title && this.note.user) {
       this.formIncomplete = false;
     } else
       this.formIncomplete = true;
@@ -90,7 +87,6 @@ export class DialogEditNoteComponent implements OnInit {
 
   saveNote() {
     this.loading = true;
-    this.note.user = this.userNameToAssign;
     this.updateNote();
 
   }

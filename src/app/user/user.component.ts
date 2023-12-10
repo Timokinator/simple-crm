@@ -29,7 +29,10 @@ export class UserComponent {
 
 
   subUserList() {
-    return onSnapshot(this.getUserRef(), (list) => {
+    const q = query(this.getUserRef()
+    //, where("firstName", "==", "Timo")
+    , limit(100), orderBy('lastName'));
+    return onSnapshot(q, (list) => {
       this.listUser = [];
       list.forEach(element => {
         this.listUser.push(this.setUserObject(element.data(), element.id));

@@ -2,10 +2,16 @@
     <mat-card-header>
         <mat-card-title>{{ note.title }}</mat-card-title>
     </mat-card-header>
-    <!-- <mat-divider></mat-divider> -->
     <mat-card-content>
         <p class="global-line-break-anywhere">{{ note.content }}</p>
-        <p> Assigned to: {{ note.user }}</p>
+
+        <span>User:</span>
+        <ng-container *ngFor="let user of listUser">
+            <span *ngIf="user.id == note.user">
+                {{ user.firstName }} {{ user.lastName }}
+            </span>
+        </ng-container>
+
     </mat-card-content>
     <mat-card-actions>
         <button (click)="editNote(note)" mat-button>
@@ -18,11 +24,6 @@
         </button>
     </mat-card-actions>
 </mat-card>
-
-
-
-
-
 
 
 

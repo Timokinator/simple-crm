@@ -6,6 +6,7 @@ export class Note {
     title!: string;
     content!: string;
     user!: string;
+    userId!: string;
 
 
 
@@ -14,6 +15,7 @@ export class Note {
         this.title = obj ? obj.title : '';
         this.content = obj ? obj.content : '';
         this.user = obj ? obj.user : '';
+        this.userId= obj ? obj.userId : '';
     }
 
 

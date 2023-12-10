@@ -14,10 +14,10 @@ export class DialogAddNoteComponent {
   loading: boolean = false;
   note = new Note();
   formIncomplete: boolean = true;
-  userNameToAssign!: string;
   firestore: Firestore = inject(Firestore);
   listUser: any = [];
   unsubUser: any;
+  user = new User();
 
 
 
@@ -81,7 +81,8 @@ export class DialogAddNoteComponent {
       id: id || "",
       title: obj.title || "",
       content: obj.content || "",
-      user: obj.user || ""
+      user: obj.user || "",
+      userId: obj.userId || ""
     }
   }
 
@@ -91,7 +92,8 @@ export class DialogAddNoteComponent {
       id: newIDid,
       title: obj.title || "",
       content: obj.content || "",
-      user: obj.user || ""
+      user: obj.user || "",
+      userId: obj.userId || ""
     }
   }
 
@@ -107,7 +109,7 @@ export class DialogAddNoteComponent {
 
 
   checkValidation() {
-    if (this.note.title && this.userNameToAssign) {
+    if (this.note.title && this.note.user) {
       this.formIncomplete = false;
     } else
       this.formIncomplete = true;
@@ -117,7 +119,6 @@ export class DialogAddNoteComponent {
 
   saveNote() {
     this.loading = true;
-    this.note.user = this.userNameToAssign;
     this.addNote(this.setNoteObject(this.note, ''), "notes")
   }
 

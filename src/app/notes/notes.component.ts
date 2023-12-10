@@ -25,14 +25,6 @@ export class NotesComponent {
   note = new Note();
   
 
-
-
-
-  
-
-
-
-
   constructor(public dialog: MatDialog) {
     this.unsubNotes = this.subNotesList();
     this.unsubUser = this.subUserList();
@@ -40,7 +32,8 @@ export class NotesComponent {
 
 
   subNotesList() {
-    return onSnapshot(this.getNotesRef(), (list) => {
+    const q = query(this.getNotesRef(), orderBy('title') )
+    return onSnapshot(q, (list) => {
       this.listNotes = [];
       list.forEach(element => {
         this.listNotes.push(this.setNotesObject(element.data(), element.id));
@@ -79,16 +72,15 @@ export class NotesComponent {
       title: obj.title || "",
       content: obj.content || "",
       user: obj.user || "",
+      userId: obj.userId || ""
     }
   }
-
-
-
 
 
   getNotesRef() {
     return collection(this.firestore, 'notes');
   }
+  
 
   getUserRef() {
     return collection(this.firestore, 'users');

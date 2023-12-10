@@ -16,8 +16,8 @@
     <div class="container-input-content">
         <mat-form-field appearance="outline">
             <mat-label>Content</mat-label>
-            <textarea cols="30" rows="5" maxlength="160" (keyup)="checkValidation()" [disabled]="loading" [(ngModel)]="note.content"
-                matInput placeholder="">
+            <textarea cols="30" rows="5" maxlength="160" (keyup)="checkValidation()" [disabled]="loading"
+                [(ngModel)]="note.content" matInput placeholder="">
             </textarea>
         </mat-form-field>
     </div>
@@ -25,9 +25,8 @@
     <div class="container-input-user">
         <mat-form-field>
             <mat-label>User</mat-label>
-            <mat-select (selectionChange)="checkValidation()" [(ngModel)]="userNameToAssign" required
-                [disabled]="loading">
-                <mat-option *ngFor="let user of listUser" value="{{ user.firstName + ' ' +  user.lastName }}">
+            <mat-select (selectionChange)="checkValidation()" [(ngModel)]="note.user" required [disabled]="loading">
+                <mat-option *ngFor="let user of listUser" value="{{ user.id }}">
                     {{ user.firstName }}
                     {{ user.lastName }}
                 </mat-option>

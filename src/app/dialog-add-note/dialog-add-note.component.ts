@@ -81,8 +81,7 @@ export class DialogAddNoteComponent {
       id: id || "",
       title: obj.title || "",
       content: obj.content || "",
-      user: obj.user || "",
-      userId: obj.userId || ""
+      user: obj.user || ""
     }
   }
 
@@ -92,8 +91,7 @@ export class DialogAddNoteComponent {
       id: newIDid,
       title: obj.title || "",
       content: obj.content || "",
-      user: obj.user || "",
-      userId: obj.userId || ""
+      user: obj.user || ""
     }
   }
 

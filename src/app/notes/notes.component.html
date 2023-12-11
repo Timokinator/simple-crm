@@ -1,30 +1,40 @@
-<mat-card *ngFor="let note of listNotes" class="example-card">
-    <mat-card-header>
-        <mat-card-title>{{ note.title }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <p class="global-line-break-anywhere">{{ note.content }}</p>
+<div class="container-notes">
 
-        <span>User:</span>
-        <ng-container *ngFor="let user of listUser">
-            <span *ngIf="user.id == note.user">
-                {{ user.firstName }} {{ user.lastName }}
-            </span>
-        </ng-container>
+    <mat-card *ngFor="let note of listNotes" class="example-card">
+        <mat-card-header>
+            <mat-card-title>{{ note.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="global-line-break-anywhere">{{ note.content }}</p>
 
-    </mat-card-content>
-    <mat-card-actions>
-        <button (click)="editNote(note)" mat-button>
-            <mat-icon>edit</mat-icon>
-            Edit note
+            <span>User:</span>
+            <ng-container *ngFor="let user of listUser">
+                <span *ngIf="user.id == note.user">
+                    {{ user.firstName }} {{ user.lastName }}
+                </span>
+            </ng-container>
+
+        </mat-card-content>
+
+        <button [matMenuTriggerFor]="menuHeader" class="icon-more-options" mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
         </button>
-        <button (click)="deleteNote(note)" mat-button>
-            <mat-icon>delete</mat-icon>
-            Delete note
-        </button>
-    </mat-card-actions>
-</mat-card>
 
+        <mat-menu #menuHeader="matMenu">
+            <button mat-menu-item (click)="editNote(note)">
+                <mat-icon>edit</mat-icon>
+                Edit note
+            </button>
+
+            <button mat-menu-item (click)="deleteNote(note)">
+                <mat-icon>delete</mat-icon>
+                Delete note
+            </button>
+        </mat-menu>
+
+    </mat-card>
+
+</div>
 
 
 <button (click)="openDialog()" matTooltip="Add note" [matTooltipPosition]="'above'" class="btn-add" mat-fab

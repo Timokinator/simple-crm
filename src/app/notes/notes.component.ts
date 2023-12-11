@@ -41,6 +41,7 @@ export class NotesComponent {
     });
   }
 
+  
   subUserList() {
     return onSnapshot(this.getUserRef(), (list) => {
       this.listUser = [];
@@ -65,14 +66,12 @@ export class NotesComponent {
   }
 
 
-
   setNotesObject(obj: any, id: string,): Note {
     return {
       id: id || "",
       title: obj.title || "",
       content: obj.content || "",
-      user: obj.user || "",
-      userId: obj.userId || ""
+      user: obj.user || ""
     }
   }
 
@@ -98,8 +97,6 @@ export class NotesComponent {
     this.unsubNotes();
 
   }
-
-
 
 
   editNote(note: any) {

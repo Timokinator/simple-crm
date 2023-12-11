@@ -6,6 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 import { DialogDeleteUserComponent } from '../dialog-delete-user/dialog-delete-user.component';
+import { NotesComponent } from '../notes/notes.component';
+import { Note } from 'src/models/note.class';
+import { DialogEditNoteComponent } from '../dialog-edit-note/dialog-edit-note.component';
+import { DialogDeleteNoteComponent } from '../dialog-delete-note/dialog-delete-note.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -22,16 +26,47 @@ export class UserDetailComponent implements OnInit {
   dataLoaded: boolean = false;
   birthDayShow: string | undefined;
   unsubUser;
+  unsubNotes;
+  listNotes: any = [];
+  note: Note = new Note();
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
     this.routeId = this.route.params;
     this.userID = this.routeId['_value']['id'];
     this.unsubUser = onSnapshot(doc(this.firestore, 'users', this.userID), (doc) => {
       this.loadUser();
-    }
-    )
+    });
+    this.unsubNotes = this.subNotesList();
 
   };
+
+
+  subNotesList() {
+    const q = query(this.getNotesRef(), where("user", "==", this.userID))
+    return onSnapshot(q, (list) => {
+      this.listNotes = [];
+      list.forEach(element => {
+        this.listNotes.push(this.setNotesObject(element.data(), element.id));
+      });
+    });
+  }
+
+
+  getNotesRef() {
+    return collection(this.firestore, 'notes');
+  }
+
+
+  setNotesObject(obj: any, id: string,): Note {
+    return {
+      id: id || "",
+      title: obj.title || "",
+      content: obj.content || "",
+      user: obj.user || ""
+    }
+  }
+
+
 
   ngOnInit(): void {
     //console.log(this.userID)
@@ -95,7 +130,23 @@ export class UserDetailComponent implements OnInit {
 
   ngonDestroy() {
     this.unsubUser();
+    this.unsubNotes();
   }
+
+
+
+  editNote(note: any) {
+    const dialog = this.dialog.open(DialogEditNoteComponent);
+    dialog.componentInstance.note = new Note(note);
+  }
+
+
+  deleteNote(note: any) {
+    const dialog = this.dialog.open(DialogDeleteNoteComponent);
+    dialog.componentInstance.note = new Note(note);
+  }
+
+
 
 
 }

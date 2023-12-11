@@ -22,18 +22,11 @@
                 <mat-icon>delete</mat-icon>
                 Delete user
             </button>
-
-
         </mat-menu>
-
-
 
         <button [routerLink]="['/user/']" class="icon-back-to-user" mat-icon-button aria-label="">
             <mat-icon>arrow_back</mat-icon>
         </button>
-
-
-
     </mat-card>
 
     <mat-card *ngIf="dataLoaded" class="mat-card-content">
@@ -56,6 +49,42 @@
             </button>
         </mat-menu>
 
+    </mat-card>
+
+
+
+
+    <!-- Template Notes for User -->
+    <h2 class="h2-notes" *ngIf="listNotes.length > 0">Assigned notes:</h2>
+
+    <mat-card *ngFor="let note of listNotes" class="example-card single-note">
+        <mat-card-header>
+            <mat-card-title>{{ note.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="global-line-break-anywhere">{{ note.content }}</p>
+
+            <span>User:</span>
+            <span *ngIf="user.id == note.user">
+                {{ user.firstName }} {{ user.lastName }}
+            </span>
+
+        </mat-card-content>
+        <button [matMenuTriggerFor]="menuHeader" class="icon-more-options" mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <mat-menu #menuHeader="matMenu">
+            <button mat-menu-item (click)="editNote(note)">
+                <mat-icon>edit</mat-icon>
+                Edit note
+            </button>
+
+            <button mat-menu-item (click)="deleteNote(note)">
+                <mat-icon>delete</mat-icon>
+                Delete note
+            </button>
+        </mat-menu>
     </mat-card>
 
 

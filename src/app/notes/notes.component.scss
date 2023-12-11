@@ -1,9 +1,24 @@
 .btn-add {
-    position: absolute;
+    position: fixed;
     bottom: 56px;
     right: 56px;
 }
 
 mat-card {
     margin-bottom: 8px;
+}
+
+.container-notes {
+    overflow: scroll;
+    position: relative;
+}
+
+.icon-more-options {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.example-card {
+    max-width: 240px;
 }

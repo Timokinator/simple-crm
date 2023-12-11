@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Note } from 'src/models/note.class';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,9 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DialogDeleteNoteComponent {
 
-  readyToDelete!:string;
+  readyToDelete!: string;
   firestore: Firestore = inject(Firestore);
   note!: Note;
+  routeId: any;
 
 
   constructor(private route: ActivatedRoute, private router: Router) {
@@ -22,9 +23,10 @@ export class DialogDeleteNoteComponent {
   }
 
 
+
+
   async deleteNote() {
     await deleteDoc(doc(this.getNoteRef(), this.note.id));
-    this.router.navigateByUrl(`notes`);
   }
 
 

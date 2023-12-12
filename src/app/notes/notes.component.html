@@ -1,6 +1,17 @@
-<div class="container-notes">
+<h4>Filter user</h4>
+<mat-form-field>
+    <mat-label>User</mat-label>
+    <mat-select (selectionChange)="loggingNbModel()" [(ngModel)]="filteredUserId">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let user of listUser" [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
+    </mat-select>
+</mat-form-field>
 
-    <mat-card (cdkDragReleased)="endChangePosition($event, note)"  cdkDrag cdkDragBoundary=".container-notes" *ngFor="let note of listNotes" class="example-card grabbable"
+
+<div class="container-notes" #myContainer>
+
+    <mat-card (cdkDragReleased)="endChangePosition($event, note)" cdkDrag cdkDragBoundary=".container-notes"
+        *ngFor="let note of listNotes" class="example-card grabbable"
         [style.transform]="'translate3d(' + note.transform1 + ', ' + note.transform2 + ', 0)'">
         <mat-card-header>
             <mat-card-title>{{ note.title }}</mat-card-title>

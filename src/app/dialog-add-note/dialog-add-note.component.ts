@@ -133,8 +133,6 @@ export class DialogAddNoteComponent {
     const transform2 = Math.floor(Math.random() * maxT2)
     this.note.transform1 = transform1 + "px";
     this.note.transform2 = transform2 + "px";
-
-
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogAddNoteComponent } from '../dialog-add-note/dialog-add-note.component';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
@@ -15,7 +15,7 @@ import { DialogDeleteNoteComponent } from '../dialog-delete-note/dialog-delete-n
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent {
+export class NotesComponent implements OnInit {
 
   firestore: Firestore = inject(Firestore);
   unsubNotes: any;
@@ -23,6 +23,38 @@ export class NotesComponent {
   listNotes: any = [];
   listUser: any = [];
   note = new Note();
+  filteredUserId!: string;
+
+  //track windowsize:
+  @ViewChild('myContainer')
+  myContainer!: ElementRef;
+
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      setInterval(() => {
+        this.ngAfterViewInit();
+      }, 3000)
+    }, 1000);
+  }
+
+  loggingNbModel() {
+    console.log(this.filteredUserId);
+    this.subNotesList();
+
+  }
+
+
+
+
+  ngAfterViewInit() {
+    const width = this.myContainer.nativeElement.offsetWidth;
+    const height = this.myContainer.nativeElement.offsetHeight;
+    //console.log(`Breite: ${width}, Höhe: ${height}`);
+    this.fitNotes(width);
+  }
+
+
 
 
   constructor(public dialog: MatDialog) {
@@ -32,10 +64,15 @@ export class NotesComponent {
 
 
   subNotesList() {
-    const q = query(this.getNotesRef(), orderBy('title'))
+    let q;
+    if (this.filteredUserId) {
+      q = query(this.getNotesRef(), where("user", "==", this.filteredUserId), orderBy('title'));
+    } else {
+      q = query(this.getNotesRef(), orderBy('title'));
+    }
     return onSnapshot(q, (list) => {
       this.listNotes = [];
-      list.forEach(element => {
+      list.forEach((element) => {
         this.listNotes.push(this.setNotesObject(element.data(), element.id));
       });
     });
@@ -159,6 +196,31 @@ export class NotesComponent {
       transform2: obj.transform2 || ""
     }
   }
+
+
+
+  fitNotes(newWidth: any) {
+    this.listNotes.forEach((element: any) => {
+      const numberOfPixel = +element.transform1.slice(0, -2);
+      let random: number;
+      if (numberOfPixel + 240 > newWidth) {
+        if (newWidth > 240) {
+          random = Math.floor(Math.random() * (newWidth - 240))
+        } else {
+          random = 0;
+        }
+        element.transform1 = random + 'px';
+        this.updateNote(element);
+      }
+    });
+
+
+
+  }
+
+
+
+
 
 
 

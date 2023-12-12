@@ -1,6 +1,7 @@
 <div class="container-notes">
 
-    <mat-card *ngFor="let note of listNotes" class="example-card">
+    <mat-card (cdkDragReleased)="endChangePosition($event, note)"  cdkDrag cdkDragBoundary=".container-notes" *ngFor="let note of listNotes" class="example-card grabbable"
+        [style.transform]="'translate3d(' + note.transform1 + ', ' + note.transform2 + ', 0)'">
         <mat-card-header>
             <mat-card-title>{{ note.title }}</mat-card-title>
         </mat-card-header>

@@ -23,7 +23,7 @@ export class NotesComponent {
   listNotes: any = [];
   listUser: any = [];
   note = new Note();
-  
+
 
   constructor(public dialog: MatDialog) {
     this.unsubNotes = this.subNotesList();
@@ -32,7 +32,7 @@ export class NotesComponent {
 
 
   subNotesList() {
-    const q = query(this.getNotesRef(), orderBy('title') )
+    const q = query(this.getNotesRef(), orderBy('title'))
     return onSnapshot(q, (list) => {
       this.listNotes = [];
       list.forEach(element => {
@@ -41,7 +41,7 @@ export class NotesComponent {
     });
   }
 
-  
+
   subUserList() {
     return onSnapshot(this.getUserRef(), (list) => {
       this.listUser = [];
@@ -71,7 +71,9 @@ export class NotesComponent {
       id: id || "",
       title: obj.title || "",
       content: obj.content || "",
-      user: obj.user || ""
+      user: obj.user || "",
+      transform1: obj.transform1 || "",
+      transform2: obj.transform2 || ""
     }
   }
 
@@ -79,7 +81,7 @@ export class NotesComponent {
   getNotesRef() {
     return collection(this.firestore, 'notes');
   }
-  
+
 
   getUserRef() {
     return collection(this.firestore, 'users');
@@ -111,6 +113,52 @@ export class NotesComponent {
   }
 
 
+  endChangePosition(event: any, note: Note) {
+    //console.log("end");
+    const element = event.source.getRootElement();
+    const style = window.getComputedStyle(element);
+    const matrix = new WebKitCSSMatrix(style.transform);
+    //console.log('1.', matrix.m41, '1.', matrix.m42, '1.', matrix.m43);
+    note.transform1 = matrix.m41 + "px";
+    note.transform2 = matrix.m42 + "px";
+    this.updateNote(note);
+  }
+
+
+  // on resize muss t1 + t2 dynamisch mit foreach maximal festgelegt werden
+
+
+
+
+
+  async updateNote(note: any) {
+    const docRef = doc(this.getNoteRef(), note.id);
+    await updateDoc(docRef, this.getCleanJson(note)).catch(
+      (err) => { console.log(err); }
+    ).then(
+      () => {
+        //console.log("Update")
+        //this.loading = false;
+      }
+    );
+  }
+
+
+  getNoteRef() {
+    return collection(this.firestore, 'notes');
+  }
+
+
+  getCleanJson(obj: Note): {} {
+    return {
+      id: obj.id,
+      title: obj.title || "",
+      content: obj.content || "",
+      user: obj.user || "",
+      transform1: obj.transform1 || "",
+      transform2: obj.transform2 || ""
+    }
+  }
 
 
 

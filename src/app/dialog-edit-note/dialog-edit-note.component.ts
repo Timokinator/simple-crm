@@ -58,7 +58,9 @@ export class DialogEditNoteComponent implements OnInit {
       id: obj.id,
       title: obj.title || "",
       content: obj.content || "",
-      user: obj.user || ""
+      user: obj.user || "",
+      transform1: obj.transform1 || "",
+      transform2: obj.transform2 || ""
     }
   }
 

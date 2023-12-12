@@ -81,7 +81,9 @@ export class DialogAddNoteComponent {
       id: id || "",
       title: obj.title || "",
       content: obj.content || "",
-      user: obj.user || ""
+      user: obj.user || "",
+      transform1: obj.transform1 || "",
+      transform2: obj.transform2 || ""
     }
   }
 
@@ -91,7 +93,9 @@ export class DialogAddNoteComponent {
       id: newIDid,
       title: obj.title || "",
       content: obj.content || "",
-      user: obj.user || ""
+      user: obj.user || "",
+      transform1: obj.transform1 || "",
+      transform2: obj.transform2 || ""
     }
   }
 
@@ -117,8 +121,22 @@ export class DialogAddNoteComponent {
 
   saveNote() {
     this.loading = true;
+    this.setTransformValues();
     this.addNote(this.setNoteObject(this.note, ''), "notes")
   }
+
+
+  setTransformValues() {
+    const maxT1 = 900;
+    const maxT2 = 500;
+    const transform1 = Math.floor(Math.random() * maxT1)
+    const transform2 = Math.floor(Math.random() * maxT2)
+    this.note.transform1 = transform1 + "px";
+    this.note.transform2 = transform2 + "px";
+
+
+  }
+
 
 
 

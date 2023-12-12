@@ -35,6 +35,8 @@ import { DialogAddNoteComponent } from './dialog-add-note/dialog-add-note.compon
 import { MatSelectModule, matSelectAnimations } from '@angular/material/select';
 import { DialogEditNoteComponent } from './dialog-edit-note/dialog-edit-note.component';
 import { DialogDeleteNoteComponent } from './dialog-delete-note/dialog-delete-note.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 
 
@@ -78,6 +80,7 @@ import { DialogDeleteNoteComponent } from './dialog-delete-note/dialog-delete-no
     MatMenuModule,
     MatDividerModule,
     MatSelectModule,
+    DragDropModule,
     provideFirebaseApp(() => initializeApp({ "projectId": "simple-crm-11490", "appId": "1:114888599173:web:a4921aa755da4c02746bec", "storageBucket": "simple-crm-11490.appspot.com", "apiKey": "AIzaSyAY2aBF17See0jJbzS9P6IapbcKeuWW1xM", "authDomain": "simple-crm-11490.firebaseapp.com", "messagingSenderId": "114888599173" })),
     provideFirestore(() => getFirestore()),
   ],

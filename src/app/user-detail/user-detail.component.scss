@@ -26,7 +26,8 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    height: 88px;
+    //height: 88px;
+    height: 160px;
 
     h2 {
         margin-bottom: 0;
@@ -54,9 +55,46 @@
 
 .h2-notes {
     margin-top: 32px;
-    
+
 }
 
 .single-note {
     margin: 8px 0;
+}
+
+.mail-address {
+    text-decoration: none;
+    color: unset;
+    cursor: pointer;
+    transition-duration: 120ms;
+    display: flex;
+    align-items: flex-end;
+
+
+    &:hover {
+        transition-duration: 120ms;
+    }
+
+
+
+
+
+    mat-icon {
+        transition-duration: 240ms;
+
+        &:hover {
+            color: #3f51b5;
+            transition-duration: 240ms;
+        }
+
+    }
+
+}
+
+
+.container-mail-address {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    width: 100%;
 }

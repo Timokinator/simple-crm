@@ -8,7 +8,7 @@
 
 .sidenav {
     width: 300px;
-
+    position: fixed;
 }
 
 .logo-container {
@@ -32,6 +32,8 @@ mat-toolbar-row {
     min-height: 57px;
     height: 57px;
     position: fixed;
+    top: 0;
+    z-index: 2;
 }
 
 
@@ -80,8 +82,8 @@ ul {
 
 
 .container-sidenav-content {
-    position: relative;
-
+    //position: relative;
+    margin-top: 64px;
 
 
 }

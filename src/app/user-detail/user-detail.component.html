@@ -4,7 +4,8 @@
         <img src="../../assets/img/user-pic-male.png" alt="">
         <div class="user-details-header">
             <h2>{{ user.firstName }} {{ user.lastName}}</h2>
-            {{ user.email }} <br>
+            <p class="container-mail-address">{{ user.email }} <a class="mail-address"
+                    href="mailto: {{user.email}}"><mat-icon>mail</mat-icon></a></p>
             Birthday: {{ birthDayShow }}
         </div>
 

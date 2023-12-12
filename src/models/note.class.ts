@@ -1,11 +1,13 @@
-import { User } from "./user.class";
-
 export class Note {
     [x: string]: any;
     id!: string;
     title!: string;
     content!: string;
     user!: string;
+    transform1!: string;
+    transform2!: string;
+
+
 
 
 
@@ -14,7 +16,12 @@ export class Note {
         this.title = obj ? obj.title : '';
         this.content = obj ? obj.content : '';
         this.user = obj ? obj.user : '';
+        this.transform1 = obj ? obj.transform1 : '';
+        this.transform2 = obj ? obj.transform2 : '';
+        
     }
+
+
 
 
 }

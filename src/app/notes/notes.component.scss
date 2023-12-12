@@ -6,11 +6,17 @@
 
 mat-card {
     margin-bottom: 8px;
+    padding: 0 24px 4px 0;
 }
+
+
+
 
 .container-notes {
     overflow: scroll;
     position: relative;
+    border: 1px dotted lightgray;
+    min-height: 80vh;
 }
 
 .icon-more-options {
@@ -21,4 +27,16 @@ mat-card {
 
 .example-card {
     max-width: 240px;
+}
+
+.grabbable {
+    cursor: move;
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+    }
+
+
+
 }

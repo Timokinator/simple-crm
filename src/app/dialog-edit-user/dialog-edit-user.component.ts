@@ -52,7 +52,7 @@ export class DialogEditUserComponent {
 
 
   checkValidation() {
-    if (this.user.firstName && this.user.lastName && this.user.birthDate && this.user.email) {
+    if (this.user.firstName && this.user.lastName && this.birthDate && this.user.email) {
       this.formIncomplete = false;
     } else
       this.formIncomplete = true;

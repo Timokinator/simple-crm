@@ -10,6 +10,7 @@ import { NotesComponent } from '../notes/notes.component';
 import { Note } from 'src/models/note.class';
 import { DialogEditNoteComponent } from '../dialog-edit-note/dialog-edit-note.component';
 import { DialogDeleteNoteComponent } from '../dialog-delete-note/dialog-delete-note.component';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-detail',
@@ -62,7 +63,9 @@ export class UserDetailComponent implements OnInit {
       id: id || "",
       title: obj.title || "",
       content: obj.content || "",
-      user: obj.user || ""
+      user: obj.user || "",
+      transform1: obj.transform1 || "",
+      transform2: obj.transform2 || ""
     }
   }
 

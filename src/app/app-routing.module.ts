@@ -6,6 +6,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { HelpSiteComponent } from './help-site/help-site.component';
 import { ImprintSiteComponent } from './imprint-site/imprint-site.component';
 import { NotesComponent } from './notes/notes.component';
+import { ArticlesComponent } from './articles/articles.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
   { path: "", component: DashboardComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: "help", component: HelpSiteComponent },
   { path: "imprint", component: ImprintSiteComponent },
   { path: "notes", component: NotesComponent },
+  { path: "articles", component: ArticlesComponent },
+  { path: "orders", component: OrdersComponent },
 
 ];
 

@@ -36,7 +36,11 @@ import { MatSelectModule, matSelectAnimations } from '@angular/material/select';
 import { DialogEditNoteComponent } from './dialog-edit-note/dialog-edit-note.component';
 import { DialogDeleteNoteComponent } from './dialog-delete-note/dialog-delete-note.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { ArticlesComponent } from './articles/articles.component';
+import { OrdersComponent } from './orders/orders.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { DialogAddArticleComponent } from './dialog-add-article/dialog-add-article.component';
 
 
 
@@ -57,7 +61,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     NotesComponent,
     DialogAddNoteComponent,
     DialogEditNoteComponent,
-    DialogDeleteNoteComponent
+    DialogDeleteNoteComponent,
+    ArticlesComponent,
+    OrdersComponent,
+    DialogAddArticleComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +88,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDividerModule,
     MatSelectModule,
     DragDropModule,
+    MatTableModule,
+    MatPaginatorModule,
     provideFirebaseApp(() => initializeApp({ "projectId": "simple-crm-11490", "appId": "1:114888599173:web:a4921aa755da4c02746bec", "storageBucket": "simple-crm-11490.appspot.com", "apiKey": "AIzaSyAY2aBF17See0jJbzS9P6IapbcKeuWW1xM", "authDomain": "simple-crm-11490.firebaseapp.com", "messagingSenderId": "114888599173" })),
     provideFirestore(() => getFirestore()),
   ],

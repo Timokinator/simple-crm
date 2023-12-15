@@ -48,7 +48,7 @@ export class NotesComponent implements OnInit, OnDestroy {
 
 
   loggingNbModel() {
-    console.log(this.filteredUserId);
+    //console.log(this.filteredUserId);
     this.subNotesList();
   }
 

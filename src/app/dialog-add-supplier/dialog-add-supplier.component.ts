@@ -15,7 +15,7 @@ export class DialogAddSupplierComponent {
 
   supplier = new Supplier();
   loading!: boolean;
-  formIncomplete!: boolean;
+  formIncomplete: boolean = true;
 
 
   checkValidation() {

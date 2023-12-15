@@ -43,6 +43,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { DialogAddArticleComponent } from './dialog-add-article/dialog-add-article.component';
 import { DialogAddCategoryComponent } from './dialog-add-category/dialog-add-category.component';
 import { DialogAddSupplierComponent } from './dialog-add-supplier/dialog-add-supplier.component';
+import { DialogEditArticleComponent } from './dialog-edit-article/dialog-edit-article.component';
+import { DialogDeleteArticleComponent } from './dialog-delete-article/dialog-delete-article.component';
 
 
 
@@ -68,7 +70,9 @@ import { DialogAddSupplierComponent } from './dialog-add-supplier/dialog-add-sup
     OrdersComponent,
     DialogAddArticleComponent,
     DialogAddCategoryComponent,
-    DialogAddSupplierComponent
+    DialogAddSupplierComponent,
+    DialogEditArticleComponent,
+    DialogDeleteArticleComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,5 @@
-<h4>Filter user</h4>
 <mat-form-field>
-    <mat-label>User</mat-label>
+    <mat-label>Filter user</mat-label>
     <mat-select (selectionChange)="loggingNbModel()" [(ngModel)]="filteredUserId">
         <mat-option>None</mat-option>
         <mat-option *ngFor="let user of listUser" [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>

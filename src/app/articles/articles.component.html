@@ -1,3 +1,12 @@
+<mat-form-field>
+    <mat-label>Type for search</mat-label>
+    <input type="string" [(ngModel)]="searchInput" matInput>
+    <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+
+
 <mat-card>
 
     <table class="mat-elevation-z8">
@@ -9,23 +18,36 @@
             <th>Category</th>
             <th>Supplier</th>
             <th>Status</th>
+            <th></th>
         </tr>
 
+        <ng-container *ngFor="let article of listArticle">
+            <tr>
+                <td *ngIf="complexSearchFunction(article)">{{ article.itemNumber }}</td>
+                <td *ngIf="complexSearchFunction(article)">{{ article.itemDesc }}</td>
+                <td *ngIf="complexSearchFunction(article)">{{ article.price }}</td>
+                <td *ngIf="complexSearchFunction(article)">{{ article.category }}</td>
+                <td *ngIf="complexSearchFunction(article)">{{ article.supplier }}</td>
+                <td *ngIf="complexSearchFunction(article)">{{ article.status }}</td>
+                <td *ngIf="complexSearchFunction(article)">
+                    <button [matMenuTriggerFor]="menuHeader" class="icon-more-options" mat-icon-button>
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
 
-        <tr *ngFor="let article of listArticle">
-            <td>{{ article.itemNumber }}</td>
-            <td>{{ article.itemDesc }}</td>
-            <td>{{ article.price }}</td>
-            <td>{{ article.category }}</td>
-            <td>{{ article.supplier }}</td>
-            <td>{{ article.status }}</td>
+                    <mat-menu #menuHeader="matMenu">
+                        <button mat-menu-item (click)="editArticle(article)">
+                            <mat-icon>edit</mat-icon>
+                            Edit article
+                        </button>
 
-        </tr>
-
-
-
-
-
+                        <button mat-menu-item (click)="deleteArticle(article)">
+                            <mat-icon>delete</mat-icon>
+                            Delete article
+                        </button>
+                    </mat-menu>
+                </td>
+            </tr>
+        </ng-container>
 
     </table>
 

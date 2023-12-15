@@ -16,7 +16,7 @@ export class DialogAddCategoryComponent {
 
   category = new Category();
   loading!: boolean;
-  formIncomplete!: boolean;
+  formIncomplete: boolean = true;
 
 
 

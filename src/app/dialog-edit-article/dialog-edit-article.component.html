@@ -10,7 +10,7 @@
             <mat-label>Item Number</mat-label>
             <input (keyup)="checkValidation()" [ngClass]="{'color-red': !itemNumberUnique}" type="text" required
                 id="itemNumber" name="itemNumber" class="form-control" minlength="5" maxlength="10" #name="ngModel"
-                [disabled]="loading" [(ngModel)]="article.itemNumber" matInput placeholder="">
+                [disabled]="loading" [(ngModel)]="itemNumberEdit" matInput placeholder="">
             <mat-hint>Must be unique / min 5 characters</mat-hint>
         </mat-form-field>
 

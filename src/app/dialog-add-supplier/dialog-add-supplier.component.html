@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Add Supplier</h1>
+
+<div mat-dialog-content>
+    <mat-form-field appearance="outline">
+        <mat-label>Supplier</mat-label>
+        <input (keyup)="checkValidation()" required id="category" name="category" class="form-control" minlength="1"
+            maxlength="32" #name="ngModel" [disabled]="loading" [(ngModel)]="supplier.name" matInput placeholder="">
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button [disabled]="loading" mat-button [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading || formIncomplete" mat-button type="submit" (click)="saveSupplier()"
+        [mat-dialog-close]="">Save</button>
+</div>

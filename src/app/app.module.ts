@@ -41,6 +41,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { DialogAddArticleComponent } from './dialog-add-article/dialog-add-article.component';
+import { DialogAddCategoryComponent } from './dialog-add-category/dialog-add-category.component';
+import { DialogAddSupplierComponent } from './dialog-add-supplier/dialog-add-supplier.component';
 
 
 
@@ -64,7 +66,9 @@ import { DialogAddArticleComponent } from './dialog-add-article/dialog-add-artic
     DialogDeleteNoteComponent,
     ArticlesComponent,
     OrdersComponent,
-    DialogAddArticleComponent
+    DialogAddArticleComponent,
+    DialogAddCategoryComponent,
+    DialogAddSupplierComponent
   ],
   imports: [
     BrowserModule,

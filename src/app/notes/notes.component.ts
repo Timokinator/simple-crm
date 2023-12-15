@@ -1,4 +1,4 @@
-import { Component, inject, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { Component, inject, ElementRef, ViewChild, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogAddNoteComponent } from '../dialog-add-note/dialog-add-note.component';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
@@ -15,7 +15,7 @@ import { DialogDeleteNoteComponent } from '../dialog-delete-note/dialog-delete-n
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss']
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
 
   firestore: Firestore = inject(Firestore);
   unsubNotes: any;
@@ -24,6 +24,7 @@ export class NotesComponent implements OnInit {
   listUser: any = [];
   note = new Note();
   filteredUserId!: string;
+  private intervalFitNotes: any;
 
   //track windowsize:
   @ViewChild('myContainer')
@@ -31,17 +32,24 @@ export class NotesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    setTimeout(() => {
-      setInterval(() => {
-        this.ngAfterViewInit();
-      }, 3000)
-    }, 1000);
+    this.intervalFitNotes = setInterval(() => {
+      this.ngAfterViewInit();
+    }, 3000)
+
   }
+
+
+  ngOnDestroy(): void {
+    if (this.intervalFitNotes) {
+      clearInterval(this.intervalFitNotes);
+      //console.log('Interval gestoppt');
+    }
+  }
+
 
   loggingNbModel() {
     console.log(this.filteredUserId);
     this.subNotesList();
-
   }
 
 
@@ -202,8 +210,10 @@ export class NotesComponent implements OnInit {
   fitNotes(newWidth: any) {
     this.listNotes.forEach((element: any) => {
       const numberOfPixel = +element.transform1.slice(0, -2);
-      let random: number;
+      //console.log(newWidth, numberOfPixel);
+
       if (numberOfPixel + 240 > newWidth) {
+        let random: number;
         if (newWidth > 240) {
           random = Math.floor(Math.random() * (newWidth - 240))
         } else {

@@ -1,27 +1,26 @@
-<div class="container-articles">
-
+<mat-card>
 
     <table class="mat-elevation-z8">
-            
-     <tr>
-        <th>Item Number</th>
-        <th>Item Description</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Supplier</th>
-        <th>Status</th>
-     </tr>
+
+        <tr class="first-row">
+            <th>Item Number</th>
+            <th>Item Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Supplier</th>
+            <th>Status</th>
+        </tr>
 
 
-     <tr *ngFor="let article of listArticle">
-        <td>{{ article.itemNumber }}</td>
-        <td>{{ article.itemDesc }}</td>
-        <td>{{ article.price }}</td>
-        <td>{{ article.category }}</td>
-        <td>{{ article.supplier }}</td>
-        <td>{{ article.status }}</td>
+        <tr *ngFor="let article of listArticle">
+            <td>{{ article.itemNumber }}</td>
+            <td>{{ article.itemDesc }}</td>
+            <td>{{ article.price }}</td>
+            <td>{{ article.category }}</td>
+            <td>{{ article.supplier }}</td>
+            <td>{{ article.status }}</td>
 
-     </tr>
+        </tr>
 
 
 
@@ -31,9 +30,7 @@
     </table>
 
 
-
-
-</div>
+</mat-card>
 
 
 

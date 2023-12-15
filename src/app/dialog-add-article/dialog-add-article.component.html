@@ -1,0 +1,78 @@
+<div *ngIf="loading" class="container-progress-bar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<h1 mat-dialog-title>Add User</h1>
+<div mat-dialog-content>
+
+    <mat-form-field [ngClass]="{'color-red': !itemNumberUnique}" appearance="outline">
+        <mat-label>Item Number</mat-label>
+        <input (keyup)="checkValidation()" [ngClass]="{'color-red': !itemNumberUnique}" type="text" required
+            id="itemNumber" name="itemNumber" class="form-control" minlength="5" maxlength="10" #name="ngModel"
+            [disabled]="loading" [(ngModel)]="article.itemNumber" matInput placeholder="">
+        <mat-hint>Must be unique / min 5 characters</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Item Description</mat-label>
+        <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="article.itemDesc" matInput
+            placeholder="">
+    </mat-form-field>
+
+
+    <mat-form-field class="input-email" appearance="outline">
+        <mat-label>Price</mat-label>
+        <input (keyup)="checkValidation()" required type="number" min="0.01" step="0.01" [disabled]="loading"
+            [(ngModel)]="article.price" matInput placeholder="">
+    </mat-form-field>
+
+
+
+
+    <mat-form-field class="input-category" appearance="outline">
+        <mat-label>Category</mat-label>
+        <mat-select (selectionChange)="checkValidation()" required [disabled]="loading" [(ngModel)]="article.category">
+            <mat-option (click)="addCategory()">Add category
+                <mat-icon>add</mat-icon>
+            </mat-option>
+            <mat-option *ngFor="let category of listCategories" value="{{ category.name }}">{{ category.name
+                }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field class="input-supplier" appearance="outline">
+        <mat-label>Supplier</mat-label>
+        <mat-select (selectionChange)="checkValidation()" required [disabled]="loading" [(ngModel)]="article.supplier">
+            <mat-option (click)="addSupplier()">Add Supplier
+                <mat-icon>add</mat-icon>
+            </mat-option>
+            <mat-option *ngFor="let supplier of listSupplier" value="{{ supplier.name }}">{{ supplier.name
+                }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+
+    <mat-form-field class="input-status" appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select (selectionChange)="checkValidation()" required [disabled]="loading" [(ngModel)]="article.status">
+            <mat-option value="Development">Development</mat-option>
+            <mat-option value="Active">Active</mat-option>
+            <mat-option value="Inactive">Inactive</mat-option>
+            <mat-option value="Obsolete">Obsolete</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+
+</div>
+
+
+
+
+<div mat-dialog-actions>
+    <button [disabled]="loading" mat-button (click)="onNoClick()" [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading || formIncomplete" mat-button type="submit" (click)="saveArticle()"
+        [mat-dialog-close]="">Save</button>
+</div>

@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Add Category</h1>
+
+<div mat-dialog-content>
+    <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+        <input (keyup)="checkValidation()" required id="category" name="category" class="form-control" minlength="1"
+            maxlength="32" #name="ngModel" [disabled]="loading" [(ngModel)]="category.name" matInput placeholder="">
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button [disabled]="loading" mat-button [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading || formIncomplete" mat-button type="submit" (click)="saveCategory()"
+        [mat-dialog-close]="">Save</button>
+</div>

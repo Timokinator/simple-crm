@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { Category } from 'src/models/category.class';
 import { query, orderBy, limit, where, Firestore, collection, doc, getDoc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc, DocumentData, DocumentSnapshot } from '@angular/fire/firestore';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
 
@@ -19,6 +20,9 @@ export class DialogAddCategoryComponent {
   formIncomplete: boolean = true;
 
 
+  constructor(
+    public dialog: MatDialogRef<DialogAddCategoryComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
 
   checkValidation() {
@@ -34,6 +38,7 @@ export class DialogAddCategoryComponent {
     this.loading = true;
     //console.log(this.category)
     this.addCategory(this.setCategory(this.category, ''), 'categories')
+    this.dialog.close(this.category);
   }
 
 

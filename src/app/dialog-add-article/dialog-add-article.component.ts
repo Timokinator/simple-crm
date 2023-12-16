@@ -9,9 +9,6 @@ import { DialogAddSupplierComponent } from '../dialog-add-supplier/dialog-add-su
 
 
 
-
-
-
 @Component({
   selector: 'app-dialog-add-article',
   templateUrl: './dialog-add-article.component.html',
@@ -57,6 +54,7 @@ export class DialogAddArticleComponent implements OnInit {
     });
   }
 
+
   getCategoryRef() {
     return collection(this.firestore, 'categories');
   }
@@ -74,7 +72,13 @@ export class DialogAddArticleComponent implements OnInit {
     //console.log('add');
     const dialog = this.dialog.open(DialogAddCategoryComponent);
     // dialog.category = new Category();
+    dialog.afterClosed().subscribe(result => {
+      if (result) {
+        this.article.category = result.name;
+        console.log(result.name);
 
+      }
+    });
   }
 
 
@@ -89,9 +93,11 @@ export class DialogAddArticleComponent implements OnInit {
     });
   }
 
+
   getSupplierRef() {
     return collection(this.firestore, 'supplier');
   }
+
 
   setSupplierObject(obj: any, id: string,): Supplier {
     return {
@@ -103,21 +109,15 @@ export class DialogAddArticleComponent implements OnInit {
 
 
   addSupplier() {
-    //console.log('add');
     const dialog = this.dialog.open(DialogAddSupplierComponent);
-    // dialog.category = new Category();
+    dialog.afterClosed().subscribe(result => {
+      if (result) {
+        this.article.supplier = result.name;
+        console.log(result);
 
+      }
+    });
   }
-
-
-
-
-
-
-
-
-
-
 
 
   ngOnInit(): void {
@@ -125,15 +125,7 @@ export class DialogAddArticleComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
   //Code für articles:
-
 
 
   subArticleList() {
@@ -158,6 +150,7 @@ export class DialogAddArticleComponent implements OnInit {
     }
   }
 
+
   getCleanJson(obj: Article, newIDid: any): {} {
     return {
       id: newIDid,
@@ -169,7 +162,6 @@ export class DialogAddArticleComponent implements OnInit {
       status: obj.status || "",
     }
   }
-
 
 
   getArticleRef() {
@@ -200,6 +192,7 @@ export class DialogAddArticleComponent implements OnInit {
     //console.log(this.article)
     this.addArticle(this.setArticle(this.article, ''), 'articles')
   }
+
 
   onNoClick() {
     console.log('Cancel')
@@ -232,23 +225,11 @@ export class DialogAddArticleComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-
-
-
   ngonDestroy() {
     this.unsubCategory();
     this.unsubArticle();
     this.unsubSupplier();
   }
-
-
 
 
 }

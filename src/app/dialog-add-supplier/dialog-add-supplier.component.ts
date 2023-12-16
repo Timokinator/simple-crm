@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { query, orderBy, limit, where, Firestore, collection, doc, getDoc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc, DocumentData, DocumentSnapshot } from '@angular/fire/firestore';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Supplier } from 'src/models/supplier.class';
 
 
@@ -17,6 +18,11 @@ export class DialogAddSupplierComponent {
   loading!: boolean;
   formIncomplete: boolean = true;
 
+  constructor(
+    public dialog: MatDialogRef<DialogAddSupplierComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+
 
   checkValidation() {
     if (this.supplier.name) {
@@ -30,6 +36,7 @@ export class DialogAddSupplierComponent {
     this.loading = true;
     //console.log(this.category)
     this.addSupplier(this.setSupplier(this.supplier, ''), 'supplier')
+    this.dialog.close(this.supplier);
   }
 
 
@@ -46,6 +53,7 @@ export class DialogAddSupplierComponent {
       )
     }
   }
+
 
   async updateSupplierWithId(item: Supplier, id: any) {
     const docRef = doc(this.getSupplierRef(), id);
@@ -65,7 +73,6 @@ export class DialogAddSupplierComponent {
   }
 
 
-
   getSupplierRef() {
     return collection(this.firestore, 'supplier');
   }
@@ -76,7 +83,6 @@ export class DialogAddSupplierComponent {
       name: obj.name || "",
     }
   }
-
 
 
 

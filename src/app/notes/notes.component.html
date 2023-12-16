@@ -28,17 +28,17 @@
         </mat-card-content>
 
         <button [matMenuTriggerFor]="menuHeader" class="icon-more-options" mat-icon-button>
-            <mat-icon>more_vert</mat-icon>
+            <mat-icon color="primary">more_vert</mat-icon>
         </button>
 
         <mat-menu #menuHeader="matMenu">
             <button mat-menu-item (click)="editNote(note)">
-                <mat-icon>edit</mat-icon>
+                <mat-icon color="primary">edit</mat-icon>
                 Edit note
             </button>
 
             <button mat-menu-item (click)="deleteNote(note)">
-                <mat-icon>delete</mat-icon>
+                <mat-icon color="warn">delete</mat-icon>
                 Delete note
             </button>
         </mat-menu>

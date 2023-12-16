@@ -5,15 +5,16 @@
         </mat-card-header>
         <mat-card-content>
             <p>If you want to delete this user, type "delete" and click "Delete"</p>
-            <mat-divider></mat-divider> <br>
+            <h2> --> {{ user.firstName }} {{ user.lastName }} <-- </h2>
+                    <mat-divider></mat-divider> <br>
 
-            <mat-form-field class="example-full-width">
-                <mat-label>Please type: "delete"</mat-label>
-                <input matInput placeholder="" [(ngModel)]="readyToDelete">
-            </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Please type: "delete"</mat-label>
+                        <input matInput placeholder="" [(ngModel)]="readyToDelete">
+                    </mat-form-field>
         </mat-card-content>
 
-        <mat-card-actions>
+        <mat-card-actions class="container-btn">
             <button mat-flat-button mat-button [mat-dialog-close]="" color="primary">
                 Cancel
                 <mat-icon>cancel</mat-icon>

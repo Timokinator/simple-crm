@@ -1,0 +1,81 @@
+<mat-form-field>
+    <mat-label>Type for search</mat-label>
+    <input type="string" [(ngModel)]="searchInput" matInput>
+    <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+
+
+<div class="container-tables">
+
+    <mat-card>
+        <table>
+            <tr class="first-row">
+                <th>Category</th>
+                <th>Options</th>
+            </tr>
+
+            <tr *ngFor="let category of listCategories">
+                <td>{{ category.name }}</td>
+                <td class="text-align-end">
+                    <mat-icon color="primary" (click)="openDialogEditCategory(category)">edit</mat-icon>
+                    <mat-icon color="warn" (click)="openDialogDeleteCategory(category)">delete</mat-icon>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+            </tr>
+
+        </table>
+        <mat-form-field appearance="outline">
+            <mat-label>New category</mat-label>
+            <input id="category" name="category" minlength="1" maxlength="20" #name="ngModel" [(ngModel)]="newCategory"
+                matInput placeholder="">
+
+            <button *ngIf="newCategory" matSuffix color="primary" matTooltip="Add category"
+                [matTooltipPosition]="'above'" mat-icon-button aria-label="Clear" (click)="saveCategory()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </mat-form-field>
+    </mat-card>
+
+
+
+
+
+    <mat-card>
+        <table>
+            <tr class="first-row">
+                <th>Supplier</th>
+                <th>Options</th>
+            </tr>
+
+            <tr *ngFor="let supplier of listSupplier">
+                <td>{{ supplier.name }}</td>
+                <td class="text-align-end">
+                    <mat-icon color="primary" (click)="openDialogEditSupplier(supplier)">edit</mat-icon>
+                    <mat-icon color="warn" (click)="openDialogDeleteSupplier(supplier)">delete</mat-icon>
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+        <mat-form-field appearance="outline">
+            <mat-label>New supplier</mat-label>
+            <input id="supplier" name="supplier" minlength="1" maxlength="20" #name="ngModel" [(ngModel)]="newSupplier"
+                matInput placeholder="">
+
+            <button *ngIf="newSupplier" matSuffix color="primary" matTooltip="Add supplier"
+                [matTooltipPosition]="'above'" mat-icon-button aria-label="Clear" (click)="saveSupplier()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </mat-form-field>
+
+    </mat-card>
+
+</div>

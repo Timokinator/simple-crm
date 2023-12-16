@@ -1,12 +1,12 @@
 <div class="container-delete-user">
     <mat-card class="example-card">
         <mat-card-header>
-            <mat-card-title>Delete note</mat-card-title>
+            <mat-card-title>Delete supplier</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <p>Do you want to delete this note?</p>
-            <h2> --> {{ note.title }} <-- </h2>
-            <mat-divider></mat-divider> <br>
+            <p>Do you want to delete this supplier?</p>
+            <h2> --> {{ supplier.name }} <-- </h2>
+                    <mat-divider></mat-divider> <br>
         </mat-card-content>
 
         <mat-card-actions class="container-btn">
@@ -14,7 +14,7 @@
                 Cancel
                 <mat-icon>cancel</mat-icon>
             </button>
-            <button (click)="deleteNote()" [mat-dialog-close]="" mat-flat-button color="warn">
+            <button (click)="deleteSupplier()" [mat-dialog-close]="" mat-flat-button color="warn">
                 Delete
                 <mat-icon>delete</mat-icon>
             </button>

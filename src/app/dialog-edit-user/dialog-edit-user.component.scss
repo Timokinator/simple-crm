@@ -25,3 +25,9 @@
 .input-email {
     width: 100%;
 }
+
+.container-btn {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}

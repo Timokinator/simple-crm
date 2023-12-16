@@ -8,6 +8,7 @@ import { ImprintSiteComponent } from './imprint-site/imprint-site.component';
 import { NotesComponent } from './notes/notes.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { OrdersComponent } from './orders/orders.component';
+import { DataManagementComponent } from './data-management/data-management.component';
 
 const routes: Routes = [
   { path: "", component: DashboardComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: "notes", component: NotesComponent },
   { path: "articles", component: ArticlesComponent },
   { path: "orders", component: OrdersComponent },
+  { path: "datamanagement", component: DataManagementComponent },
 
 ];
 

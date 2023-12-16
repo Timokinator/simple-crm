@@ -75,8 +75,6 @@ export class DialogAddArticleComponent implements OnInit {
     dialog.afterClosed().subscribe(result => {
       if (result) {
         this.article.category = result.name;
-        console.log(result.name);
-
       }
     });
   }
@@ -113,8 +111,6 @@ export class DialogAddArticleComponent implements OnInit {
     dialog.afterClosed().subscribe(result => {
       if (result) {
         this.article.supplier = result.name;
-        console.log(result);
-
       }
     });
   }
@@ -188,8 +184,6 @@ export class DialogAddArticleComponent implements OnInit {
 
   saveArticle() {
     this.loading = true;
-
-    //console.log(this.article)
     this.addArticle(this.setArticle(this.article, ''), 'articles')
   }
 
@@ -219,7 +213,9 @@ export class DialogAddArticleComponent implements OnInit {
     await updateDoc(docRef, this.getCleanJson(item, id)).catch(
       (err) => { console.log(err); }
     ).then(
-      () => { console.log("Update") }
+      () => {
+
+      }
     );
 
   }

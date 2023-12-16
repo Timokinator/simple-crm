@@ -2,7 +2,7 @@
     <mat-label>Type for search</mat-label>
     <input type="string" [(ngModel)]="searchInput" matInput>
     <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
-        <mat-icon>close</mat-icon>
+        <mat-icon color="primary">close</mat-icon>
     </button>
 </mat-form-field>
 
@@ -31,17 +31,17 @@
                 <td *ngIf="complexSearchFunction(article)">{{ article.status }}</td>
                 <td *ngIf="complexSearchFunction(article)">
                     <button [matMenuTriggerFor]="menuHeader" class="icon-more-options" mat-icon-button>
-                        <mat-icon>more_vert</mat-icon>
+                        <mat-icon color="primary">more_vert</mat-icon>
                     </button>
 
                     <mat-menu #menuHeader="matMenu">
                         <button mat-menu-item (click)="editArticle(article)">
-                            <mat-icon>edit</mat-icon>
+                            <mat-icon color="primary">edit</mat-icon>
                             Edit article
                         </button>
 
                         <button mat-menu-item (click)="deleteArticle(article)">
-                            <mat-icon>delete</mat-icon>
+                            <mat-icon color="warn">delete</mat-icon>
                             Delete article
                         </button>
                     </mat-menu>

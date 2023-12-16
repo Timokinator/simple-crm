@@ -22,7 +22,7 @@ export class ArticlesComponent {
   unsubArticle: any;
   listArticle: any = [];
   article = new Article();
-  searchInput: string = "";
+  searchInput: string = '';
 
 
   constructor(public dialog: MatDialog) {

@@ -45,6 +45,11 @@ import { DialogAddCategoryComponent } from './dialog-add-category/dialog-add-cat
 import { DialogAddSupplierComponent } from './dialog-add-supplier/dialog-add-supplier.component';
 import { DialogEditArticleComponent } from './dialog-edit-article/dialog-edit-article.component';
 import { DialogDeleteArticleComponent } from './dialog-delete-article/dialog-delete-article.component';
+import { DataManagementComponent } from './data-management/data-management.component';
+import { DialogEditCategoryComponent } from './dialog-edit-category/dialog-edit-category.component';
+import { DialogDeleteCategoryComponent } from './dialog-delete-category/dialog-delete-category.component';
+import { DialogEditSupplierComponent } from './dialog-edit-supplier/dialog-edit-supplier.component';
+import { DialogDeleteSupplierComponent } from './dialog-delete-supplier/dialog-delete-supplier.component';
 
 
 
@@ -72,7 +77,12 @@ import { DialogDeleteArticleComponent } from './dialog-delete-article/dialog-del
     DialogAddCategoryComponent,
     DialogAddSupplierComponent,
     DialogEditArticleComponent,
-    DialogDeleteArticleComponent
+    DialogDeleteArticleComponent,
+    DataManagementComponent,
+    DialogEditCategoryComponent,
+    DialogDeleteCategoryComponent,
+    DialogEditSupplierComponent,
+    DialogDeleteSupplierComponent
   ],
   imports: [
     BrowserModule,

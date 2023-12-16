@@ -35,8 +35,14 @@
 
 
 </div>
-<div mat-dialog-actions>
-    <button [disabled]="loading" mat-button [mat-dialog-close]="">Cancel</button>
-    <button [disabled]="loading || formIncomplete" mat-button type="submit" (click)="updateUserAddress()"
-        [mat-dialog-close]="">Save</button>
+<div class="container-btn" mat-dialog-actions>
+    <button [disabled]="loading" mat-flat-button color="warn" [mat-dialog-close]="">
+        Cancel
+        <mat-icon>cancel</mat-icon>
+    </button>
+    <button [disabled]="loading || formIncomplete" mat-flat-button color="primary" type="submit"
+        (click)="updateUserAddress()" [mat-dialog-close]="">
+        Save
+        <mat-icon>save</mat-icon>
+    </button>
 </div>

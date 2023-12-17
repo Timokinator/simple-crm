@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { DialogAddArticleComponent } from '../dialog-add-article/dialog-add-article.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
@@ -15,11 +15,11 @@ import { DialogDeleteArticleComponent } from '../dialog-delete-article/dialog-de
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss']
 })
-export class ArticlesComponent {
+export class ArticlesComponent implements OnDestroy {
 
   firestore: Firestore = inject(Firestore);
   displayedColumns: string[] = ['position'];
-  unsubArticle: any;
+  unsubArticle;
   listArticle: any = [];
   article = new Article();
   searchInput: string = '';
@@ -28,6 +28,7 @@ export class ArticlesComponent {
   constructor(public dialog: MatDialog) {
     this.unsubArticle = this.subArticleList();
   }
+ 
 
 
   complexSearchFunction(article: any) {
@@ -97,6 +98,9 @@ export class ArticlesComponent {
   }
 
 
+  ngOnDestroy(): void {
+    this.unsubArticle();
+  }
 
 
 

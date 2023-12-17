@@ -17,7 +17,7 @@ import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, a
 export class UserComponent {
   firestore: Firestore = inject(Firestore);
   user = new User();
-  unsubUser: any;
+  unsubUser;
   listUser: any = [];
 
 

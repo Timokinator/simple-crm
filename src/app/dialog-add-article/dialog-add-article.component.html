@@ -85,7 +85,7 @@
 
 
 <div mat-dialog-actions>
-    <button [disabled]="loading" mat-button (click)="onNoClick()" [mat-dialog-close]="">Cancel</button>
-    <button [disabled]="loading || formIncomplete" mat-button type="submit" (click)="saveArticle()"
+    <button [disabled]="loading" mat-flat-button color="warn" (click)="onNoClick()" [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading || formIncomplete" mat-flat-button color="primary" type="submit" (click)="saveArticle()"
         [mat-dialog-close]="">Save</button>
 </div>

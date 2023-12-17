@@ -80,6 +80,17 @@ export class DialogEditArticleComponent implements OnInit {
     const dialog = this.dialog.open(DialogAddCategoryComponent);
     // dialog.category = new Category();
 
+    dialog.afterClosed().subscribe(result => {
+      if (result) {
+        this.article.category = result.name;
+        //console.log(this.article);
+        this.checkValidation();
+
+      }
+    });
+
+
+
   }
 
 
@@ -111,6 +122,15 @@ export class DialogEditArticleComponent implements OnInit {
     //console.log('add');
     const dialog = this.dialog.open(DialogAddSupplierComponent);
     // dialog.category = new Category();
+
+    dialog.afterClosed().subscribe(result => {
+      if (result) {
+        this.article.supplier = result.name;
+        //console.log(this.article);
+        this.checkValidation();
+      }
+    });
+
 
   }
 
@@ -200,6 +220,7 @@ export class DialogEditArticleComponent implements OnInit {
     ).then(
       () => {
         console.log("Update")
+        console.log(this.article);
         this.loading = false;
       }
     );

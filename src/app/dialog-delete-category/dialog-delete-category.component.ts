@@ -57,7 +57,6 @@ export class DialogDeleteCategoryComponent implements OnInit, OnDestroy {
 
   subArticleList() {
     const q = query(this.getArticleRef());
-    //, where("category", "==", this.oldCategory));
     return onSnapshot(q, (list) => {
       this.listArticlesToEdit = [];
       list.forEach(element => {

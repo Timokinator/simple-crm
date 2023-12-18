@@ -24,7 +24,6 @@ export class DialogEditCategoryComponent implements OnInit, OnDestroy {
 
   constructor() {
     this.unsubArticle = this.subArticleList();
-    //this.oldCategory = this.category.name;
   }
 
   ngOnInit(): void {

@@ -5,6 +5,7 @@
         <mat-label>Category</mat-label>
         <input (keyup)="checkValidation()" required id="category" name="category" class="form-control" minlength="1"
             maxlength="32" #name="ngModel" [disabled]="loading" [(ngModel)]="category.name" matInput placeholder="">
+            <mat-hint>All Articles will be updated!</mat-hint>
     </mat-form-field>
 </div>
 

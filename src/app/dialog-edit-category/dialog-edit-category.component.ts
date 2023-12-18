@@ -17,23 +17,26 @@ export class DialogEditCategoryComponent implements OnInit, OnDestroy {
 
   firestore: Firestore = inject(Firestore);
 
-  oldCategory!: string;
+  oldCategory: string = '';
   unsubArticle;
-  listArticlesToEdit = [];
+  listArticlesToEdit: any = [];
+
+
+  constructor() {
+    this.unsubArticle = this.subArticleList();
+    //this.oldCategory = this.category.name;
+  }
 
   ngOnInit(): void {
     this.oldCategory = this.category.name;
+    //console.log(this.oldCategory);
+    //console.log(this.category.name);
+    //console.log(this.listArticlesToEdit);
   }
 
   ngOnDestroy(): void {
     this.unsubArticle();
   }
-
-
-  constructor() {
-    this.unsubArticle = this.updateAllArticle();
-  }
-
 
 
   checkValidation() {
@@ -45,14 +48,17 @@ export class DialogEditCategoryComponent implements OnInit, OnDestroy {
 
 
   async updateCategory() {
+    this.loading = true;
     const docRef = doc(this.getCategoryRef(), this.category.id);
     await updateDoc(docRef, this.getCleanJson(this.category)).catch(
       (err) => { console.log(err); }
     ).then(
       () => {
-        this.updateAllArticle();
+        //console.log(this.listArticlesToEdit);
+        this.listArticlesToEdit.forEach((element: any) => {
+          this.updateSingleArticle(element);
+        });
       }
-
     );
   }
 
@@ -79,19 +85,24 @@ export class DialogEditCategoryComponent implements OnInit, OnDestroy {
   }
 
 
-  updateAllArticle() {
-    const q = query(this.getArticleRef(), where("category", "==", this.oldCategory));
+  subArticleList() {
+    const q = query(this.getArticleRef());
+    //, where("category", "==", this.oldCategory));
     return onSnapshot(q, (list) => {
+      this.listArticlesToEdit = [];
       list.forEach(element => {
-        //this.listArticlesToEdit.push(this.setArticle(element.data(), element.id));
+        if (element.data()['category'] == this.oldCategory) {
+          this.listArticlesToEdit.push(this.setArticle(element.data()));
+        };
       });
+      //console.log(this.listArticlesToEdit);
     });
   }
 
 
-  setArticle(obj: any, id: string,): Article {
+  setArticle(obj: any): Article {
     return {
-      id: id || "",
+      id: obj.id || "",
       itemNumber: obj.itemNumber || "",
       itemDesc: obj.itemDesc || "",
       price: obj.price || "",
@@ -107,8 +118,9 @@ export class DialogEditCategoryComponent implements OnInit, OnDestroy {
       (err) => { console.log(err); }
     ).then(
       () => {
+        //console.log(element.category);
         //console.log("Update")
-        //this.loading = false;
+        this.loading = false;
       }
     );
   }

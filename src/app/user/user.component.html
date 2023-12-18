@@ -1,3 +1,13 @@
+<mat-form-field>
+    <mat-label>Type for search</mat-label>
+    <input type="string" [(ngModel)]="searchInput" matInput>
+    <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
+        <mat-icon color="primary">close</mat-icon>
+    </button>
+</mat-form-field>
+
+
+
 <mat-card>
     <table>
         <tr class="first-row">
@@ -8,10 +18,10 @@
         </tr>
 
         <tr *ngFor="let user of listUser" [routerLink]="['/user/' + user.id]">
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.city }}</td>
+            <td *ngIf="searchFunction(user)">{{ user.lastName }}</td>
+            <td *ngIf="searchFunction(user)">{{ user.firstName }}</td>
+            <td *ngIf="searchFunction(user)">{{ user.email }}</td>
+            <td *ngIf="searchFunction(user)">{{ user.city }}</td>
         </tr>
 
     </table>

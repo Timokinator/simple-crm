@@ -16,7 +16,9 @@ mat-card {
     overflow: scroll;
     position: relative;
     border: 1px dotted lightgray;
-    min-height: 80vh;
+    //min-height: 80vh;
+    height: 75vh;
+    max-height: 75vh;
 }
 
 .icon-more-options {

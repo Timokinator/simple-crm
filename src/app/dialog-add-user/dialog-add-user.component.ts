@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'src/models/user.class';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc, DocumentReference } from '@angular/fire/firestore';
 import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -9,12 +9,12 @@ import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/for
   templateUrl: './dialog-add-user.component.html',
   styleUrls: ['./dialog-add-user.component.scss']
 })
-export class DialogAddUserComponent {
+export class DialogAddUserComponent implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   user = new User();
   listUser: any = [];
   birthDate!: Date;
-  unsubUser: any;
+  unsubUser;
   loading: boolean = false;
   //addUserForm: any;
   formIncomplete: boolean = true;
@@ -121,7 +121,7 @@ export class DialogAddUserComponent {
   }
 
 
-  ngonDestroy() {
+  ngOnDestroy(): void {
     this.unsubUser();
   }
 

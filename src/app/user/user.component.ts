@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { FormsModule } from '@angular/forms';
@@ -14,12 +14,12 @@ import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, a
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent {
+export class UserComponent implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   user = new User();
   unsubUser;
   listUser: any = [];
-
+  searchInput: string = '';
 
 
   constructor(public dialog: MatDialog) {
@@ -30,8 +30,8 @@ export class UserComponent {
 
   subUserList() {
     const q = query(this.getUserRef()
-    //, where("firstName", "==", "Timo")
-    , limit(100), orderBy('lastName'));
+      //, where("firstName", "==", "Timo")
+      , limit(100), orderBy('lastName'));
     return onSnapshot(q, (list) => {
       this.listUser = [];
       list.forEach(element => {
@@ -59,7 +59,7 @@ export class UserComponent {
     return collection(this.firestore, 'users');
   }
 
-  ngonDestroy() {
+  ngOnDestroy() {
     this.unsubUser();
   }
 
@@ -71,7 +71,17 @@ export class UserComponent {
 
 
 
-
+  searchFunction(user: any) {
+    if (user.firstName.toLowerCase().includes(this.searchInput.toLowerCase())
+      || user.lastName.toLowerCase().includes(this.searchInput.toLowerCase())
+      || user.email.toLowerCase().includes(this.searchInput.toLowerCase())
+      || user.email.toLowerCase().includes(this.searchInput.toLowerCase())
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 
 

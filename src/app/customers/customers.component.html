@@ -1,0 +1,38 @@
+<mat-form-field>
+    <mat-label>Type for search</mat-label>
+    <input type="string" [(ngModel)]="searchInput" matInput>
+    <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
+        <mat-icon color="primary">close</mat-icon>
+    </button>
+</mat-form-field>
+
+
+
+<mat-card>
+    <table>
+        <tr class="first-row">
+            <th>Customer #</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>E-mail</th>
+            <th>Status</th>
+
+        </tr>
+
+        <tr *ngFor="let user of listCustomer" [routerLink]="['/user/' + user.id]">
+            <td *ngIf="searchFunction(customer)">{{ customer.customerNumber }}</td>
+            <td *ngIf="searchFunction(customer)">{{ customer.name }}</td>
+            <td *ngIf="searchFunction(customer)">{{ customer.city }}</td>
+            <td *ngIf="searchFunction(customer)">{{ customer.email }}</td>
+            <td *ngIf="searchFunction(customer)">{{ customer.status }}</td>
+        </tr>
+
+    </table>
+
+</mat-card>
+
+
+<button (click)="openDialogAddCustomer()" matTooltip="Add Customer" [matTooltipPosition]="'above'" class="btn-add" mat-fab
+    color="primary" aria-label="Example icon button with a delete icon">
+    <mat-icon>add</mat-icon>
+</button>

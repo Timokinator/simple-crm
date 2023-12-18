@@ -1,50 +1,52 @@
 <mat-form-field>
-    <mat-label>Filter user</mat-label>
-    <mat-select (selectionChange)="loggingNbModel()" [(ngModel)]="filteredUserId">
-        <mat-option>None</mat-option>
-        <mat-option *ngFor="let user of listUser" [value]="user.id">{{user.firstName}} {{user.lastName}}</mat-option>
-    </mat-select>
+    <mat-label>Type for search</mat-label>
+    <input type="string" [(ngModel)]="searchInput" matInput>
+    <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
+        <mat-icon color="primary">close</mat-icon>
+    </button>
 </mat-form-field>
 
 
 <div class="container-notes" #myContainer>
 
-    <mat-card (cdkDragReleased)="endChangePosition($event, note)" cdkDrag cdkDragBoundary=".container-notes"
-        *ngFor="let note of listNotes" class="example-card grabbable"
-        [style.transform]="'translate3d(' + note.transform1 + ', ' + note.transform2 + ', 0)'">
-        <mat-card-header>
-            <mat-card-title>{{ note.title }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="global-line-break-anywhere">{{ note.content }}</p>
+    <div *ngFor="let note of listNotes">
+        <mat-card *ngIf="searchFunction(note)" (cdkDragReleased)="endChangePosition($event, note)" cdkDrag
+            cdkDragBoundary=".container-notes" class="example-card grabbable"
+            [style.transform]="'translate3d(' + note.transform1 + ', ' + note.transform2 + ', 0)'">
 
-            <span>User:</span>
-            <ng-container *ngFor="let user of listUser">
-                <span *ngIf="user.id == note.user">
-                    {{ user.firstName }} {{ user.lastName }}
-                </span>
-            </ng-container>
+            <mat-card-header>
+                <mat-card-title>{{ note.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="global-line-break-anywhere">{{ note.content }}</p>
 
-        </mat-card-content>
+                <span>User:</span>
+                <ng-container *ngFor="let user of listUser">
+                    <span *ngIf="user.id == note.user">
+                        {{ user.firstName }} {{ user.lastName }}
+                    </span>
+                </ng-container>
 
-        <button [matMenuTriggerFor]="menuHeader" class="icon-more-options" mat-icon-button>
-            <mat-icon color="primary">more_vert</mat-icon>
-        </button>
+            </mat-card-content>
 
-        <mat-menu #menuHeader="matMenu">
-            <button mat-menu-item (click)="editNote(note)">
-                <mat-icon color="primary">edit</mat-icon>
-                Edit note
+            <button [matMenuTriggerFor]="menuHeader" class="icon-more-options" mat-icon-button>
+                <mat-icon color="primary">more_vert</mat-icon>
             </button>
 
-            <button mat-menu-item (click)="deleteNote(note)">
-                <mat-icon color="warn">delete</mat-icon>
-                Delete note
-            </button>
-        </mat-menu>
+            <mat-menu #menuHeader="matMenu">
+                <button mat-menu-item (click)="editNote(note)">
+                    <mat-icon color="primary">edit</mat-icon>
+                    Edit note
+                </button>
 
-    </mat-card>
+                <button mat-menu-item (click)="deleteNote(note)">
+                    <mat-icon color="warn">delete</mat-icon>
+                    Delete note
+                </button>
+            </mat-menu>
 
+        </mat-card>
+    </div>
 </div>
 
 

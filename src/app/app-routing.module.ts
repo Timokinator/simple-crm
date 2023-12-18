@@ -9,6 +9,7 @@ import { NotesComponent } from './notes/notes.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { OrdersComponent } from './orders/orders.component';
 import { DataManagementComponent } from './data-management/data-management.component';
+import { CustomersComponent } from './customers/customers.component';
 
 const routes: Routes = [
   { path: "", component: DashboardComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: "articles", component: ArticlesComponent },
   { path: "orders", component: OrdersComponent },
   { path: "datamanagement", component: DataManagementComponent },
+  { path: "customers", component: CustomersComponent },
 
 ];
 

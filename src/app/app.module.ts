@@ -50,6 +50,8 @@ import { DialogEditCategoryComponent } from './dialog-edit-category/dialog-edit-
 import { DialogDeleteCategoryComponent } from './dialog-delete-category/dialog-delete-category.component';
 import { DialogEditSupplierComponent } from './dialog-edit-supplier/dialog-edit-supplier.component';
 import { DialogDeleteSupplierComponent } from './dialog-delete-supplier/dialog-delete-supplier.component';
+import { CustomersComponent } from './customers/customers.component';
+import { DialogAddCustomerComponent } from './dialog-add-customer/dialog-add-customer.component';
 
 
 
@@ -82,7 +84,9 @@ import { DialogDeleteSupplierComponent } from './dialog-delete-supplier/dialog-d
     DialogEditCategoryComponent,
     DialogDeleteCategoryComponent,
     DialogEditSupplierComponent,
-    DialogDeleteSupplierComponent
+    DialogDeleteSupplierComponent,
+    CustomersComponent,
+    DialogAddCustomerComponent
   ],
   imports: [
     BrowserModule,

@@ -18,13 +18,14 @@ import { DialogDeleteNoteComponent } from '../dialog-delete-note/dialog-delete-n
 export class NotesComponent implements OnInit, OnDestroy {
 
   firestore: Firestore = inject(Firestore);
-  unsubNotes: any;
-  unsubUser: any;
+  unsubNotes;
+  unsubUser;
   listNotes: any = [];
   listUser: any = [];
   note = new Note();
   filteredUserId!: string;
   private intervalFitNotes: any;
+  searchInput: string = '';
 
   //track windowsize:
   @ViewChild('myContainer')
@@ -44,12 +45,14 @@ export class NotesComponent implements OnInit, OnDestroy {
       clearInterval(this.intervalFitNotes);
       //console.log('Interval gestoppt');
     }
+    this.unsubNotes();
+    this.unsubUser();
   }
 
 
   loggingNbModel() {
     //console.log(this.filteredUserId);
-    this.subNotesList();
+    //this.subNotesList();
   }
 
 
@@ -59,7 +62,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     const width = this.myContainer.nativeElement.offsetWidth;
     const height = this.myContainer.nativeElement.offsetHeight;
     //console.log(`Breite: ${width}, Höhe: ${height}`);
-    this.fitNotes(width);
+    this.fitNotes(width, height);
   }
 
 
@@ -72,12 +75,7 @@ export class NotesComponent implements OnInit, OnDestroy {
 
 
   subNotesList() {
-    let q;
-    if (this.filteredUserId) {
-      q = query(this.getNotesRef(), where("user", "==", this.filteredUserId), orderBy('title'));
-    } else {
-      q = query(this.getNotesRef(), orderBy('title'));
-    }
+    let q = query(this.getNotesRef(), orderBy('title'));
     return onSnapshot(q, (list) => {
       this.listNotes = [];
       list.forEach((element) => {
@@ -138,14 +136,6 @@ export class NotesComponent implements OnInit, OnDestroy {
 
   }
 
-
-  ngonDestroy() {
-    this.unsubUser();
-    this.unsubNotes();
-
-  }
-
-
   editNote(note: any) {
     const dialog = this.dialog.open(DialogEditNoteComponent);
     dialog.componentInstance.note = new Note(note);
@@ -168,12 +158,6 @@ export class NotesComponent implements OnInit, OnDestroy {
     note.transform2 = matrix.m42 + "px";
     this.updateNote(note);
   }
-
-
-  // on resize muss t1 + t2 dynamisch mit foreach maximal festgelegt werden
-
-
-
 
 
   async updateNote(note: any) {
@@ -207,12 +191,14 @@ export class NotesComponent implements OnInit, OnDestroy {
 
 
 
-  fitNotes(newWidth: any) {
+  fitNotes(newWidth: any, newHeight: any) {
     this.listNotes.forEach((element: any) => {
-      const numberOfPixel = +element.transform1.slice(0, -2);
+      const numberOfPixelWidth = +element.transform1.slice(0, -2);
+      const numberOfPixelHeight = +element.transform2.slice(0, -2);
+
       //console.log(newWidth, numberOfPixel);
 
-      if (numberOfPixel + 240 > newWidth) {
+      if (numberOfPixelWidth + 240 > newWidth) {
         let random: number;
         if (newWidth > 240) {
           random = Math.floor(Math.random() * (newWidth - 240))
@@ -220,18 +206,77 @@ export class NotesComponent implements OnInit, OnDestroy {
           random = 0;
         }
         element.transform1 = random + 'px';
-        this.updateNote(element);
+        this.updateNoteTransform1(element);
+      }
+
+      if (numberOfPixelHeight + 240 > newHeight || numberOfPixelHeight < 0) {
+        let random: number;
+        if (newHeight > 240) {
+          random = Math.floor(Math.random() * (newHeight - 240))
+        } else {
+          random = 0;
+        }
+        element.transform2 = random + 'px';
+        this.updateNoteTransform2(element);
       }
     });
+  }
 
 
+  async updateNoteTransform1(note: any) {
+    const docRef = doc(this.getNoteRef(), note.id);
+    await updateDoc(docRef, { transform1: note.transform1 }).catch(
+      (err) => { console.log(err); }
+    ).then(
+      () => {
+        //console.log("Update")
+        //this.loading = false;
+      }
+    );
+  }
 
+
+  async updateNoteTransform2(note: any) {
+    const docRef = doc(this.getNoteRef(), note.id);
+    await updateDoc(docRef, { transform2: note.transform2 }).catch(
+      (err) => { console.log(err); }
+    ).then(
+      () => {
+        //console.log("Update")
+        //this.loading = false;
+      }
+    );
   }
 
 
 
 
+  searchFunction(note: any) {
+    if (note.title.toLowerCase().includes(this.searchInput.toLowerCase())
+      || note.content.toLowerCase().includes(this.searchInput.toLowerCase())
+      || this.checkNoteAndUser(note)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
+  checkNoteAndUser(note: any) {
+    let counter: number = 0;
+    this.listUser.forEach((element: any) => {
+      if (element.id == note.user
+        && element.firstName.toLowerCase().includes(this.searchInput.toLocaleLowerCase())
+        || element.lastName.toLowerCase().includes(this.searchInput.toLowerCase())
+      ) {
+        counter++;
+      }
+    });
 
-
+    if (counter > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

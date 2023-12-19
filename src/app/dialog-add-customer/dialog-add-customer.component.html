@@ -1,1 +1,103 @@
-<p>dialog-add-customer works!</p>
+<div *ngIf="loading" class="container-progress-bar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<h1 mat-dialog-title>Add Customer</h1>
+<div mat-dialog-content>
+    <div class="container-input-names">
+        <mat-form-field class="input-c-number" appearance="outline">
+            <mat-label>Customer number</mat-label>
+            <input (keyup)="checkValidation()" [ngClass]="{'color-red': !customerNumberUnique}" required id="firstName"
+                name="firstName" class="form-control" minlength="5" #name="ngModel" [disabled]="loading"
+                [(ngModel)]="customer.customerNumber" matInput placeholder="">
+            <mat-hint>Must be unique / min 5 characters</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="input-c-name" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="customer.name" matInput
+                placeholder="">
+        </mat-form-field>
+    </div>
+
+
+
+    <div class="container-input-email-phone">
+        <mat-form-field class="input-email" appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input (keyup)="checkValidation()" required type="email" [disabled]="loading" [(ngModel)]="customer.email"
+                matInput placeholder="">
+        </mat-form-field>
+
+        <mat-form-field class="input-phone" appearance="outline">
+            <mat-label>Phone number</mat-label>
+            <input (keyup)="checkValidation()" required type="tel" [disabled]="loading" [(ngModel)]="customer.phone"
+                matInput placeholder="">
+        </mat-form-field>
+    </div>
+
+
+
+
+    <div class="container-input-address-street">
+        <mat-form-field class="input-address-street" appearance="outline">
+            <mat-label>Street & House number</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="customer.street" matInput
+                placeholder="">
+        </mat-form-field>
+
+    </div>
+
+    <div class="container-input-address-city">
+
+        <mat-form-field class="input-zip" appearance="outline">
+            <mat-label>Zip code</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="customer.zipCode" type="text"
+                matInput maxlength="10" placeholder="">
+        </mat-form-field>
+
+        <mat-form-field class="input-city" appearance="outline">
+            <mat-label>City</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="customer.city" matInput
+                placeholder="">
+        </mat-form-field>
+
+    </div>
+
+
+
+    <div class="container-input-status-infotext">
+        <mat-form-field class="input-status" appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select (selectionChange)="checkValidation()" required [disabled]="loading"
+                [(ngModel)]="customer.status">
+                <mat-option value="Akquise">Development</mat-option>
+                <mat-option value="Active">Active</mat-option>
+                <mat-option value="Key-Account">Key-Account</mat-option>
+                <mat-option value="Inactive">Inactive</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-infotext" appearance="outline">
+            <mat-label>Infotext</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5" maxlength="100"></textarea>
+                <mat-hint>Max 100 characters</mat-hint>
+        </mat-form-field>
+
+    </div>
+
+
+
+
+
+
+
+
+</div>
+<div mat-dialog-actions>
+    <button [disabled]="loading" mat-flat-button color="warn" (click)="onNoClick()"
+        [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading || formIncomplete" mat-flat-button color="primary" type="submit"
+        (click)="saveCustomer()" [mat-dialog-close]="">Save</button>
+</div>

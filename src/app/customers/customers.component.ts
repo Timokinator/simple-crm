@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Customer } from 'src/models/customer.class';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
+import { DialogAddCustomerComponent } from '../dialog-add-customer/dialog-add-customer.component';
 
 
 
@@ -33,14 +34,14 @@ export class CustomersComponent implements OnDestroy {
     return onSnapshot(q, (list) => {
       this.listCustomer = [];
       list.forEach(element => {
-        this.listCustomer.push(this.setUserObject(element.data(), element.id));
+        this.listCustomer.push(this.setCustomerObject(element.data(), element.id));
       });
     });
   }
 
 
 
-  setUserObject(obj: any, id: string,): Customer {
+  setCustomerObject(obj: any, id: string,): Customer {
     return {
       id: id || "",
       customerNumber: obj.customerNumber || "",
@@ -66,7 +67,7 @@ export class CustomersComponent implements OnDestroy {
 
 
   openDialogAddCustomer() {
-    //this.dialog.open(DialogAddUserComponent);
+    this.dialog.open(DialogAddCustomerComponent);
 
   }
 

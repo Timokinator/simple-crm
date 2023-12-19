@@ -1,0 +1,82 @@
+.container-progress-bar {
+    padding: 0;
+}
+
+
+.container-input-names {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+    margin-bottom: 16px;
+}
+
+.container-input-birthday {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.container-input-address-street {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.container-input-address-city {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.container-input-email {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.input-address-street,
+.input-birthday {
+    width: 100%;
+}
+
+.input-zip {
+    width: 30%;
+}
+
+.input-city {
+    width: 70%;
+}
+
+.container-input-email-phone {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.input-c-number {
+    width: 40%;
+}
+
+.input-c-name {
+    width: 60%;
+}
+
+/* .input-infotext {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+} */
+
+.container-input-status-infotext {
+    display: flex;
+    gap: 16px;
+    padding: 4px 0;
+}
+
+.input-status {
+    width: 40%;
+}
+
+.input-infotext {
+    width: 60%;
+}

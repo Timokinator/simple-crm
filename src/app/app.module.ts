@@ -52,6 +52,7 @@ import { DialogEditSupplierComponent } from './dialog-edit-supplier/dialog-edit-
 import { DialogDeleteSupplierComponent } from './dialog-delete-supplier/dialog-delete-supplier.component';
 import { CustomersComponent } from './customers/customers.component';
 import { DialogAddCustomerComponent } from './dialog-add-customer/dialog-add-customer.component';
+import {TextFieldModule} from '@angular/cdk/text-field';
 
 
 
@@ -112,6 +113,7 @@ import { DialogAddCustomerComponent } from './dialog-add-customer/dialog-add-cus
     DragDropModule,
     MatTableModule,
     MatPaginatorModule,
+    TextFieldModule,
     provideFirebaseApp(() => initializeApp({ "projectId": "simple-crm-11490", "appId": "1:114888599173:web:a4921aa755da4c02746bec", "storageBucket": "simple-crm-11490.appspot.com", "apiKey": "AIzaSyAY2aBF17See0jJbzS9P6IapbcKeuWW1xM", "authDomain": "simple-crm-11490.firebaseapp.com", "messagingSenderId": "114888599173" })),
     provideFirestore(() => getFirestore()),
   ],

@@ -1,0 +1,70 @@
+<div class="container-mat-card">
+
+    <mat-card *ngIf="dataLoaded" class="mat-card-header">
+        <img src="../../assets/img/customer-pic1.png" alt="">
+        <div class="customer-details-header">
+            <h2>{{ customer.customerNumber }} - {{ customer.name }}</h2>
+
+            <div class="container-mail-phone">
+                <p class="container-mail-address">{{ customer.email }} <a class="mail-address"
+                        href="mailto: {{customer.email}}"><mat-icon>mail</mat-icon></a></p>
+
+                <p class="container-mail-address">{{ customer.phone }} <a class="mail-address"
+                        href="tel: {{customer.phone}}"><mat-icon>phone</mat-icon></a></p>
+            </div>
+        </div>
+
+        <button [matMenuTriggerFor]="menuHeader" class="icon-more-options" mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <mat-menu #menuHeader="matMenu">
+            <button mat-menu-item (click)="editCustomer()">
+                <mat-icon color="primary">edit</mat-icon>
+                Edit customer
+            </button>
+
+            <button mat-menu-item (click)="deleteCustomer()">
+                <mat-icon color="warn">delete</mat-icon>
+                Delete customer
+            </button>
+        </mat-menu>
+
+        <button [routerLink]="['/customers/']" class="icon-back-to-user" mat-icon-button aria-label="">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    </mat-card>
+
+    <mat-card *ngIf="dataLoaded" class="mat-card-content">
+        <mat-card-header>
+            <mat-card-title>Address</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            {{ customer.street }} <br>
+            {{ customer.zipCode }} {{ customer.city }}
+        </mat-card-content>
+
+    </mat-card>
+
+
+    <mat-card *ngIf="dataLoaded" class="mat-card-infotext">
+        <mat-card-header>
+            <mat-card-title>Infotext</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            {{ customer.infotext }}
+        </mat-card-content>
+
+
+
+    </mat-card>
+
+
+
+
+    <!-- Template Orders for Customer -->
+    <h2 class="h2-orders">Order history:</h2>
+
+
+
+</div>

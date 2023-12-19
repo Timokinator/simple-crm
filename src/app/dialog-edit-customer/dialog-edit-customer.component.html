@@ -2,14 +2,14 @@
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
-<h1 mat-dialog-title>Add Customer</h1>
+<h1 mat-dialog-title>Edit Customer</h1>
 <div mat-dialog-content>
     <div class="container-input-names">
-        <mat-form-field class="input-c-number" appearance="outline">
+        <mat-form-field [ngClass]="{'color-red': !customerNumberUnique}" class="input-c-number" appearance="outline">
             <mat-label>Customer number</mat-label>
             <input (keyup)="checkValidation()" [ngClass]="{'color-red': !customerNumberUnique}" required id="firstName"
                 name="firstName" class="form-control" minlength="5" #name="ngModel" [disabled]="loading"
-                [(ngModel)]="customer.customerNumber" matInput placeholder="">
+                [(ngModel)]="customerNumberEdit" matInput placeholder="">
             <mat-hint>Must be unique / min 5 characters</mat-hint>
         </mat-form-field>
 
@@ -80,24 +80,17 @@
 
         <mat-form-field class="input-infotext" appearance="outline">
             <mat-label>Infotext</mat-label>
-            <textarea matInput [(ngModel)]="customer.infotext" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5" maxlength="1000"></textarea>
-                <mat-hint>Optional / max 100 characters</mat-hint>
+            <textarea matInput [(ngModel)]="customer.infotext" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" maxlength="1000"></textarea>
+            <mat-hint>Optional / max 100 characters</mat-hint>
         </mat-form-field>
 
     </div>
 
-
-
-
-
-
-
-
 </div>
+
 <div mat-dialog-actions>
-    <button [disabled]="loading" mat-flat-button color="warn" (click)="onNoClick()"
-        [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading" mat-flat-button color="warn" [mat-dialog-close]="">Cancel</button>
     <button [disabled]="loading || formIncomplete" mat-flat-button color="primary" type="submit"
         (click)="saveCustomer()" [mat-dialog-close]="">Save</button>
 </div>

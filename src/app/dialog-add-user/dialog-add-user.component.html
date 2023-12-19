@@ -60,19 +60,12 @@
             <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="user.city" matInput
                 placeholder="">
         </mat-form-field>
-
-
-
-
     </div>
-
-
-
-
-
 </div>
+
 <div mat-dialog-actions>
-    <button [disabled]="loading" mat-flat-button color="warn" (click)="onNoClick()" [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading" mat-flat-button color="warn" (click)="onNoClick()"
+        [mat-dialog-close]="">Cancel</button>
     <button [disabled]="loading || formIncomplete" mat-flat-button color="primary" type="submit" (click)="saveUser()"
         [mat-dialog-close]="">Save</button>
 </div>

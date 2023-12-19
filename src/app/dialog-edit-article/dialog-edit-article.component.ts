@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Article } from 'src/models/article.class';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc, DocumentReference } from '@angular/fire/firestore';
 import { Category } from 'src/models/category.class';
@@ -13,7 +13,7 @@ import { DialogAddSupplierComponent } from '../dialog-add-supplier/dialog-add-su
   templateUrl: './dialog-edit-article.component.html',
   styleUrls: ['./dialog-edit-article.component.scss']
 })
-export class DialogEditArticleComponent implements OnInit {
+export class DialogEditArticleComponent implements OnInit, OnDestroy {
 
 
   article!: Article;
@@ -21,17 +21,17 @@ export class DialogEditArticleComponent implements OnInit {
   itemNumberEdit!: string;
 
   listArticles: any = [];
-  unsubArticle: any;
+  unsubArticle;
   itemNumberUnique: boolean = false;
 
   loading: boolean = false;
   formIncomplete: boolean = true;
 
   category = new Category();
-  unsubCategory: any;
+  unsubCategory;
   listCategories: any = [];
 
-  unsubSupplier: any;
+  unsubSupplier;
   supplier = new Supplier();
   listSupplier: any = [];
 
@@ -207,11 +207,6 @@ export class DialogEditArticleComponent implements OnInit {
     this.updateArticle();
   }
 
-  onNoClick() {
-    console.log('Cancel')
-  }
-
-
 
   async updateArticle() {
     const docRef = doc(this.getArticleRef(), this.article.id);
@@ -228,11 +223,11 @@ export class DialogEditArticleComponent implements OnInit {
 
 
 
-  ngonDestroy() {
-    this.unsubCategory();
-    this.unsubArticle();
-    this.unsubSupplier();
-  }
+ngOnDestroy(): void {
+  this.unsubCategory();
+  this.unsubArticle();
+  this.unsubSupplier();
+}
 
 
 

@@ -14,17 +14,34 @@
             <th>Customer #</th>
             <th>Name</th>
             <th>City</th>
-            <th>E-mail</th>
             <th>Status</th>
-
+            <!-- <th></th> -->
+            
         </tr>
 
-        <tr *ngFor="let user of listCustomer" [routerLink]="['/user/' + user.id]">
+        <tr *ngFor="let customer of listCustomer" [routerLink]="['/customers/' + customer.id]" >
             <td *ngIf="searchFunction(customer)">{{ customer.customerNumber }}</td>
             <td *ngIf="searchFunction(customer)">{{ customer.name }}</td>
             <td *ngIf="searchFunction(customer)">{{ customer.city }}</td>
-            <td *ngIf="searchFunction(customer)">{{ customer.email }}</td>
             <td *ngIf="searchFunction(customer)">{{ customer.status }}</td>
+
+            <!-- <td *ngIf="searchFunction(customer)">
+                <button [matMenuTriggerFor]="menuHeader" class="icon-more-options" mat-icon-button>
+                    <mat-icon color="primary">more_vert</mat-icon>
+                </button>
+
+                <mat-menu #menuHeader="matMenu">
+                    <button mat-menu-item (click)="editCustomer(customer)">
+                        <mat-icon color="primary">edit</mat-icon>
+                        Edit customer
+                    </button>
+
+                    <button mat-menu-item (click)="deleteCustomer(customer)">
+                        <mat-icon color="warn">delete</mat-icon>
+                        Delete customer
+                    </button>
+                </mat-menu>
+            </td> -->
         </tr>
 
     </table>

@@ -112,7 +112,7 @@ export class DialogAddUserComponent implements OnDestroy {
       this.user.birthDate = 0;
     }
 
-    console.log(this.user)
+    //console.log(this.user)
     this.addUser(this.setUserObject(this.user, ''), 'users')
   }
 

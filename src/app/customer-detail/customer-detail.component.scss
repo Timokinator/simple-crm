@@ -1,0 +1,109 @@
+.mat-card-header {
+    min-height: 200px;
+    max-height: 100%;
+    background-color: rgb(236, 108, 58);
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    gap: 32px;
+    padding: 16px;
+
+
+    img {
+        width: 88px;
+        border-radius: 100px;
+        background-color: white;
+        object-fit: cover;
+    }
+
+
+}
+
+
+.customer-details-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    //height: 88px;
+    height: 160px;
+    gap: 4px;
+
+    h2 {
+        margin-bottom: 0;
+    }
+}
+
+
+.mat-card-content,
+.mat-card-infotext {
+    margin-top: 32px;
+}
+
+
+.icon-more-options {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+.icon-back-to-user {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.h2-orders {
+    margin-top: 32px;
+
+}
+
+.single-note {
+    margin: 8px 0;
+}
+
+.mail-address {
+    text-decoration: none;
+    color: unset;
+    cursor: pointer;
+    transition-duration: 120ms;
+    display: flex;
+    align-items: flex-end;
+
+
+
+    &:hover {
+        transition-duration: 120ms;
+    }
+
+
+
+    mat-icon {
+        transition-duration: 240ms;
+
+        &:hover {
+            color: #3f51b5;
+            transition-duration: 240ms;
+        }
+
+    }
+
+}
+
+
+.container-mail-address {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    width: 100%;
+    margin: 0;
+}
+
+.container-mail-phone {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+
+}

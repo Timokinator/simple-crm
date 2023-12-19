@@ -10,6 +10,7 @@ import { ArticlesComponent } from './articles/articles.component';
 import { OrdersComponent } from './orders/orders.component';
 import { DataManagementComponent } from './data-management/data-management.component';
 import { CustomersComponent } from './customers/customers.component';
+import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 
 const routes: Routes = [
   { path: "", component: DashboardComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: "orders", component: OrdersComponent },
   { path: "datamanagement", component: DataManagementComponent },
   { path: "customers", component: CustomersComponent },
+  { path: "customers/:id", component: CustomerDetailComponent },
 
 ];
 

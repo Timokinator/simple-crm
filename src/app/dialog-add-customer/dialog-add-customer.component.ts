@@ -59,7 +59,6 @@ export class DialogAddCustomerComponent implements OnDestroy {
   }
 
 
-
   setCustomerObject(obj: any, id: string,): Customer {
     return {
       id: id || "",
@@ -85,13 +84,40 @@ export class DialogAddCustomerComponent implements OnDestroy {
   }
 
 
-
-
-
   saveCustomer() {
-    console.log('save');
-
+    this.loading = true;
+    this.addCustomer(this.setCustomerObject(this.customer, ''), 'customers')
   }
+
+  async addCustomer(item: Customer, colId: "customers") {
+    if (colId == "customers") {
+      await addDoc(this.getCustomerRef(), item).catch(
+        (err) => { console.error(err) }
+      ).then(
+        (docRef) => {
+          this.loading = false;
+          const newID = docRef?.id;
+          this.updateCustomerWithId(item, newID);
+        }
+      )
+    }
+  }
+
+
+  async updateCustomerWithId(item: Customer, id: any) {
+    const docRef = doc(this.getCustomerRef(), id);
+    await updateDoc(docRef, { id: id }).catch(
+      (err) => { console.log(err); }
+    ).then(
+      () => { console.log("Update") }
+    );
+  }
+
+
+
+
+
+
 
 
   onNoClick() {

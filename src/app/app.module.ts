@@ -53,6 +53,10 @@ import { DialogDeleteSupplierComponent } from './dialog-delete-supplier/dialog-d
 import { CustomersComponent } from './customers/customers.component';
 import { DialogAddCustomerComponent } from './dialog-add-customer/dialog-add-customer.component';
 import {TextFieldModule} from '@angular/cdk/text-field';
+import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
+import { DialogEditCustomerComponent } from './dialog-edit-customer/dialog-edit-customer.component';
+import { DialogDeleteCustomerComponent } from './dialog-delete-customer/dialog-delete-customer.component';
+import { DialogAddOrderComponent } from './dialog-add-order/dialog-add-order.component';
 
 
 
@@ -87,7 +91,11 @@ import {TextFieldModule} from '@angular/cdk/text-field';
     DialogEditSupplierComponent,
     DialogDeleteSupplierComponent,
     CustomersComponent,
-    DialogAddCustomerComponent
+    DialogAddCustomerComponent,
+    CustomerDetailComponent,
+    DialogEditCustomerComponent,
+    DialogDeleteCustomerComponent,
+    DialogAddOrderComponent
   ],
   imports: [
     BrowserModule,

@@ -73,9 +73,28 @@ export class CustomersComponent implements OnDestroy {
 
 
   searchFunction(customer: any) {
+    if (customer.customerNumber.toLowerCase().includes(this.searchInput.toLowerCase())
+      || customer.name.toLowerCase().includes(this.searchInput.toLowerCase())
+      || customer.city.toLowerCase().includes(this.searchInput.toLowerCase())
+      || customer.status.toLowerCase().includes(this.searchInput.toLowerCase())
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+
 
   }
 
+
+  editCustomer(customer: any) {
+
+  }
+
+
+  deleteCustomer(customer: any) {
+
+  }
 
 
 

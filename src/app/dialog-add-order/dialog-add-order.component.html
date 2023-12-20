@@ -1,1 +1,128 @@
-<p>dialog-add-order works!</p>
+<div *ngIf="loading" class="container-progress-bar">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<h1 mat-dialog-title>Add Order</h1>
+<div mat-dialog-content>
+    <div class="container-input-names">
+        <mat-form-field class="input-c-number" appearance="outline">
+            <mat-label>Order number</mat-label>
+            <input (keyup)="checkValidation()" [ngClass]="{'color-red': !orderNumberUnique}" required id="orderNumber"
+                name="orderNumber" class="form-control" minlength="5" #name="ngModel" [disabled]="loading"
+                [(ngModel)]="order.orderNumber" matInput placeholder="">
+            <mat-hint>Must be unique / min 5 characters</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="input-customer" appearance="outline">
+            <mat-label>Customer</mat-label>
+            <mat-select (selectionChange)="checkValidation()" required [disabled]="loading"
+                [(ngModel)]="order.customer">
+                <mat-option *ngFor="let customer of listCustomer" [value]="customer">{{ customer.name
+                    }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+
+
+    <div class="container-input-order-and-delivery-date">
+        <mat-form-field class="input-order-date">
+            <mat-label>Order date</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="orderDate" matInput
+                [matDatepicker]="picker1">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="input-birthday">
+            <mat-label>Delivery date</mat-label>
+            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="deliveryDate" matInput
+                [matDatepicker]="picker2">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+
+
+
+    <div class="container-input-status-note">
+        <mat-form-field class="input-status" appearance="outline">
+            <mat-label>Order status</mat-label>
+            <mat-select (selectionChange)="checkValidation()" required [disabled]="loading" [(ngModel)]="order.status">
+                <mat-option value="Pending">Pending</mat-option>
+                <mat-option value="Processing">Processing</mat-option>
+                <mat-option value="Shipped">Shipped</mat-option>
+                <mat-option value="Delivered">Delivered</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-note" appearance="outline">
+            <mat-label>Note</mat-label>
+            <textarea matInput [(ngModel)]="order.note" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" maxlength="100"></textarea>
+            <mat-hint>Optional / max 100 characters</mat-hint>
+        </mat-form-field>
+    </div>
+
+
+    <div class="container-positions">
+        <table>
+            <tr>
+                <th>Article #</th>
+                <th>Article Desc</th>
+                <th>Price</th>
+                <th>Amount</th>
+                <th>Sum</th>
+            </tr>
+
+            <tr *ngFor=" let article of order.positions">
+                <td>{{ article.itemNumber }}</td>
+                <td>{{ article.itemDesc }}</td>
+                <td>{{ article.price }} €</td>
+                <td>{{ article.amount }}</td>
+                <td>{{ article.sum }} €</td>
+            </tr>
+
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input type="text" placeholder="Search" aria-label="Number" matInput
+                          [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                </td>
+            </tr>
+
+
+
+        </table>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+</div>
+<div mat-dialog-actions>
+    <button [disabled]="loading" mat-flat-button color="warn" [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading || formIncomplete" mat-flat-button color="primary" type="submit" (click)="saveOrder()"
+        [mat-dialog-close]="">Save</button>
+</div>

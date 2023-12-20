@@ -15,7 +15,7 @@ export class OrdersComponent implements OnDestroy, OnInit {
   searchInput: string = '';
   unsubOrders;
   listOrders: any = [];
-  order = new Order;
+  order = new Order();
   deliveryDate!: Date;
   showOrderDetails: number | null = 1; //später auf null setzen
 
@@ -61,6 +61,7 @@ export class OrdersComponent implements OnDestroy, OnInit {
       status: obj.status || "",
       note: obj.note || "",
       positions: obj.positions || "",
+      sum: obj.sum || ""
     }
   }
 

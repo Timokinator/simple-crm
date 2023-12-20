@@ -16,6 +16,7 @@
             <th>Customer</th>
             <th>Status</th>
             <th>Delivery date</th>
+            <th>Order volume</th>
         </tr>
 
         <ng-container *ngFor="let order of listOrders; let i = index">
@@ -24,11 +25,12 @@
                 <td *ngIf="searchFunction(order)">{{ order.customer.name }}</td>
                 <td *ngIf="searchFunction(order)">{{ order.status }}</td>
                 <td *ngIf="searchFunction(order)">{{ order.deliveryDate }}</td>
+                <td *ngIf="searchFunction(order)">{{ order.sum }} €</td>
             </tr>
 
             <tr class="no-hover container-animation" [style.display]=" this.showOrderDetails == i ? '' : 'none'">
 
-                <td class="container-order-details" colspan="4">
+                <td class="container-order-details" colspan="5">
                     <h2>Order Details</h2>
 
                     <h3>Customer:</h3>
@@ -51,30 +53,17 @@
                         <tr *ngFor=" let article of order.positions">
                             <td>{{ article.itemNumber }}</td>
                             <td>{{ article.itemDesc }}</td>
-                            <td>{{ article.price }}</td>
-
+                            <td>{{ article.price }} €</td>
+                            <td>{{ article.amount }}</td>
+                            <td>{{ article.sum }} €</td>
 
                         </tr>
 
-
-
-
                     </table>
-
-
-
-
 
                 </td>
 
-
-
-
-
-
             </tr>
-
-
 
         </ng-container>
 

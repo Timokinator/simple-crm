@@ -28,7 +28,7 @@ export class ArticlesComponent implements OnDestroy {
   constructor(public dialog: MatDialog) {
     this.unsubArticle = this.subArticleList();
   }
- 
+
 
 
   complexSearchFunction(article: any) {
@@ -66,6 +66,8 @@ export class ArticlesComponent implements OnDestroy {
       category: obj.category || "",
       supplier: obj.supplier || "",
       status: obj.status || "",
+      amount: obj.amount || "",
+      sum: obj.sum || ""
     }
   }
 

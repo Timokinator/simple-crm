@@ -7,8 +7,10 @@ export class Article {
     category!: string;
     supplier!: string;
     status!: string;
+    amount!: number;
+    sum!: number;
 
-    
+
 
     constructor(obj?: any) {
         this.id = obj ? obj.id : '';
@@ -18,9 +20,11 @@ export class Article {
         this.category = obj ? obj.category : '';
         this.supplier = obj ? obj.supplier : '';
         this.status = obj ? obj.status : '';
+        this.amount = obj ? obj.amount : '';
+        this.sum = obj ? obj.sum : '';
     }
 
 
-    
+
 }
 

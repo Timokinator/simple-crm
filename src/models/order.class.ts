@@ -12,6 +12,7 @@ export class Order {
     status!: string;
     note!: string;
     positions!: Article[];
+    sum!: number;
 
 
     constructor(obj?: any) {
@@ -23,6 +24,8 @@ export class Order {
         this.status = obj ? obj.status : '';
         this.note = obj ? obj.note : '';
         this.positions = obj ? obj.positions : '';
+        this.sum = obj ? obj.sum : '';
+
     }
 
 }

@@ -78,6 +78,8 @@ export class DialogDeleteCategoryComponent implements OnInit, OnDestroy {
       category: obj.category || "",
       supplier: obj.supplier || "",
       status: obj.status || "",
+      amount: obj.amount || "",
+      sum: obj.sum || ""
     }
   }
 

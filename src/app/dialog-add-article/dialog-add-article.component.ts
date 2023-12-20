@@ -143,6 +143,8 @@ export class DialogAddArticleComponent implements OnInit {
       category: obj.category || "",
       supplier: obj.supplier || "",
       status: obj.status || "",
+      amount: obj.amount || "",
+      sum: obj.sum || ""
     }
   }
 

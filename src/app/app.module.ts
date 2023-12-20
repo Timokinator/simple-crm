@@ -58,6 +58,7 @@ import { DialogEditCustomerComponent } from './dialog-edit-customer/dialog-edit-
 import { DialogDeleteCustomerComponent } from './dialog-delete-customer/dialog-delete-customer.component';
 import { DialogAddOrderComponent } from './dialog-add-order/dialog-add-order.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
@@ -125,6 +126,7 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
     MatPaginatorModule,
     TextFieldModule,
     CdkAccordionModule,
+    MatAutocompleteModule,
     provideFirebaseApp(() => initializeApp({ "projectId": "simple-crm-11490", "appId": "1:114888599173:web:a4921aa755da4c02746bec", "storageBucket": "simple-crm-11490.appspot.com", "apiKey": "AIzaSyAY2aBF17See0jJbzS9P6IapbcKeuWW1xM", "authDomain": "simple-crm-11490.firebaseapp.com", "messagingSenderId": "114888599173" })),
     provideFirestore(() => getFirestore()),
   ],

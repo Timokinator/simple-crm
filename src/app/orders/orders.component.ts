@@ -17,7 +17,7 @@ export class OrdersComponent implements OnDestroy, OnInit {
   listOrders: any = [];
   order = new Order;
   deliveryDate!: Date;
-  showOrderDetails: number | null = null;
+  showOrderDetails: number | null = 1; //später auf null setzen
 
 
 

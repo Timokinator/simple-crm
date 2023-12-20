@@ -26,19 +26,42 @@
                 <td *ngIf="searchFunction(order)">{{ order.deliveryDate }}</td>
             </tr>
 
-            <!--eventuel als tr:-->
+            <tr class="no-hover container-animation" [style.display]=" this.showOrderDetails == i ? '' : 'none'">
 
-            <tr class="no-hover" [style.display]=" this.showOrderDetails == i ? '' : 'none'">
                 <td class="container-order-details" colspan="4">
                     <h2>Order Details</h2>
 
+                    <h3>Customer:</h3>
                     <span>{{ order.customer.customerNumber }} - {{ order.customer.name }}</span> <br>
                     <span>{{ order.customer.street }} / {{ order.customer.zipCode }} {{ order.customer.city }} </span>
 
 
                     <h3>Positions:</h3>
 
-                    
+                    <table>
+                        <tr>
+                            <th>Article #</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                            <th>Sum</th>
+                        </tr>
+
+
+                        <tr *ngFor=" let article of order.positions">
+                            <td>{{ article.itemNumber }}</td>
+                            <td>{{ article.itemDesc }}</td>
+                            <td>{{ article.price }}</td>
+
+
+                        </tr>
+
+
+
+
+                    </table>
+
+
 
 
 

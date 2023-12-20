@@ -3,3 +3,59 @@
     bottom: 56px;
     right: 56px;
 }
+
+table {
+
+    line-height: 2;
+    border-collapse: collapse;
+
+
+    tr {
+        text-align: start;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+
+        &:last-child,
+        &:first-child {
+            border-bottom: 0;
+        }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+    }
+
+    td {
+        padding: 4px;
+    }
+
+    th {
+        text-align: start;
+        font-size: 16px;
+        padding: 4px;
+    }
+
+}
+
+
+.no-hover:hover {
+    cursor: unset !important;
+    background-color: white !important;
+}
+
+.first-row {
+    background-color: #3f51b5;
+    //border: none;
+    color: white;
+
+
+    &:hover {
+        background-color: #3f51b5 !important;
+        //border: none !important;
+        color: white !important;
+        cursor: unset !important;
+    }
+
+}
+

@@ -18,7 +18,7 @@ import { DialogDeleteArticleComponent } from '../dialog-delete-article/dialog-de
 export class ArticlesComponent implements OnDestroy {
 
   firestore: Firestore = inject(Firestore);
-  displayedColumns: string[] = ['position'];
+  //displayedColumns: string[] = ['position'];
   unsubArticle;
   listArticle: any = [];
   article = new Article();
@@ -75,9 +75,6 @@ export class ArticlesComponent implements OnDestroy {
     return collection(this.firestore, 'articles');
   }
 
-  ngonDestroy() {
-    this.unsubArticle();
-  }
 
   openDialog() {
     this.dialog.open(DialogAddArticleComponent);

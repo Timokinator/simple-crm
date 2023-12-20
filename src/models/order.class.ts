@@ -1,5 +1,6 @@
-import { Article } from "./article.class";
 import { Customer } from "./customer.class";
+import { Article } from "./article.class";
+
 
 export class Order {
     [x: string]: any;
@@ -7,7 +8,7 @@ export class Order {
     orderNumber!: string;
     customer!: Customer;
     orderDate!: number;
-    deliveryDate!: number;
+    deliveryDate!: Date;
     status!: string;
     note!: string;
     positions!: Article[];

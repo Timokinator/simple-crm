@@ -8,6 +8,7 @@ import { Order } from 'src/models/order.class';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { DialogAddPositionToOrderComponent } from '../dialog-add-position-to-order/dialog-add-position-to-order.component';
 
 
 
@@ -17,7 +18,7 @@ import { startWith, map } from 'rxjs/operators';
   templateUrl: './dialog-add-order.component.html',
   styleUrls: ['./dialog-add-order.component.scss']
 })
-export class DialogAddOrderComponent implements OnDestroy, OnInit {
+export class DialogAddOrderComponent implements OnDestroy {
 
 
   firestore: Firestore = inject(Firestore);
@@ -89,7 +90,6 @@ export class DialogAddOrderComponent implements OnDestroy, OnInit {
       list.forEach(element => {
         this.listArticle.push(this.setArticle(element.data(), element.id));
       });
-      this.fillNewArray();
     });
   }
 
@@ -171,34 +171,30 @@ export class DialogAddOrderComponent implements OnDestroy, OnInit {
   }
 
 
-  //Test-code
 
-  myControl = new FormControl();
-  //options: string[] = ['One', 'Two', 'Three'];
-
-  fillNewArray() {
-    this.listArticle.forEach((element: any) => {
-      this.options.push(element.itemNumber)
+  openDialogAddPosition() {
+    console.log('add position');
+    const dialog = this.dialog.open(DialogAddPositionToOrderComponent);
+    // dialog.category = new Category();
+    dialog.afterClosed().subscribe(result => {
+      if (result) {
+        const newArticle = this.setArticle(result, result.id);
+        this.order.positions.push(newArticle);
+      }
     });
   }
 
-  options: string[] = []
-  filteredOptions!: Observable<string[]>;
 
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
-      console.log(this.options);
-      
+
+  calculateSum(article: Article) {
+    article.sum = article.amount * article.price
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  deletePosition(i: any) {
+    this.order.positions.splice(i, 1)
   }
+
+
+
 
 }

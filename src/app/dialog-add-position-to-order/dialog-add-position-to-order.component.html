@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Search Article to add</h1>
+
+<mat-form-field>
+    <mat-label>Type for search</mat-label>
+    <input type="string" [(ngModel)]="searchInput" matInput>
+    <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
+        <mat-icon color="primary">close</mat-icon>
+    </button>
+</mat-form-field>
+
+
+<mat-card>
+
+    <table class="mat-elevation-z8">
+
+        <tr class="first-row">
+            <th>Item Number</th>
+            <th>Item Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Supplier</th>
+            <th>Status</th>
+
+        </tr>
+
+        <ng-container *ngFor="let article of listArticle">
+            <tr [mat-dialog-close]="article">
+                <td *ngIf="searchFunction(article)">{{ article.itemNumber }}</td>
+                <td *ngIf="searchFunction(article)">{{ article.itemDesc }}</td>
+                <td *ngIf="searchFunction(article)">{{ article.price }}</td>
+                <td *ngIf="searchFunction(article)">{{ article.category }}</td>
+                <td *ngIf="searchFunction(article)">{{ article.supplier }}</td>
+                <td *ngIf="searchFunction(article)">{{ article.status }}</td>
+            </tr>
+        </ng-container>
+
+    </table>
+
+
+</mat-card>

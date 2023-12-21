@@ -59,6 +59,7 @@ import { DialogDeleteCustomerComponent } from './dialog-delete-customer/dialog-d
 import { DialogAddOrderComponent } from './dialog-add-order/dialog-add-order.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DialogAddPositionToOrderComponent } from './dialog-add-position-to-order/dialog-add-position-to-order.component';
 
 
 
@@ -98,7 +99,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     CustomerDetailComponent,
     DialogEditCustomerComponent,
     DialogDeleteCustomerComponent,
-    DialogAddOrderComponent
+    DialogAddOrderComponent,
+    DialogAddPositionToOrderComponent
   ],
   imports: [
     BrowserModule,

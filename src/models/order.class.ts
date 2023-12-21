@@ -23,7 +23,7 @@ export class Order {
         this.deliveryDate = obj ? obj.deliveryDate : '';
         this.status = obj ? obj.status : '';
         this.note = obj ? obj.note : '';
-        this.positions = obj ? obj.positions : '';
+        this.positions = obj ? obj.positions : [];
         this.sum = obj ? obj.sum : '';
 
     }

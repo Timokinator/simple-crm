@@ -76,30 +76,37 @@
                 <th>Price</th>
                 <th>Amount</th>
                 <th>Sum</th>
+                <th></th>
             </tr>
 
-            <tr *ngFor=" let article of order.positions">
+            <tr *ngFor=" let article of order.positions; let i = index">
                 <td>{{ article.itemNumber }}</td>
                 <td>{{ article.itemDesc }}</td>
                 <td>{{ article.price }} €</td>
-                <td>{{ article.amount }}</td>
+                <td>
+                    <input (input)="calculateSum(article)" [(ngModel)]="article.amount" type="number">
+                </td>
                 <td>{{ article.sum }} €</td>
+                <td><mat-icon (click)="deletePosition(i)" color="warn">delete</mat-icon></td>
             </tr>
+
+
+
+
+
 
             <tr>
                 <td>
-                    <mat-form-field class="example-full-width">
-                        <input type="text" placeholder="Search" aria-label="Number" matInput
-                          [formControl]="myControl" [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete">
-                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                            {{option}}
-                          </mat-option>
-                        </mat-autocomplete>
-                      </mat-form-field>
+                    <button (click)="openDialogAddPosition()" matTooltip="Add Position" [matTooltipPosition]="'above'"
+                        mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
+                        <mat-icon>add</mat-icon>
+                    </button>
                 </td>
+                <td></td>
+                <td></td>
+                <td>Order sum:</td>
+                <td>568654€</td>
             </tr>
-
 
 
         </table>

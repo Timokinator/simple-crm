@@ -84,8 +84,8 @@
                 <td>{{ article.itemDesc }}</td>
                 <td>{{ article.price }} €</td>
                 <td>
-                    <input (input)="calculateSumPosition(article); calculateSumOrder()" [(ngModel)]="article.amount"
-                        type="number">
+                    <input class="input-amount-position" (input)="calculateSumPosition(article); calculateSumOrder()"
+                        [(ngModel)]="article.amount" type="number" min="0" step="1">
                 </td>
                 <td>{{ article.sum }} €</td>
                 <td class="icon-delete"><mat-icon (click)="deletePosition(i); calculateSumOrder()"

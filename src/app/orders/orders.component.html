@@ -30,45 +30,60 @@
 
             <tr class="no-hover container-animation" [style.display]=" this.showOrderDetails == i ? '' : 'none'">
 
-                <td class="container-order-details" colspan="5">
-                    <h2>Order Details</h2>
+                <td colspan="5">
+                    <div class="container-order-details">
+                        <h2>Order Details</h2>
 
-                    <h3>Customer:</h3>
-                    <span>{{ order.customer.customerNumber }} - {{ order.customer.name }}</span> <br>
-                    <span>{{ order.customer.street }} / {{ order.customer.zipCode }} {{ order.customer.city }} </span>
-
-
-                    <h3>Positions:</h3>
-
-                    <table class="table-details">
-                        <tr class="first-row">
-                            <th>Article #</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Amount</th>
-                            <th>Sum</th>
-                        </tr>
+                        <div class="flex-container-table-details">
 
 
-                        <tr *ngFor=" let article of order.positions">
-                            <td>{{ article.itemNumber }}</td>
-                            <td>{{ article.itemDesc }}</td>
-                            <td>{{ article.price }} €</td>
-                            <td>{{ article.amount }}</td>
-                            <td>{{ article.sum }} €</td>
-                        </tr>
+                            <div class="container-order-details-positions">
+                                <h3>Positions:</h3>
 
-                    </table>
+                                <table class="table-details">
+                                    <tr class="first-row">
+                                        <th>Article #</th>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                        <th>Amount</th>
+                                        <th>Sum</th>
+                                    </tr>
 
+                                    <tr *ngFor=" let article of order.positions">
+                                        <td>{{ article.itemNumber }}</td>
+                                        <td>{{ article.itemDesc }}</td>
+                                        <td>{{ article.price }} €</td>
+                                        <td>{{ article.amount }}</td>
+                                        <td>{{ article.sum }} €</td>
+                                    </tr>
+                                </table>
+
+
+
+                            </div>
+
+                            <div class="container-order-details-header">
+                                <h3>Customer:</h3>
+                                <span>{{ order.customer.customerNumber }} - {{ order.customer.name }}</span> <br>
+                                <span>{{ order.customer.street }}</span> <br>
+                                <span>{{ order.customer.zipCode }} {{ order.customer.city }}</span>
+                            </div>
+
+                            <div class="contaniner-note">
+                                <h3>Order notes:</h3>
+                                <p>{{ order.note }}</p>
+                            </div>
+                        </div>
+                    </div>
                 </td>
-
             </tr>
 
+
+
+
+
         </ng-container>
-
     </table>
-
-
 </mat-card>
 
 

@@ -228,9 +228,22 @@ export class DialogAddOrderComponent implements OnDestroy {
     });
   }
 
-
+  checkAmount(article: any) {
+    const newValue = Math.floor(article.amount);
+    article.amount = newValue;
+    if (article.amount < 0) {
+      article.amount = 0;
+    }
+  }
 
   calculateSumPosition(article: Article) {
+    //this.checkAmount(article)
+    //article.amount = Math.floor(article.amount);
+    if (article.amount < 0) {
+      article.amount = 0;
+    }
+    //article.amount = Math.floor(article.amount);
+
     article.sum = article.amount * article.price
   }
 

@@ -84,16 +84,13 @@
                 <td>{{ article.itemDesc }}</td>
                 <td>{{ article.price }} €</td>
                 <td>
-                    <input (input)="calculateSum(article)" [(ngModel)]="article.amount" type="number">
+                    <input (input)="calculateSumPosition(article); calculateSumOrder()" [(ngModel)]="article.amount"
+                        type="number">
                 </td>
                 <td>{{ article.sum }} €</td>
-                <td><mat-icon (click)="deletePosition(i)" color="warn">delete</mat-icon></td>
+                <td class="icon-delete"><mat-icon (click)="deletePosition(i); calculateSumOrder()"
+                        color="warn">delete</mat-icon></td>
             </tr>
-
-
-
-
-
 
             <tr>
                 <td>
@@ -104,19 +101,10 @@
                 </td>
                 <td></td>
                 <td></td>
-                <td>Order sum:</td>
-                <td>568654€</td>
+                <td><b>Order sum:</b></td>
+                <td><b>{{ order.sum }} €</b></td>
             </tr>
-
-
         </table>
-
-
-
-
-
-
-
     </div>
 
 
@@ -129,7 +117,7 @@
 
 </div>
 <div mat-dialog-actions>
-    <button [disabled]="loading" mat-flat-button color="warn" [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading" mat-flat-button color="warn" [mat-dialog-close]>Cancel</button>
     <button [disabled]="loading || formIncomplete" mat-flat-button color="primary" type="submit" (click)="saveOrder()"
         [mat-dialog-close]="">Save</button>
 </div>

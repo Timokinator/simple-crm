@@ -9,15 +9,17 @@ import { Order } from 'src/models/order.class';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnDestroy, OnInit {
+export class OrdersComponent implements OnDestroy {
 
   firestore: Firestore = inject(Firestore);
   searchInput: string = '';
   unsubOrders;
   listOrders: any = [];
   order = new Order();
-  deliveryDate!: Date;
-  showOrderDetails: number | null = 1; //später auf null setzen
+  deliveryDateShow: string | undefined;
+  orderDateShow: string | undefined;
+
+  showOrderDetails: number | null = null;
 
 
 
@@ -28,14 +30,11 @@ export class OrdersComponent implements OnDestroy, OnInit {
     this.unsubOrders = this.subOrdersList();
   }
 
-
-  ngOnInit(): void {
-    setTimeout(() => {
-      console.log(this.listOrders);
-
-    }, 1000);
-
+  convertDate(date: any) {
+    const correctDate = new Date(date)
+    return correctDate.getDate() + '.' + (correctDate.getMonth() + 1) + '.' + correctDate.getFullYear()
   }
+
 
 
 
@@ -80,14 +79,22 @@ export class OrdersComponent implements OnDestroy, OnInit {
 
 
   openDialogAddOrder() {
-    console.log('Add order');
     this.dialog.open(DialogAddOrderComponent);
   }
 
 
   searchFunction(order: any) {
-    return true;
+    if (order.orderNumber.toLowerCase().includes(this.searchInput.toLowerCase())
+      || order.customer.name.toLowerCase().includes(this.searchInput.toLowerCase())
+      || order.status.toLowerCase().includes(this.searchInput.toLowerCase())
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
+
+
 
 
   ngOnDestroy(): void {

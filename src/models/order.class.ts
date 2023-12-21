@@ -8,7 +8,7 @@ export class Order {
     orderNumber!: string;
     customer!: Customer;
     orderDate!: number;
-    deliveryDate!: Date;
+    deliveryDate!: number;
     status!: string;
     note!: string;
     positions!: Article[];

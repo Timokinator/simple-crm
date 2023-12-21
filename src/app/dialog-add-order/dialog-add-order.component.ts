@@ -153,13 +153,58 @@ export class DialogAddOrderComponent implements OnDestroy {
 
 
   checkValidation() {
-    console.log(this.order);
-
+    return true;
   }
 
 
   saveOrder() {
-    console.log('save');
+    this.loading = true;
+    this.getDates();
+    this.addOrder(this.setOrder(this.order, ''), 'orders')
+  }
+
+
+  getDates() {
+    if (this.deliveryDate) {
+      this.order.deliveryDate = this.deliveryDate.getTime();
+    } else {
+      this.order.deliveryDate = 0
+    };
+
+    if (this.orderDate) {
+      this.order.orderDate = this.orderDate.getTime();
+    } else {
+      this.order.orderDate = 0
+    };
+  }
+
+
+
+
+  async addOrder(item: Order, colId: "orders") {
+    if (colId == "orders") {
+      await addDoc(this.getOrdersRef(), item).catch(
+        (err) => { console.error(err) }
+      ).then(
+        (docRef) => {
+          this.loading = false;
+          const newID = docRef?.id;
+          this.updateOrderWithId(item, newID);
+        }
+      )
+    }
+  }
+
+
+  async updateOrderWithId(item: Order, newId: any) {
+    const docRef = doc(this.getOrdersRef(), newId);
+    await updateDoc(docRef, { id: newId }).catch(
+      (err) => { console.log(err); }
+    ).then(
+      () => {
+
+      }
+    );
 
   }
 
@@ -173,7 +218,6 @@ export class DialogAddOrderComponent implements OnDestroy {
 
 
   openDialogAddPosition() {
-    console.log('add position');
     const dialog = this.dialog.open(DialogAddPositionToOrderComponent);
     // dialog.category = new Category();
     dialog.afterClosed().subscribe(result => {
@@ -186,12 +230,23 @@ export class DialogAddOrderComponent implements OnDestroy {
 
 
 
-  calculateSum(article: Article) {
+  calculateSumPosition(article: Article) {
     article.sum = article.amount * article.price
   }
 
   deletePosition(i: any) {
     this.order.positions.splice(i, 1)
+  }
+
+
+  calculateSumOrder() {
+    let newSumOrder: number = 0;
+    this.order.positions.forEach(element => {
+      newSumOrder += element.sum;
+    });
+
+    this.order.sum = newSumOrder;
+
   }
 
 

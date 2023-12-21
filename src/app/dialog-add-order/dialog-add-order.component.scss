@@ -1,3 +1,11 @@
 input {
     width: 64px;
 }
+
+.icon-delete {
+    cursor: pointer;
+
+    &:hover {
+        scale: 1.1;
+    }
+}

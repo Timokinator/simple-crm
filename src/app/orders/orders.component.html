@@ -24,7 +24,7 @@
                 <td *ngIf="searchFunction(order)">{{ order.orderNumber }}</td>
                 <td *ngIf="searchFunction(order)">{{ order.customer.name }}</td>
                 <td *ngIf="searchFunction(order)">{{ order.status }}</td>
-                <td *ngIf="searchFunction(order)">{{ order.deliveryDate }}</td>
+                <td *ngIf="searchFunction(order)">{{ convertDate(order.deliveryDate) }}</td>
                 <td *ngIf="searchFunction(order)">{{ order.sum }} €</td>
             </tr>
 
@@ -40,8 +40,8 @@
 
                     <h3>Positions:</h3>
 
-                    <table>
-                        <tr>
+                    <table class="table-details">
+                        <tr class="first-row">
                             <th>Article #</th>
                             <th>Description</th>
                             <th>Price</th>
@@ -56,7 +56,6 @@
                             <td>{{ article.price }} €</td>
                             <td>{{ article.amount }}</td>
                             <td>{{ article.sum }} €</td>
-
                         </tr>
 
                     </table>

@@ -14,8 +14,8 @@
     <table class="mat-elevation-z8">
 
         <tr class="first-row">
-            <th>Item Number</th>
-            <th>Item Description</th>
+            <th>Article #</th>
+            <th>Article Desc</th>
             <th>Price</th>
             <th>Category</th>
             <th>Supplier</th>
@@ -27,7 +27,8 @@
             <tr [mat-dialog-close]="article">
                 <td *ngIf="searchFunction(article)">{{ article.itemNumber }}</td>
                 <td *ngIf="searchFunction(article)">{{ article.itemDesc }}</td>
-                <td *ngIf="searchFunction(article)">{{ article.price }}</td>
+                <td class="text-align-end" *ngIf="searchFunction(article)">{{ article.price | currency:
+                    'USD':'symbol':'1.2-2' }}</td>
                 <td *ngIf="searchFunction(article)">{{ article.category }}</td>
                 <td *ngIf="searchFunction(article)">{{ article.supplier }}</td>
                 <td *ngIf="searchFunction(article)">{{ article.status }}</td>

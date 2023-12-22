@@ -20,7 +20,7 @@ import { DialogAddPositionToOrderComponent } from '../dialog-add-position-to-ord
 })
 export class DialogAddOrderComponent implements OnDestroy {
 
-
+  minDate!: Date;
   firestore: Firestore = inject(Firestore);
   unsubOrders;
   listOrders: any = [];
@@ -36,7 +36,7 @@ export class DialogAddOrderComponent implements OnDestroy {
 
   loading: boolean = false;
   orderNumberUnique!: boolean;
-  formIncomplete!: boolean;
+  formIncomplete: boolean = true;
 
   orderDate!: Date;
   deliveryDate!: Date;
@@ -47,7 +47,8 @@ export class DialogAddOrderComponent implements OnDestroy {
     this.unsubArticle = this.subArticleList();
     this.unsubCustomer = this.subCustomerList();
     this.order.status = "Pending";
-
+    const heute = new Date();
+    this.minDate = new Date(heute.getFullYear(), heute.getMonth(), heute.getDate());
   }
 
 
@@ -149,11 +150,22 @@ export class DialogAddOrderComponent implements OnDestroy {
   }
 
 
-
-
-
   checkValidation() {
-    return true;
+    let listOfOrderNumbers: any = [];
+    this.listOrders.forEach((element: any) => {
+      listOfOrderNumbers.push(element.orderNumber)
+    });
+
+    if (listOfOrderNumbers.includes(this.order.orderNumber)) {
+      this.orderNumberUnique = false
+    } else {
+      this.orderNumberUnique = true
+    }
+
+    if (this.orderNumberUnique && this.order.orderNumber && this.order.customer.name && this.orderDate && this.deliveryDate) {
+      this.formIncomplete = false;
+    } else
+      this.formIncomplete = true;
   }
 
 

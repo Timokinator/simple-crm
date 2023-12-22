@@ -25,7 +25,7 @@
     <div class="container-price-category">
 
         <mat-form-field class="input-email" appearance="outline">
-            <mat-label>Price (€)</mat-label>
+            <mat-label>Price ($)</mat-label>
             <input (keyup)="checkValidation()" required type="number" min="0.01" step="0.01" [disabled]="loading"
                 [(ngModel)]="article.price" matInput placeholder="">
         </mat-form-field>

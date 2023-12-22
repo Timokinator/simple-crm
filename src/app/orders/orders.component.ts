@@ -22,10 +22,6 @@ export class OrdersComponent implements OnDestroy {
   showOrderDetails: number | null = null;
 
 
-
-
-
-
   constructor(public dialog: MatDialog) {
     this.unsubOrders = this.subOrdersList();
   }
@@ -109,6 +105,20 @@ export class OrdersComponent implements OnDestroy {
       this.showOrderDetails = null;
     }
   }
+
+
+
+
+  editOrder(order: any) {
+    console.log('edit');
+    console.log(order);
+  }
+
+  deleteOrder(order: any) {
+    console.log('delete');
+    console.log(order);
+  }
+
 
 
 

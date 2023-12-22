@@ -3,7 +3,7 @@
 </div>
 
 <h1 mat-dialog-title>Add Order</h1>
-<div mat-dialog-content>
+<div class="flex-center" mat-dialog-content>
     <div class="container-input-names">
         <mat-form-field class="input-c-number" appearance="outline">
             <mat-label>Order number</mat-label>
@@ -28,17 +28,17 @@
     <div class="container-input-order-and-delivery-date">
         <mat-form-field class="input-order-date">
             <mat-label>Order date</mat-label>
-            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="orderDate" matInput
+            <input (dateChange)="checkValidation()" required readonly [disabled]="loading" [(ngModel)]="orderDate" matInput
                 [matDatepicker]="picker1">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field class="input-birthday">
+        <mat-form-field class="input-deliver-date">
             <mat-label>Delivery date</mat-label>
-            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="deliveryDate" matInput
-                [matDatepicker]="picker2">
+            <input (dateChange)="checkValidation()" required readonly [disabled]="loading" [(ngModel)]="deliveryDate" matInput
+                [matDatepicker]="picker2" [min]="minDate">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
@@ -62,60 +62,59 @@
         <mat-form-field class="input-note" appearance="outline">
             <mat-label>Note</mat-label>
             <textarea matInput [(ngModel)]="order.note" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" maxlength="100"></textarea>
-            <mat-hint>Optional / max 100 characters</mat-hint>
+                cdkAutosizeMinRows="0" cdkAutosizeMaxRows="5" maxlength="200"></textarea>
+            <mat-hint>Optional / max 200 characters</mat-hint>
         </mat-form-field>
     </div>
 
+    <div class="container-btn-add-positions">
+        <button class="btn-add-position" (click)="openDialogAddPosition()" matTooltip="Add Position"
+            [matTooltipPosition]="'above'" mat-mini-fab color="primary"
+            aria-label="Example icon button with a menu icon">
+            <mat-icon>add</mat-icon>
+        </button>
+        <span class="align-items-center" *ngIf="order.positions.length == 0">
+            <mat-icon>arrow_left</mat-icon>Click to add positions</span>
+    </div>
 
-    <div class="container-positions">
+    <div class="container-positions mat-elevation-z8">
         <table>
-            <tr>
-                <th>Article #</th>
-                <th>Article Desc</th>
+
+            <tr *ngIf="order.positions.length > 0">
+                <th>Article</th>
                 <th>Price</th>
-                <th>Amount</th>
+                <th>Qty</th>
                 <th>Sum</th>
                 <th></th>
             </tr>
 
             <tr *ngFor=" let article of order.positions; let i = index">
-                <td>{{ article.itemNumber }}</td>
-                <td>{{ article.itemDesc }}</td>
-                <td>{{ article.price }} €</td>
+                <td>{{ article.itemNumber }} - {{ article.itemDesc }}</td>
+                <td>{{ article.price | currency:
+                    'USD':'symbol':'1.2-2' }}</td>
                 <td>
                     <input class="input-amount-position" (input)="calculateSumPosition(article); calculateSumOrder()"
-                        [(ngModel)]="article.amount" type="number" min="0" step="1">
+                        [(ngModel)]="article.amount" type="number" min="0" max="100000" step="1"
+                        onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
                 </td>
-                <td>{{ article.sum }} €</td>
-                <td class="icon-delete"><mat-icon (click)="deletePosition(i); calculateSumOrder()"
-                        color="warn">delete</mat-icon></td>
+                <td class="text-align-end">{{ article.sum | currency:
+                    'USD':'symbol':'1.2-2' }}</td>
+                <td class="icon-delete">
+                    <mat-icon (click)="deletePosition(i); calculateSumOrder()" color="warn">delete</mat-icon>
+                </td>
             </tr>
 
-            <tr>
-                <td>
-                    <button (click)="openDialogAddPosition()" matTooltip="Add Position" [matTooltipPosition]="'above'"
-                        mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                </td>
-                <td></td>
+            <tr *ngIf="order.positions.length > 0">
                 <td></td>
                 <td><b>Order sum:</b></td>
-                <td><b>{{ order.sum }} €</b></td>
+                <td colspan="2" class="text-align-end"><b>{{ order.sum | currency:
+                        'USD':'symbol':'1.2-2' }}</b></td>
             </tr>
         </table>
     </div>
 
-
-
-
-
-
-
-
-
 </div>
+
 <div mat-dialog-actions>
     <button [disabled]="loading" mat-flat-button color="warn" [mat-dialog-close]>Cancel</button>
     <button [disabled]="loading || formIncomplete" mat-flat-button color="primary" type="submit" (click)="saveOrder()"

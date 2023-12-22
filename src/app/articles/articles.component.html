@@ -25,7 +25,8 @@
             <tr>
                 <td *ngIf="complexSearchFunction(article)">{{ article.itemNumber }}</td>
                 <td *ngIf="complexSearchFunction(article)">{{ article.itemDesc }}</td>
-                <td *ngIf="complexSearchFunction(article)">{{ article.price }}</td>
+                <td *ngIf="complexSearchFunction(article)">{{ article.price | currency:
+                    'USD':'symbol':'1.2-2' }}</td>
                 <td *ngIf="complexSearchFunction(article)">{{ article.category }}</td>
                 <td *ngIf="complexSearchFunction(article)">{{ article.supplier }}</td>
                 <td *ngIf="complexSearchFunction(article)">{{ article.status }}</td>

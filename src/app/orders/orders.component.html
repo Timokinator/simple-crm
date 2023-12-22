@@ -8,7 +8,6 @@
 
 
 <mat-card>
-
     <table class="mat-elevation-z8">
 
         <tr class="first-row">
@@ -16,7 +15,7 @@
             <th>Customer</th>
             <th>Status</th>
             <th>Delivery date</th>
-            <th>Order volume</th>
+            <th class="text-align-right">Total $</th>
         </tr>
 
         <ng-container *ngFor="let order of listOrders; let i = index">
@@ -25,17 +24,22 @@
                 <td *ngIf="searchFunction(order)">{{ order.customer.name }}</td>
                 <td *ngIf="searchFunction(order)">{{ order.status }}</td>
                 <td *ngIf="searchFunction(order)">{{ convertDate(order.deliveryDate) }}</td>
-                <td *ngIf="searchFunction(order)">{{ order.sum }} €</td>
+                <td class="order-sum-text-right" *ngIf="searchFunction(order)">{{ order.sum | currency:
+                    'USD':'symbol':'1.2-2' }}</td>
             </tr>
 
             <tr class="no-hover container-animation" [style.display]=" this.showOrderDetails == i ? '' : 'none'">
 
                 <td colspan="5">
                     <div class="container-order-details">
-                        <h2>Order Details</h2>
+                        <h2 class="header-line-order-details">Order Details
+                            <div class="container-icons-header-line">
+                                <mat-icon (click)="editOrder(order)" color="primary">edit</mat-icon>
+                                <mat-icon (click)="deleteOrder(order)" color="warn">delete</mat-icon>
+                            </div>
+                        </h2>
 
                         <div class="flex-container-table-details">
-
 
                             <div class="container-order-details-positions">
                                 <h3>Positions:</h3>
@@ -44,17 +48,19 @@
                                     <tr class="first-row">
                                         <th>Article #</th>
                                         <th>Description</th>
-                                        <th>Price</th>
-                                        <th>Amount</th>
-                                        <th>Sum</th>
+                                        <th class="text-align-right">Price</th>
+                                        <th class="text-align-right">Qty</th>
+                                        <th class="text-align-right">Sum</th>
                                     </tr>
 
                                     <tr *ngFor=" let article of order.positions">
                                         <td>{{ article.itemNumber }}</td>
                                         <td>{{ article.itemDesc }}</td>
-                                        <td>{{ article.price }} €</td>
-                                        <td>{{ article.amount }}</td>
-                                        <td>{{ article.sum }} €</td>
+                                        <td class="text-align-right">{{ article.price | currency:
+                                            'USD':'symbol':'1.2-2' }}</td>
+                                        <td class="text-align-right">{{ article.amount }}</td>
+                                        <td class="text-align-right">{{ article.sum | currency:
+                                            'USD':'symbol':'1.2-2' }}</td>
                                     </tr>
                                 </table>
 

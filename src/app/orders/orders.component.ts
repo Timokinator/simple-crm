@@ -1,19 +1,24 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddOrderComponent } from '../dialog-add-order/dialog-add-order.component';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
 import { Order } from 'src/models/order.class';
+import { DialogDeleteOrderComponent } from '../dialog-delete-order/dialog-delete-order.component';
+import { DialogEditOrderComponent } from '../dialog-edit-order/dialog-edit-order.component';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent implements OnDestroy {
+export class OrdersComponent implements OnDestroy, OnInit {
+
+  @Input() inputFilterCustomer!: string;
+
 
   firestore: Firestore = inject(Firestore);
   searchInput: string = '';
-  unsubOrders;
+  unsubOrders: any;
   listOrders: any = [];
   order = new Order();
   deliveryDateShow: string | undefined;
@@ -23,7 +28,8 @@ export class OrdersComponent implements OnDestroy {
 
 
   constructor(public dialog: MatDialog) {
-    this.unsubOrders = this.subOrdersList();
+    //this.unsubOrders = this.subOrdersList();
+
   }
 
   convertDate(date: any) {
@@ -31,11 +37,20 @@ export class OrdersComponent implements OnDestroy {
     return correctDate.getDate() + '.' + (correctDate.getMonth() + 1) + '.' + correctDate.getFullYear()
   }
 
+  ngOnInit(): void {
+    this.unsubOrders = this.subOrdersList();
+  }
 
 
 
   subOrdersList() {
-    const q = query(this.getOrdersRef());
+    let q;
+    if (this.inputFilterCustomer) {
+      q = query(this.getOrdersRef(), where("customer.id", "==", this.inputFilterCustomer));
+    } else {
+      q = query(this.getOrdersRef());
+    }
+
     return onSnapshot(q, (list) => {
       this.listOrders = [];
       list.forEach(element => {
@@ -107,16 +122,19 @@ export class OrdersComponent implements OnDestroy {
   }
 
 
-
-
   editOrder(order: any) {
-    console.log('edit');
-    console.log(order);
+    const dialog = this.dialog.open(DialogEditOrderComponent);
+    dialog.componentInstance.order = new Order(order);
+
+    dialog.afterClosed().subscribe(() => {
+      this.subOrdersList();
+    })
+
   }
 
   deleteOrder(order: any) {
-    console.log('delete');
-    console.log(order);
+    const dialog = this.dialog.open(DialogDeleteOrderComponent);
+    dialog.componentInstance.order = new Order(order);
   }
 
 

@@ -60,6 +60,8 @@ import { DialogAddOrderComponent } from './dialog-add-order/dialog-add-order.com
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { DialogAddPositionToOrderComponent } from './dialog-add-position-to-order/dialog-add-position-to-order.component';
+import { DialogEditOrderComponent } from './dialog-edit-order/dialog-edit-order.component';
+import { DialogDeleteOrderComponent } from './dialog-delete-order/dialog-delete-order.component';
 
 
 
@@ -100,7 +102,9 @@ import { DialogAddPositionToOrderComponent } from './dialog-add-position-to-orde
     DialogEditCustomerComponent,
     DialogDeleteCustomerComponent,
     DialogAddOrderComponent,
-    DialogAddPositionToOrderComponent
+    DialogAddPositionToOrderComponent,
+    DialogEditOrderComponent,
+    DialogDeleteOrderComponent
   ],
   imports: [
     BrowserModule,

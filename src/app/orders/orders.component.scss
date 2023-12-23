@@ -4,6 +4,11 @@
     right: 64px;
 }
 
+th,
+td {
+    white-space: nowrap;
+}
+
 table {
     line-height: 2;
     border-collapse: collapse;
@@ -135,4 +140,12 @@ h3 {
         transform: rotateX(0deg);
         transform-origin: top;
     }
+}
+
+
+.color-grey {
+    color: grey !important;
+    cursor: not-allowed !important;
+    scale: unset !important;
+
 }

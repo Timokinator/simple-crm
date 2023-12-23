@@ -34,8 +34,19 @@
                     <div class="container-order-details">
                         <h2 class="header-line-order-details">Order Details
                             <div class="container-icons-header-line">
-                                <mat-icon (click)="editOrder(order)" color="primary">edit</mat-icon>
-                                <mat-icon (click)="deleteOrder(order)" color="warn">delete</mat-icon>
+                                <mat-icon
+                                    (click)="order.status == 'Pending' || order.status == 'Processing' ? editOrder(order) : null"
+                                    color="primary"
+                                    [ngClass]="{'color-grey': order.status == 'Shipped' || order.status == 'Delivered'}"
+                                    [matTooltip]="order.status == 'Delivered' || order.status == 'Shipped' ? 'Not possible on this status' : ''"
+                                    [matTooltipPosition]="'above'">edit</mat-icon>
+
+                                <mat-icon
+                                    [ngClass]="{'color-grey': order.status == 'Shipped' || order.status == 'Delivered'}"
+                                    (click)="order.status == 'Pending' || order.status == 'Processing' ? deleteOrder(order) : null"
+                                    color="warn"
+                                    [matTooltip]="order.status == 'Delivered' || order.status == 'Shipped' ? 'Not possible on this status' : ''"
+                                    [matTooltipPosition]="'above'">delete</mat-icon>
                             </div>
                         </h2>
 
@@ -106,7 +117,8 @@
 
 
 
-<button (click)="openDialogAddOrder()" matTooltip="Add Order" [matTooltipPosition]="'above'" class="btn-add" mat-fab
-    color="primary" aria-label="Example icon button with a delete icon">
+<button *ngIf="!inputFilterCustomer" (click)="openDialogAddOrder()" matTooltip="Add Order"
+    [matTooltipPosition]="'above'" class="btn-add" mat-fab color="primary"
+    aria-label="Example icon button with a delete icon">
     <mat-icon>add</mat-icon>
 </button>

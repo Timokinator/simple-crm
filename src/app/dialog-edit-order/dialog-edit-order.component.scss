@@ -1,0 +1,79 @@
+.input-amount-position {
+    width: 52px;
+}
+
+.icon-delete {
+    cursor: pointer;
+
+    &:hover {
+        scale: 1.1;
+    }
+}
+
+mat-form-field {
+    max-width: 212px;
+}
+
+th {
+    text-align: start;
+}
+
+.container-btn-add-positions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.align-items-center {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.container-input-names,
+.container-input-order-and-delivery-date,
+.container-input-status-note {
+    display: flex;
+    //align-items: center;
+    padding: 4px 0;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container-input-names {
+    margin-bottom: 24px;
+
+    @media (max-width: 610px) {
+        margin-bottom: unset;
+    }
+}
+
+
+
+.input-c-number {
+
+    @media (max-width: 610px) {
+        margin-bottom: unset;
+    }
+}
+
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.container-positions {
+    width: 100%;
+    margin-top: 24px;
+
+
+}
+
+
+.text-align-end {
+    text-align: end !important;
+}

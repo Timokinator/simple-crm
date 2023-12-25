@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Chart } from 'chart.js';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
 import { Order } from 'src/models/order.class';
@@ -13,7 +13,7 @@ import { Customer } from 'src/models/customer.class';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnDestroy, OnInit {
   title = 'ng-chart';
   chart: any = [];
 
@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   listOrders: any = [];
 
   listCustomerForChart: any = [];
-  listSumsforChart: any = [];
+  listSumsForChart: any = [];
 
   order = new Order();
 
@@ -33,9 +33,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
   constructor() {
-    this.unsubOrders = this.subOrdersList();
     this.unsubCustomer = this.subCustomerList();
+    this.unsubOrders = this.subOrdersList();
   }
+
+  ngOnInit(): void {
+    console.log(this.chart);
+    console.log(this.listCustomerForChart);
+    console.log(this.listSumsForChart);
+
+
+  }
+
 
   subCustomerList() {
     const q = query(this.getCustomerRef());
@@ -46,7 +55,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.listCustomer.push(this.setCustomerObject(element.data(), element.id));
         this.listCustomerForChart.push(element.data()['name'])
       });
-      console.log(this.listCustomerForChart);
+      this.listCustomerForChart.push('Unknown')
+      //console.log(this.listCustomerForChart);
     });
   }
 
@@ -80,28 +90,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     return onSnapshot(q, (list) => {
       this.listOrders = [];
+      this.listSumsForChart = [];
+      this.createListSumsForChart();
       list.forEach(element => {
         this.listOrders.push(this.setOrder(element.data(), element.id));
-        this.addSumToListForChart(element)
+        this.addSumToListForChart(element);
       });
-
-
+      //console.log(this.listSumsForChart)
+      this.loadChart();
+      this.chart.update();
     });
   }
 
 
+  createListSumsForChart() {
+    for (let i = 0; i < this.listCustomerForChart.length; i++) {
+      this.listSumsForChart.push(0);
+    }
+  }
+
+
   addSumToListForChart(element: any) {
-    //const sum = Math.round(element.data()['sum'] * 100) / 100;
+    const sum = Math.round(element.data()['sum'] * 100) / 100;
+    const indexOfCustomer = this.listCustomerForChart.indexOf(element.data()['customer'].name)
 
-
-
-
-    //console.log(sum);
-
-
-
-
-
+    if (indexOfCustomer != -1) {
+      this.listSumsForChart[indexOfCustomer] += sum;
+    } else {
+      this.listSumsForChart[this.listCustomerForChart.length - 1] += sum;
+    }
   }
 
 
@@ -128,22 +145,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
 
-
-
-
-
-
-
-  ngOnInit(): void {
+  loadChart() {
 
     this.chart = new Chart('canvas', {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: this.listCustomerForChart,
         datasets: [
           {
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'Sales in $',
+            //data: [12, 19, 3, 5, 2, 3],
+            data: this.listSumsForChart,
             borderWidth: 1,
           },
         ],
@@ -161,16 +174,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
 
-
-
-
-
-
-
-
   ngOnDestroy(): void {
     this.unsubCustomer();
     this.unsubOrders();
+    this.chart.destroy();
+    this.chart = '';
   }
 
 

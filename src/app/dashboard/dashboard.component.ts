@@ -3,6 +3,7 @@ import { Chart } from 'chart.js';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
 import { Order } from 'src/models/order.class';
 import { Customer } from 'src/models/customer.class';
+import { getDocs } from 'firebase/firestore';
 
 
 
@@ -14,12 +15,10 @@ import { Customer } from 'src/models/customer.class';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnDestroy, OnInit {
-  title = 'ng-chart';
-  chart: any = [];
+  chartSalesStatistic: any = [];
 
   firestore: Firestore = inject(Firestore);
   searchInput: string = '';
-  unsubOrders;
   listOrders: any = [];
 
   listCustomerForChart: any = [];
@@ -27,39 +26,47 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
   order = new Order();
 
-  unsubCustomer;
   listCustomer: any = [];
   customer = new Customer();
 
 
   constructor() {
-    this.unsubCustomer = this.subCustomerList();
-    this.unsubOrders = this.subOrdersList();
+    //this.unsubCustomer = this.subCustomerList();
+    //this.unsubOrders = this.subOrdersList();
   }
 
   ngOnInit(): void {
-    console.log(this.chart);
-    console.log(this.listCustomerForChart);
-    console.log(this.listSumsForChart);
-
-
+    this.initChartSalesStatistic();
   }
 
 
-  subCustomerList() {
+
+  async initChartSalesStatistic() {
+    await this.subCustomerList();
+    await this.subOrdersList();
+    this.listCustomer.forEach((customer: Customer) => {
+      this.listCustomerForChart.push(customer.name)
+    });
+    this.listCustomerForChart.push('Unknown')
+    this.createListSumsForChart();
+    this.listOrders.forEach((order: Order) => {
+      this.addSumToListForChart(order);
+    });
+    let values = this.sortingSalesStatistics();
+    this.loadChartSalesStatistic(values[0], values[1]);
+  }
+
+
+  async subCustomerList() {
     const q = query(this.getCustomerRef());
-    return onSnapshot(q, (list) => {
+    return getDocs(q).then((list) => {
       this.listCustomer = [];
       this.listCustomerForChart = [];
       list.forEach(element => {
         this.listCustomer.push(this.setCustomerObject(element.data(), element.id));
-        this.listCustomerForChart.push(element.data()['name'])
       });
-      this.listCustomerForChart.push('Unknown')
-      //console.log(this.listCustomerForChart);
     });
   }
-
 
 
   setCustomerObject(obj: any, id: string,): Customer {
@@ -82,23 +89,16 @@ export class DashboardComponent implements OnDestroy, OnInit {
   }
 
 
-
-
-  subOrdersList() {
+  async subOrdersList() {
     let q;
     q = query(this.getOrdersRef());
 
-    return onSnapshot(q, (list) => {
+    return getDocs(q).then((list) => {
       this.listOrders = [];
       this.listSumsForChart = [];
-      this.createListSumsForChart();
       list.forEach(element => {
         this.listOrders.push(this.setOrder(element.data(), element.id));
-        this.addSumToListForChart(element);
       });
-      //console.log(this.listSumsForChart)
-      this.loadChart();
-      this.chart.update();
     });
   }
 
@@ -110,9 +110,9 @@ export class DashboardComponent implements OnDestroy, OnInit {
   }
 
 
-  addSumToListForChart(element: any) {
-    const sum = Math.round(element.data()['sum'] * 100) / 100;
-    const indexOfCustomer = this.listCustomerForChart.indexOf(element.data()['customer'].name)
+  addSumToListForChart(order: Order) {
+    const sum = Math.round(order.sum * 100) / 100;
+    const indexOfCustomer = this.listCustomerForChart.indexOf(order.customer.name)
 
     if (indexOfCustomer != -1) {
       this.listSumsForChart[indexOfCustomer] += sum;
@@ -120,8 +120,6 @@ export class DashboardComponent implements OnDestroy, OnInit {
       this.listSumsForChart[this.listCustomerForChart.length - 1] += sum;
     }
   }
-
-
 
 
   setOrder(obj: any, id: string,): Order {
@@ -143,20 +141,26 @@ export class DashboardComponent implements OnDestroy, OnInit {
     return collection(this.firestore, 'orders');
   }
 
+  loggingLists() {
+    console.log('Customer: ', this.listCustomer);
+    console.log('Customer-Chart: ', this.listCustomerForChart);
+    console.log('Orders: ', this.listOrders);
+    console.log('Sums for Chart: ', this.listSumsForChart);
+    console.log('Chart: ', this.chartSalesStatistic);
+  }
 
 
-  loadChart() {
-
-    this.chart = new Chart('canvas', {
+  loadChartSalesStatistic(labels: any, datasets: any) {
+    this.chartSalesStatistic = new Chart('canvas-sales', {
       type: 'bar',
       data: {
-        //labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        labels: this.listCustomerForChart,
+        //labels: this.listCustomerForChart,
+        labels: labels,
         datasets: [
           {
             label: 'Sales in $',
-            //data: [12, 19, 3, 5, 2, 3],
-            data: this.listSumsForChart,
+            //data: this.listSumsForChart,
+            data: datasets,
             borderWidth: 1,
           },
         ],
@@ -167,19 +171,54 @@ export class DashboardComponent implements OnDestroy, OnInit {
             beginAtZero: true,
           },
         },
+        responsive: true,
+        maintainAspectRatio: false,
       },
     });
   }
 
 
-
-
   ngOnDestroy(): void {
-    this.unsubCustomer();
-    this.unsubOrders();
-    this.chart.destroy();
-    this.chart = '';
+    //this.unsubCustomer();
+    //this.unsubOrders();
+    //this.chart.destroy();
   }
+
+
+
+  //Test zum Sortieren
+
+
+
+
+
+
+
+  sortingSalesStatistics() {
+
+    let data = {
+      labels: this.listCustomerForChart,
+      datasets: [{
+        label: 'Sales in $',
+        data: this.listSumsForChart,
+        backgroundColor: 'rgba(0, 123, 255, 0.5)'
+      }]
+    };
+
+    // Sortieren der Daten
+    let sortedIndices = data.datasets[0].data
+      .map((value: any, index: any) => ({ value, index }))
+      .sort((a: any, b: any) => b.value - a.value)
+      .map((data: any) => data.index);
+
+    data.labels = sortedIndices.map((index: any) => data.labels[index]);
+    data.datasets[0].data = sortedIndices.map((index: any) => data.datasets[0].data[index]);
+
+    return [data.labels, data.datasets[0].data]
+  }
+
+
+
 
 
 

@@ -311,7 +311,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     let counter: number = 0;
     this.listUser.forEach((element: any) => {
       if (element.id == note.user
-        && element.firstName.toLowerCase().includes(this.searchInput.toLocaleLowerCase())
+        && element.firstName.toLowerCase().includes(this.searchInput.toLowerCase())
         || element.lastName.toLowerCase().includes(this.searchInput.toLowerCase())
       ) {
         counter++;

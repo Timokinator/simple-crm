@@ -1,6 +1,6 @@
 <mat-form-field>
     <mat-label>Type for search</mat-label>
-    <input type="string" [(ngModel)]="searchInput" matInput>
+    <input type="string" [(ngModel)]="searchInputFunc" matInput>
     <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
         <mat-icon color="primary">close</mat-icon>
     </button>
@@ -9,8 +9,8 @@
 
 <div class="container-notes" #myContainer>
 
-    <div *ngFor="let note of listNotes">
-        <mat-card *ngIf="searchFunction(note)" (cdkDragReleased)="endChangePosition($event, note)" cdkDrag
+    <ng-container *ngFor="let note of listNotes" >
+        <mat-card *ngIf="searchFunction(note)" cdkDrag (cdkDragReleased)="endChangePosition($event, note)"
             cdkDragBoundary=".container-notes" class="example-card grabbable"
             [style.transform]="'translate3d(' + note.transform1 + ', ' + note.transform2 + ', 0)'">
 
@@ -46,7 +46,7 @@
             </mat-menu>
 
         </mat-card>
-    </div>
+    </ng-container>
 </div>
 
 

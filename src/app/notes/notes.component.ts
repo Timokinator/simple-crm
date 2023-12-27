@@ -56,13 +56,57 @@ export class NotesComponent implements OnInit, OnDestroy {
   }
 
 
+  get searchInputFunc(): string {
+    return this.searchInput;
+  }
+
+  set searchInputFunc(value: string) {
+    //console.log('Search Input: ', value);
+    this.searchInput = value;
+    this.setNewHeight();
+  }
+
+
+  setNewHeight() {
+    const height = this.myContainer.nativeElement.offsetHeight;
+    this.fitNotesOnlyHeight(height);
+
+  }
+
+
+  fitNotesOnlyHeight(newHeight: any) {
+    this.listNotes.forEach((element: any) => {
+      const numberOfPixelHeight = +element.transform2.slice(0, -2);
+
+      const random = 50;
+
+
+
+
+
+
+      /*  if (numberOfPixelHeight + 240 > newHeight || numberOfPixelHeight < 0) {
+         let random: number;
+         if (newHeight > 240) {
+           random = Math.floor(Math.random() * (newHeight - 240))
+         } else {
+           random = 0;
+         } */
+      element.transform2 = random + 'px';
+      this.updateNoteTransform2(element);
+    })
+
+  }
+
+
+
 
 
   ngAfterViewInit() {
     const width = this.myContainer.nativeElement.offsetWidth;
     const height = this.myContainer.nativeElement.offsetHeight;
     //console.log(`Breite: ${width}, Höhe: ${height}`);
-    this.fitNotes(width, height);
+    this.fitNotes(width);
   }
 
 
@@ -191,7 +235,7 @@ export class NotesComponent implements OnInit, OnDestroy {
 
 
 
-  fitNotes(newWidth: any, newHeight: any) {
+  fitNotes(newWidth: any) {
     this.listNotes.forEach((element: any) => {
       const numberOfPixelWidth = +element.transform1.slice(0, -2);
       const numberOfPixelHeight = +element.transform2.slice(0, -2);
@@ -209,7 +253,7 @@ export class NotesComponent implements OnInit, OnDestroy {
         this.updateNoteTransform1(element);
       }
 
-      if (numberOfPixelHeight + 240 > newHeight || numberOfPixelHeight < 0) {
+      /* if (numberOfPixelHeight + 240 > newHeight || numberOfPixelHeight < 0) {
         let random: number;
         if (newHeight > 240) {
           random = Math.floor(Math.random() * (newHeight - 240))
@@ -219,7 +263,8 @@ export class NotesComponent implements OnInit, OnDestroy {
         element.transform2 = random + 'px';
         this.updateNoteTransform2(element);
       }
-    });
+    }); */
+    })
   }
 
 

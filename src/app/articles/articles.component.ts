@@ -84,14 +84,14 @@ export class ArticlesComponent implements OnDestroy {
 
 
   editArticle(article: Article) {
-    console.log('edit' + article);
+    //console.log('edit' + article);
     const dialog = this.dialog.open(DialogEditArticleComponent);
     dialog.componentInstance.article = new Article(article);
   }
 
 
   deleteArticle(article: Article) {
-    console.log('delete' + article);
+    //console.log('delete' + article);
     const dialog = this.dialog.open(DialogDeleteArticleComponent);
     dialog.componentInstance.article = new Article(article);
   }

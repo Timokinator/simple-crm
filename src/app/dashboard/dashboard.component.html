@@ -11,13 +11,32 @@
 
     <div class="container-order-statistics">
         <h2>Order statistics</h2>
-        <div>
-            <canvas class="chart-order-statistics" id="canvas-orders"></canvas>
+        <div class="container-charts">
+            <div class="container-average-oder-value">
+                <h3>Average order value</h3>
+                <span class="value-average-order">{{ averageOderValue | currency: 'USD':'symbol':'1.2-2' }}</span>
+            </div>
+
+
+
+            <div class="container-order-status">
+                <h3>Orders by status</h3>
+                <canvas class="chart-order-statistics" id="canvas-orders"></canvas>
+            </div>
+
+
+            <div class="container-orders-by-date">
+                <h3>Pending / Processing orders by delivery date</h3>
+                <canvas class="chart-order-delivery-date" id="canvas-orders-delivery-date"></canvas>
+            </div>
+
+
+
         </div>
+
+
+
     </div>
-
-
-
 
 
 

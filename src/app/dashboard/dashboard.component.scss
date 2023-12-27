@@ -7,13 +7,18 @@
 
 
 .chart-sales-statistic {
-    min-height: 240px;
+    //min-height: 240px;
+}
+
+.chart-order-delivery-date {
+    //min-height: 240px;
+    max-width: 100%;
 }
 
 
 .container-charts {
     display: flex;
-    gap: 16px;
+    gap: 24px;
     flex-wrap: wrap;
 }
 
@@ -34,4 +39,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 100%;
+}
+
+.container-orders-by-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-sales-customer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
 }

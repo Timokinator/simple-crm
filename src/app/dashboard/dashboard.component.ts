@@ -29,7 +29,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
   listStatus = ['Pending', 'Processing', 'Shipped', 'Delivered'];
   listStatusForChartOrderStatus = [0, 0, 0, 0];
 
-  listOfMonthsLabel = [];
+  listOfMonthsLabel: any = [];
   listOfMonthsNames = [
     'January',
     'February',
@@ -44,6 +44,9 @@ export class DashboardComponent implements OnDestroy, OnInit {
     'November',
     'December'
   ];
+
+  monthStartChartOrdersDeliveryDate!: number;
+  listOrderVolumeByMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   listOfMonthsNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
@@ -67,8 +70,10 @@ export class DashboardComponent implements OnDestroy, OnInit {
     this.initChartSalesStatistic();
     this.initChartAverageOrderValue();
     this.setListOrderStatus();
-    this.loadChartOrderStatus(this.listStatusForChartOrderStatus);
-
+    this.loadChartOrderStatus();
+    this.setListOfMonthsLabel();
+    this.setListOrderVolumeByMonth();
+    this.loadChartOrderValueDeliveryDate();
   }
 
 
@@ -81,33 +86,65 @@ export class DashboardComponent implements OnDestroy, OnInit {
       data: {
         labels: this.listOfMonthsLabel,
         datasets: [{
-          label: 'Order value by delivery date',
-          data: [65, 59, 80, 81, 56, 55, 40],
+          label: 'Order value',
+          data: this.listOrderVolumeByMonth,
           fill: false,
           borderColor: 'rgb(75, 192, 192)',
           tension: 0.1
         }]
-      }
-
-
-
-
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+      },
     })
+  };
 
 
+  setListOrderVolumeByMonth() {
+    this.listOrders.forEach((order: any) => {
+      if (order['status'] == 'Pending' || order['status'] == 'Processing') {
 
-  }
+        const date = new Date(order['deliveryDate'])
+        const month = date.getMonth() + 1;
+
+        if (this.monthStartChartOrdersDeliveryDate != month) {
+          this.listOrderVolumeByMonth[this.monthStartChartOrdersDeliveryDate - (12 - month)] += order['sum']
+        } else {
+          this.listOrderVolumeByMonth[this.monthStartChartOrdersDeliveryDate - month] += order['sum']
+        }
+
+      }
+    });
+  };
 
 
   setListOfMonthsLabel() {
+    let arrayForNumbers: any = [];
 
+    this.listOrders.forEach((order: any) => {
+      const date = new Date(order['deliveryDate'])
+      arrayForNumbers.push(date);
+    });
 
+    this.monthStartChartOrdersDeliveryDate = Math.min(...arrayForNumbers);
+    const newDate = new Date(this.monthStartChartOrdersDeliveryDate);
+    const correctDate = newDate.getMonth() + 1;
 
+    this.monthStartChartOrdersDeliveryDate = correctDate;
+
+    this.listOfMonthsLabel.push(this.listOfMonthsNames[this.monthStartChartOrdersDeliveryDate - 1])
+
+    for (let i = 0; i < 11; i++) {
+      if (this.monthStartChartOrdersDeliveryDate + i == 12 && this.monthStartChartOrdersDeliveryDate != 12) {
+        this.listOfMonthsLabel.push(this.listOfMonthsNames[0])
+      } else if (this.monthStartChartOrdersDeliveryDate + i > 12) {
+        this.listOfMonthsLabel.push(this.listOfMonthsNames[this.monthStartChartOrdersDeliveryDate - 12 + i])
+      } else {
+        this.listOfMonthsLabel.push(this.listOfMonthsNames[i])
+      };
+    }
   }
-
-
-
-
 
 
 
@@ -243,7 +280,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
           },
         },
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
       },
     });
   };
@@ -304,14 +341,14 @@ export class DashboardComponent implements OnDestroy, OnInit {
   }
 
 
-  loadChartOrderStatus(listStatusOrders: any) {
+  loadChartOrderStatus() {
     this.chartOrderStatus = new Chart('canvas-orders', {
       type: 'doughnut',
       data: {
         labels: this.listStatus,
         datasets: [{
           label: 'Orders by Status',
-          data: listStatusOrders,
+          data: this.listStatusForChartOrderStatus,
           backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',

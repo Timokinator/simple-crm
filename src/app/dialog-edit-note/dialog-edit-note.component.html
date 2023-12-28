@@ -37,7 +37,7 @@
 </div>
 
 <div mat-dialog-actions>
-    <button [disabled]="loading" mat-button [mat-dialog-close]="">Cancel</button>
-    <button [disabled]="loading || formIncomplete" mat-button type="submit" (click)="saveNote()"
+    <button [disabled]="loading" mat-flat-button color="warn" [mat-dialog-close]="">Cancel</button>
+    <button [disabled]="loading || formIncomplete" mat-flat-button color="primary" type="submit" (click)="saveNote()"
         [mat-dialog-close]="">Save</button>
 </div>

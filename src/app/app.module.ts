@@ -63,6 +63,7 @@ import { DialogAddPositionToOrderComponent } from './dialog-add-position-to-orde
 import { DialogEditOrderComponent } from './dialog-edit-order/dialog-edit-order.component';
 import { DialogDeleteOrderComponent } from './dialog-delete-order/dialog-delete-order.component';
 import { NgChartsModule } from 'ng2-charts';
+import { IntroComponent } from './intro/intro.component';
 
 
 
@@ -104,7 +105,8 @@ import { NgChartsModule } from 'ng2-charts';
     DialogAddOrderComponent,
     DialogAddPositionToOrderComponent,
     DialogEditOrderComponent,
-    DialogDeleteOrderComponent
+    DialogDeleteOrderComponent,
+    IntroComponent
   ],
   imports: [
     BrowserModule,

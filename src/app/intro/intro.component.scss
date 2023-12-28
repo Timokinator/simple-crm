@@ -1,0 +1,51 @@
+.container-intro {
+    animation: fadeOut 2.5s ease-out forwards;
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(245, 245, 245, 0.975);
+
+    img {
+        width: 75%;
+        animation: fadeOutImg 2.5s ease-out forwards;
+        position: relative;
+    }
+
+
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOutImg {
+    0% {
+        width: 75%;
+        top: 0%;
+        left: 0%;
+    }
+
+    35% {
+        width: 75%;
+        top: 0%;
+        left: 0%;
+    }
+
+    100% {
+        width: 0%;
+        top: 50%;
+        left: 50%;
+    }
+}

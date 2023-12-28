@@ -7,13 +7,13 @@
     <div class="container-input-names">
         <mat-form-field appearance="outline">
             <mat-label>First name</mat-label>
-            <input (keyup)="checkValidation()" required id="firstName" name="firstName" class="form-control"
+            <input (keyup)="checkValidation()" maxlength="15" required id="firstName" name="firstName" class="form-control"
                 minlength="4" #name="ngModel" [disabled]="loading" [(ngModel)]="user.firstName" matInput placeholder="">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Last name</mat-label>
-            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="user.lastName" matInput
+            <input (keyup)="checkValidation()" maxlength="20" required [disabled]="loading" [(ngModel)]="user.lastName" matInput
                 placeholder="">
         </mat-form-field>
     </div>
@@ -21,7 +21,7 @@
     <div class="container-input-email">
         <mat-form-field class="input-email" appearance="outline">
             <mat-label>E-mail</mat-label>
-            <input (keyup)="checkValidation()" required type="email" [disabled]="loading" [(ngModel)]="user.email"
+            <input (keyup)="checkValidation()" maxlength="25" required type="email" [disabled]="loading" [(ngModel)]="user.email"
                 matInput placeholder="">
         </mat-form-field>
     </div>
@@ -41,7 +41,7 @@
     <div class="container-input-address-street">
         <mat-form-field class="input-address-street" appearance="outline">
             <mat-label>Street & House number</mat-label>
-            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="user.street" matInput
+            <input (keyup)="checkValidation()" maxlength="25" required [disabled]="loading" [(ngModel)]="user.street" matInput
                 placeholder="">
         </mat-form-field>
 
@@ -57,7 +57,7 @@
 
         <mat-form-field class="input-city" appearance="outline">
             <mat-label>City</mat-label>
-            <input (keyup)="checkValidation()" required [disabled]="loading" [(ngModel)]="user.city" matInput
+            <input (keyup)="checkValidation()" maxlength="20" required [disabled]="loading" [(ngModel)]="user.city" matInput
                 placeholder="">
         </mat-form-field>
     </div>

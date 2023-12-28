@@ -14,7 +14,7 @@
             <th>Customer #</th>
             <th>Name</th>
             <th>City</th>
-            <th>Status</th>
+            <th class="hide-on-mobile">Status</th>
             <!-- <th></th> -->
 
         </tr>
@@ -23,7 +23,7 @@
             <td *ngIf="searchFunction(customer)">{{ customer.customerNumber }}</td>
             <td *ngIf="searchFunction(customer)">{{ customer.name }}</td>
             <td *ngIf="searchFunction(customer)">{{ customer.city }}</td>
-            <td *ngIf="searchFunction(customer)">{{ customer.status }}</td>
+            <td class="hide-on-mobile" *ngIf="searchFunction(customer)">{{ customer.status }}</td>
 
         </tr>
 

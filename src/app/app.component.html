@@ -1,5 +1,5 @@
 <mat-drawer-container class="mat-drawer-container" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side" [opened]="true">
+  <mat-drawer #drawer class="sidenav" [mode]="drawerMode" [opened]="drawerOpened">
 
     <div class="logo-container">
       <img class="img-logo" src="../assets/img/logo.png" alt="">
@@ -7,20 +7,36 @@
 
     <div class="container-drawer-content">
       <ul>
-        <li routerLinkActive="active" routerLink="dashboard"><mat-icon>dashboard</mat-icon>Dashboard</li>
-        <li routerLinkActive="active" routerLink="user"><mat-icon>perm_identity</mat-icon>Users</li>
-        <li routerLinkActive="active" routerLink="notes"><mat-icon>note</mat-icon>Notes</li>
-        <li routerLinkActive="active" routerLink="articles"><mat-icon>article</mat-icon>Articles</li>
-        <li routerLinkActive="active" routerLink="customers"><mat-icon>group</mat-icon>Customers</li>
-        <li routerLinkActive="active" routerLink="orders"><mat-icon>sell</mat-icon>Orders</li>
-        <li routerLinkActive="active" routerLink="datamanagement"><mat-icon>storage</mat-icon>Data Management</li>
+        <li (click)="isScreenSmall && drawer.toggle()" routerLinkActive="active" routerLink="dashboard">
+          <mat-icon>dashboard</mat-icon>Dashboard
+        </li>
+        <li (click)="isScreenSmall && drawer.toggle()" routerLinkActive="active" routerLink="user">
+          <mat-icon>perm_identity</mat-icon>Users
+        </li>
+        <li (click)="isScreenSmall && drawer.toggle()" routerLinkActive="active" routerLink="notes">
+          <mat-icon>note</mat-icon>Notes
+        </li>
+        <li (click)="isScreenSmall && drawer.toggle()" routerLinkActive="active" routerLink="articles">
+          <mat-icon>article</mat-icon>Articles
+        </li>
+        <li (click)="isScreenSmall && drawer.toggle()" routerLinkActive="active" routerLink="customers">
+          <mat-icon>group</mat-icon>Customers
+        </li>
+        <li (click)="isScreenSmall && drawer.toggle()" routerLinkActive="active" routerLink="orders">
+          <mat-icon>sell</mat-icon>Orders
+        </li>
+        <li (click)="isScreenSmall && drawer.toggle()" routerLinkActive="active" routerLink="datamanagement">
+          <mat-icon>storage</mat-icon>Data Management
+        </li>
       </ul>
 
 
       <div class="container-imprint-privacy">
         <ul>
-          <li routerLink="help"><mat-icon>help</mat-icon>About</li>
-          <li routerLink="imprint"><mat-icon>policy</mat-icon>Imprint / Privacy Policy</li>
+          <li (click)="isScreenSmall && drawer.toggle()" routerLinkActive="active" routerLink="help">
+            <mat-icon>help</mat-icon>About</li>
+          <li (click)="isScreenSmall && drawer.toggle()" routerLinkActive="active" routerLink="imprint">
+            <mat-icon>policy</mat-icon>Imprint / Privacy Policy</li>
         </ul>
 
       </div>

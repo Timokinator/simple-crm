@@ -54,6 +54,32 @@ mat-card {
 }
 
 
+
+
+
+
 .text-align-end {
     text-align: end;
+}
+
+
+@media (max-width: 850px) {
+
+    td {
+        font-size: 10px;
+    }
+
+    th {
+        font-size: 12px !important;
+    }
+
+    mat-card{
+        padding: 0;
+    } 
+
+    .hide-on-mobile {
+        display: none;
+    }
+
+
 }

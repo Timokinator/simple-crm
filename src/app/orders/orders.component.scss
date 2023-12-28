@@ -1,8 +1,21 @@
 .btn-add {
-    position: absolute;
+    position: fixed;
     top: 64px;
     right: 64px;
+
+    @media (max-width: 850px) {
+        right: 4px;
+        top: 60px;
+    }
 }
+
+mat-form-field {
+    @media (max-width: 850px) {
+        max-width: 200px;
+    }
+}
+
+
 
 th,
 td {
@@ -147,5 +160,28 @@ h3 {
     color: grey !important;
     cursor: not-allowed !important;
     scale: unset !important;
+
+}
+
+
+:host-context(.styles-for-customer-details) {
+    .hide-on-mobile-customer-detail {
+        @media (max-width: 850px) {
+            display: none;
+        }
+    }
+
+    td {
+        @media (max-width: 850px) {
+            font-size: 10px;
+        }
+    }
+
+    th {
+        @media (max-width: 850px) {
+            font-size: 12px;
+        }
+    }
+
 
 }

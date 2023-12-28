@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, HostListener } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { FormsModule } from '@angular/forms';
@@ -26,6 +26,8 @@ export class UserComponent implements OnDestroy {
     this.unsubUser = this.subUserList();
   }
 
+
+  
 
 
   subUserList() {

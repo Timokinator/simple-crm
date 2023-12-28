@@ -7,6 +7,12 @@
     display: flex;
     gap: 16px;
     padding: 4px 0;
+
+    @media (max-width: 850px) {
+        flex-direction: column;
+        gap: 0;
+    }
+
 }
 
 .container-input-birthday {
@@ -25,6 +31,12 @@
     display: flex;
     gap: 16px;
     padding: 4px 0;
+
+    @media (max-width: 850px) {
+        flex-direction: column;
+        gap: 0;
+    }
+
 }
 
 .container-input-email {
@@ -41,8 +53,18 @@
 
 .input-zip {
     width: 30%;
+
+    @media (max-width: 850px) {
+        width: 100%;
+    }
+
 }
 
 .input-city {
     width: 70%;
+
+    @media (max-width: 850px) {
+        width: 100%;
+    }
+
 }

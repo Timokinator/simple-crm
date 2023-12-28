@@ -12,12 +12,12 @@
     <table class="mat-elevation-z8">
 
         <tr class="first-row">
-            <th>Item Number</th>
-            <th>Item Description</th>
+            <th>Item #</th>
+            <th>Item Desc</th>
             <th>Price</th>
-            <th>Category</th>
-            <th>Supplier</th>
-            <th>Status</th>
+            <th class="hide-on-mobile">Category</th>
+            <th class="hide-on-mobile">Supplier</th>
+            <th class="hide-on-mobile">Status</th>
             <th></th>
         </tr>
 
@@ -27,9 +27,9 @@
                 <td *ngIf="complexSearchFunction(article)">{{ article.itemDesc }}</td>
                 <td *ngIf="complexSearchFunction(article)">{{ article.price | currency:
                     'USD':'symbol':'1.2-2' }}</td>
-                <td *ngIf="complexSearchFunction(article)">{{ article.category }}</td>
-                <td *ngIf="complexSearchFunction(article)">{{ article.supplier }}</td>
-                <td *ngIf="complexSearchFunction(article)">{{ article.status }}</td>
+                <td class="hide-on-mobile" *ngIf="complexSearchFunction(article)">{{ article.category }}</td>
+                <td class="hide-on-mobile" *ngIf="complexSearchFunction(article)">{{ article.supplier }}</td>
+                <td class="hide-on-mobile" *ngIf="complexSearchFunction(article)">{{ article.status }}</td>
                 <td *ngIf="complexSearchFunction(article)">
                     <button [matMenuTriggerFor]="menuHeader" class="icon-more-options" mat-icon-button>
                         <mat-icon color="primary">more_vert</mat-icon>

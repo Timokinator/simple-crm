@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
 import { Chart } from 'chart.js';
 import { query, orderBy, limit, where, Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, setDoc } from '@angular/fire/firestore';
 import { Order } from 'src/models/order.class';
@@ -63,6 +63,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
 
   constructor() { }
+
 
 
   async ngOnInit(): Promise<void> {

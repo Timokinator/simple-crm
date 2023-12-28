@@ -2,6 +2,12 @@
     position: fixed;
     top: 64px;
     right: 64px;
+
+    @media (max-width: 850px) {
+        top: 60px;
+        right: 4px;
+    }
+
 }
 
 mat-card {
@@ -9,6 +15,11 @@ mat-card {
     padding: 0 24px 4px 0;
 }
 
+mat-form-field {
+    @media (max-width: 850px) {
+        max-width: 200px;
+    }
+}
 
 
 
@@ -42,4 +53,3 @@ mat-card {
 
 
 }
-

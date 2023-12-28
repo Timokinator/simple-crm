@@ -12,19 +12,20 @@
 
         <tr class="first-row">
             <th>Order #</th>
-            <th>Customer</th>
+            <th class="hide-on-mobile-customer-detail">Customer</th>
             <th>Status</th>
             <th>Delivery date</th>
-            <th class="text-align-right">Total $</th>
+            <th class="text-align-right hide-on-mobile-customer-detail">Total $</th>
         </tr>
 
         <ng-container *ngFor="let order of listOrders; let i = index">
             <tr #orderElement [attr.id]="i" (click)="toggleOrderElement(orderElement)">
                 <td *ngIf="searchFunction(order)">{{ order.orderNumber }}</td>
-                <td *ngIf="searchFunction(order)">{{ order.customer.name }}</td>
+                <td class="hide-on-mobile-customer-detail" *ngIf="searchFunction(order)">{{ order.customer.name }}</td>
                 <td *ngIf="searchFunction(order)">{{ order.status }}</td>
                 <td *ngIf="searchFunction(order)">{{ convertDate(order.deliveryDate) }}</td>
-                <td class="order-sum-text-right" *ngIf="searchFunction(order)">{{ order.sum | currency:
+                <td class="order-sum-text-right hide-on-mobile-customer-detail" *ngIf="searchFunction(order)">{{
+                    order.sum | currency:
                     'USD':'symbol':'1.2-2' }}</td>
             </tr>
 
@@ -58,7 +59,7 @@
                                 <table class="table-details">
                                     <tr class="first-row">
                                         <th>Article #</th>
-                                        <th>Description</th>
+                                        <th>Desc</th>
                                         <th class="text-align-right">Price</th>
                                         <th class="text-align-right">Qty</th>
                                         <th class="text-align-right">Sum</th>

@@ -15,6 +15,11 @@
         border-radius: 100px;
         background-color: white;
         object-fit: cover;
+
+        @media (max-width: 850px) {
+            width: 48px;
+        }
+
     }
 
 
@@ -107,3 +112,11 @@
     gap: 2px;
 
 }
+
+
+.hide-on-mobile-customer-detail {
+    @media (max-width: 850px) {
+        display: none;
+    }
+}
+

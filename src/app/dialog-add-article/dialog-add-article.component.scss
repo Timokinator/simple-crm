@@ -19,12 +19,23 @@
     display: flex;
     gap: 16px;
     padding: 4px 0;
+
+    @media (max-width: 850px) {
+        flex-direction: column;
+        gap: 0;
+    }
 }
 
 .container-itemNumber-itemDesc {
     margin-bottom: 16px;
+
+    @media (max-width: 850px) {
+        margin-bottom: 0;
+        gap: 24px !important;
+    }
 }
 
 mat-hint {
     line-height: 1;
 }
+

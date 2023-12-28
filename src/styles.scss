@@ -10,3 +10,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     word-wrap: break-word;
 }
 
+.cdk-overlay-pane {
+    @media (max-width: 850px) {
+        max-width: 95vw !important;
+    }
+
+}

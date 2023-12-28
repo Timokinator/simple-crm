@@ -1,5 +1,11 @@
 .input-amount-position {
     width: 52px;
+
+    @media (max-width: 850px) {
+        width: 32px;
+    }
+
+
 }
 
 .icon-delete {
@@ -63,17 +69,31 @@ th {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (max-width: 850px) {
+        padding: 0;
+    }
 }
 
 
 .container-positions {
     width: 100%;
     margin-top: 24px;
-
-
 }
 
 
 .text-align-end {
     text-align: end !important;
+}
+
+mat-hint {
+    @media (max-width: 850px) {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 850px) {
+    td, th {
+        font-size: 12px;
+    }
 }

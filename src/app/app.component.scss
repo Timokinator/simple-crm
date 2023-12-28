@@ -70,6 +70,12 @@ ul {
 
 .container-router {
     padding: 16px 56px;
+
+    @media (max-width: 850px) {
+        padding: 16px 8px;
+    }
+
+
 }
 
 

@@ -13,15 +13,15 @@
         <tr class="first-row">
             <th>Last name</th>
             <th>First name</th>
-            <th>E-mail</th>
+            <th class="hide-on-mobile">E-mail</th>
             <th>City</th>
         </tr>
 
         <tr *ngFor="let user of listUser" [routerLink]="['/user/' + user.id]">
             <td *ngIf="searchFunction(user)">{{ user.lastName }}</td>
             <td *ngIf="searchFunction(user)">{{ user.firstName }}</td>
-            <td *ngIf="searchFunction(user)">{{ user.email }}</td>
-            <td *ngIf="searchFunction(user)">{{ user.city }}</td>
+            <td class="hide-on-mobile" *ngIf="searchFunction(user)">{{ user.email }}</td>
+            <td *ngIf=" searchFunction(user)">{{ user.city }}</td>
         </tr>
 
     </table>

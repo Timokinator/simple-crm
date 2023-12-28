@@ -1,12 +1,20 @@
 .btn-add {
     position: fixed;
-    bottom: 56px;
-    right: 56px;
+    top: 64px;
+    right: 64px;
+
+    @media (max-width: 850px) {
+        right: 4px;
+        top: 60px;
+    }
+
 }
 
-
-
-
+mat-form-field {
+    @media (max-width: 850px) {
+        max-width: 200px;
+    }
+}
 
 table {
 
@@ -56,4 +64,11 @@ table {
         cursor: unset !important;
     }
 
+}
+
+
+.hide-on-mobile {
+    @media (max-width: 850px) {
+        display: none;
+    }
 }

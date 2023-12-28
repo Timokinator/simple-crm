@@ -15,8 +15,15 @@
         border-radius: 100px;
         background-color: white;
         object-fit: cover;
+
+        @media (max-width: 850px) {
+            width: 48px;
+        }
     }
 
+    @media (max-width: 850px) {
+        gap: 16px;
+    }
 
 }
 

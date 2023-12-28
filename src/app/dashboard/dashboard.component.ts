@@ -28,6 +28,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
   listStatus = ['Pending', 'Processing', 'Shipped', 'Delivered'];
   listStatusForChartOrderStatus = [0, 0, 0, 0];
+  listStatusForChartOrderStatusValue = [0, 0, 0, 0];
 
   listOfMonthsLabel: any = [];
   listOfMonthsNames = [
@@ -318,7 +319,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
 
 
-  //Code for order statistics
+  //Code for order count and value by status statistics
 
   initChartAverageOrderValue() {
     let sumOfOrders: number = 0;
@@ -337,6 +338,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
     this.listOrders.forEach((order: any) => {
       const index = this.listStatus.indexOf(order.status)
       this.listStatusForChartOrderStatus[index] += 1;
+      this.listStatusForChartOrderStatusValue[index] += order['sum']
     });
   }
 
@@ -347,7 +349,7 @@ export class DashboardComponent implements OnDestroy, OnInit {
       data: {
         labels: this.listStatus,
         datasets: [{
-          label: 'Orders by Status',
+          label: 'Order count by Status',
           data: this.listStatusForChartOrderStatus,
           backgroundColor: [
             'rgb(255, 99, 132)',
@@ -356,7 +358,19 @@ export class DashboardComponent implements OnDestroy, OnInit {
             'rgb(75, 192, 192)'
           ],
           hoverOffset: 4,
-        }]
+        },
+        {
+          label: 'Order value by Status',
+          data: this.listStatusForChartOrderStatusValue,
+          backgroundColor: [
+            'rgb(255, 99, 132, 0.5)',
+            'rgb(54, 162, 235, 0.5)',
+            'rgb(255, 205, 86, 0.5)',
+            'rgb(75, 192, 192, 0.5)'
+          ],
+          hoverOffset: 4,
+        }
+        ]
       },
       options: {
         radius: '100%'
@@ -365,6 +379,39 @@ export class DashboardComponent implements OnDestroy, OnInit {
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
+  /*   loadChartOrderStatus() {
+      this.chartOrderStatus = new Chart('canvas-orders', {
+        type: 'doughnut',
+        data: {
+          labels: this.listStatus,
+          datasets: [{
+            label: 'Orders by Status',
+            data: this.listStatusForChartOrderStatus,
+            backgroundColor: [
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)'
+            ],
+            hoverOffset: 4,
+          }]
+        },
+        options: {
+          radius: '100%'
+        }
+      })
+    } */
 
 
 

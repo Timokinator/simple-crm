@@ -168,11 +168,11 @@ export class DialogAddArticleComponent implements OnInit {
 
 
   checkValidation() {
-    let listOFItemNumbers: any = [];
+    let listOfItemNumbers: any = [];
     this.listArticles.forEach((element: any) => {
-      listOFItemNumbers.push(element.itemNumber)
+      listOfItemNumbers.push(element.itemNumber)
     });
-    if (listOFItemNumbers.includes(this.article.itemNumber)) {
+    if (listOfItemNumbers.includes(this.article.itemNumber)) {
       this.itemNumberUnique = false
     } else {
       this.itemNumberUnique = true

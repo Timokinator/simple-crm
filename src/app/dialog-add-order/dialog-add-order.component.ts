@@ -35,7 +35,7 @@ export class DialogAddOrderComponent implements OnDestroy {
   customer = new Customer();
 
   loading: boolean = false;
-  orderNumberUnique!: boolean;
+  orderNumberUnique: boolean = true;
   formIncomplete: boolean = true;
 
   orderDate!: Date;

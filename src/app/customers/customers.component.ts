@@ -30,7 +30,7 @@ export class CustomersComponent implements OnDestroy {
 
 
   subCustomerList() {
-    const q = query(this.getCustomerRef());
+    const q = query(this.getCustomerRef(), orderBy('customerNumber'));
     return onSnapshot(q, (list) => {
       this.listCustomer = [];
       list.forEach(element => {

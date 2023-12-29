@@ -1,3 +1,18 @@
+.color-red {
+
+    color: red;
+
+    input {
+        color: red;
+    }
+
+    mat-label {
+        color: red;
+    }
+
+}
+
+
 .input-amount-position {
     width: 52px;
 }
@@ -50,6 +65,9 @@ th {
     }
 }
 
+.input-status {
+    height: fit-content;
+}
 
 
 .input-c-number {

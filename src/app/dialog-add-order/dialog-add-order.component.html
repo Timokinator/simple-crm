@@ -5,7 +5,7 @@
 <h1 mat-dialog-title>Add Order</h1>
 <div class="flex-center" mat-dialog-content>
     <div class="container-input-names">
-        <mat-form-field class="input-c-number" appearance="outline">
+        <mat-form-field [ngClass]="{'color-red': !orderNumberUnique}" class="input-c-number" appearance="outline">
             <mat-label>Order number</mat-label>
             <input (keyup)="checkValidation()" [ngClass]="{'color-red': !orderNumberUnique}" required id="orderNumber"
                 name="orderNumber" class="form-control" minlength="5" #name="ngModel" [disabled]="loading"

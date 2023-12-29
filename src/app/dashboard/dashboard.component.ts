@@ -109,13 +109,11 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
         const date = new Date(order['deliveryDate'])
         const month = date.getMonth() + 1;
-
-        if (this.monthStartChartOrdersDeliveryDate != month) {
-          this.listOrderVolumeByMonth[this.monthStartChartOrdersDeliveryDate - (12 - month)] += order['sum']
+        if (month - this.monthStartChartOrdersDeliveryDate >= 0) {
+          this.listOrderVolumeByMonth[month - this.monthStartChartOrdersDeliveryDate] += order['sum'];
         } else {
-          this.listOrderVolumeByMonth[this.monthStartChartOrdersDeliveryDate - month] += order['sum']
+          this.listOrderVolumeByMonth[month + 12 - this.monthStartChartOrdersDeliveryDate] += order['sum'];
         }
-
       }
     });
   };
@@ -137,13 +135,14 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
     this.listOfMonthsLabel.push(this.listOfMonthsNames[this.monthStartChartOrdersDeliveryDate - 1])
 
+
     for (let i = 0; i < 11; i++) {
       if (this.monthStartChartOrdersDeliveryDate + i == 12 && this.monthStartChartOrdersDeliveryDate != 12) {
         this.listOfMonthsLabel.push(this.listOfMonthsNames[0])
       } else if (this.monthStartChartOrdersDeliveryDate + i > 12) {
         this.listOfMonthsLabel.push(this.listOfMonthsNames[this.monthStartChartOrdersDeliveryDate - 12 + i])
       } else {
-        this.listOfMonthsLabel.push(this.listOfMonthsNames[i])
+        this.listOfMonthsLabel.push(this.listOfMonthsNames[i + 1]) //richtig? vorher nur [i] -> prüfen!
       };
     }
   }
@@ -232,14 +231,6 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
   getOrdersRef() {
     return collection(this.firestore, 'orders');
-  };
-
-  loggingLists() {
-    console.log('Customer: ', this.listCustomer);
-    console.log('Customer-Chart: ', this.listCustomerForChart);
-    console.log('Orders: ', this.listOrders);
-    console.log('Sums for Chart: ', this.listSumsForChart);
-    console.log('Chart: ', this.chartSalesStatistic);
   };
 
   // Code for Sales statistics chart
@@ -378,42 +369,6 @@ export class DashboardComponent implements OnDestroy, OnInit {
       }
     })
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*   loadChartOrderStatus() {
-      this.chartOrderStatus = new Chart('canvas-orders', {
-        type: 'doughnut',
-        data: {
-          labels: this.listStatus,
-          datasets: [{
-            label: 'Orders by Status',
-            data: this.listStatusForChartOrderStatus,
-            backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(54, 162, 235)',
-              'rgb(255, 205, 86)',
-              'rgb(75, 192, 192)'
-            ],
-            hoverOffset: 4,
-          }]
-        },
-        options: {
-          radius: '100%'
-        }
-      })
-    } */
-
 
 
 }

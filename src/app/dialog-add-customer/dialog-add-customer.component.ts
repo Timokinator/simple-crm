@@ -109,21 +109,9 @@ export class DialogAddCustomerComponent implements OnDestroy {
     await updateDoc(docRef, { id: id }).catch(
       (err) => { console.log(err); }
     ).then(
-      () => { console.log("Update") }
+      () => { }
     );
   }
-
-
-
-
-
-
-
-
-  onNoClick() {
-    console.log('Cancel')
-  }
-
 
 
 }

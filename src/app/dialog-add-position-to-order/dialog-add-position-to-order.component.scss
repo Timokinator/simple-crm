@@ -37,6 +37,8 @@ table {
     background-color: #3f51b5;
     //border: none;
     color: white;
+    position: sticky;
+    top: 0;
 
 
     &:hover {
@@ -73,13 +75,18 @@ mat-card {
         font-size: 12px !important;
     }
 
-    mat-card{
+    mat-card {
         padding: 0;
-    } 
+    }
 
     .hide-on-mobile {
         display: none;
     }
 
 
+}
+
+
+.container-add-article-to-order {
+    max-height: 90vh;
 }

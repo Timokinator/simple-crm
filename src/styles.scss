@@ -15,4 +15,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         max-width: 95vw !important;
     }
 
+    @media (max-width: 550px) {
+        width: 100vw;
+    }
+
+
 }

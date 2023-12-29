@@ -85,7 +85,7 @@ export class DialogEditCustomerComponent implements OnInit, OnDestroy {
     await updateDoc(docRef, this.getCleanJson(this.customer)).catch(
       (err) => { console.log(err); }
     ).then(
-      () => { console.log("Update") }
+      () => { }
     );
   }
 

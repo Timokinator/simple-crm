@@ -1,41 +1,44 @@
-<h1 mat-dialog-title>Search Article to add</h1>
+<div class="container-add-article-to-order">
+    <h1 mat-dialog-title>Search Article to add</h1>
 
-<mat-form-field>
-    <mat-label>Type for search</mat-label>
-    <input type="string" [(ngModel)]="searchInput" matInput>
-    <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
-        <mat-icon color="primary">close</mat-icon>
-    </button>
-</mat-form-field>
+    <mat-form-field>
+        <mat-label>Type for search</mat-label>
+        <input type="string" [(ngModel)]="searchInput" matInput>
+        <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Clear" (click)="searchInput=''">
+            <mat-icon color="primary">close</mat-icon>
+        </button>
+    </mat-form-field>
 
 
-<mat-card>
+    <mat-card>
 
-    <table class="mat-elevation-z8">
+        <table class="mat-elevation-z8">
 
-        <tr class="first-row">
-            <th>#</th>
-            <th>Desc</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th class="hide-on-mobile">Supplier</th>
-            <th class="hide-on-mobile">Status</th>
+            <tr class="first-row">
+                <th>#</th>
+                <th>Desc</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th class="hide-on-mobile">Supplier</th>
+                <th class="hide-on-mobile">Status</th>
 
-        </tr>
-
-        <ng-container *ngFor="let article of listArticle">
-            <tr [mat-dialog-close]="article">
-                <td *ngIf="searchFunction(article)">{{ article.itemNumber }}</td>
-                <td *ngIf="searchFunction(article)">{{ article.itemDesc }}</td>
-                <td class="text-align-end" *ngIf="searchFunction(article)">{{ article.price | currency:
-                    'USD':'symbol':'1.2-2' }}</td>
-                <td *ngIf="searchFunction(article)">{{ article.category }}</td>
-                <td class="hide-on-mobile" *ngIf="searchFunction(article)">{{ article.supplier }}</td>
-                <td class="hide-on-mobile" *ngIf="searchFunction(article)">{{ article.status }}</td>
             </tr>
-        </ng-container>
 
-    </table>
+            <ng-container *ngFor="let article of listArticle">
+                <tr [mat-dialog-close]="article">
+                    <td *ngIf="searchFunction(article)">{{ article.itemNumber }}</td>
+                    <td *ngIf="searchFunction(article)">{{ article.itemDesc }}</td>
+                    <td class="text-align-end" *ngIf="searchFunction(article)">{{ article.price | currency:
+                        'USD':'symbol':'1.2-2' }}</td>
+                    <td *ngIf="searchFunction(article)">{{ article.category }}</td>
+                    <td class="hide-on-mobile" *ngIf="searchFunction(article)">{{ article.supplier }}</td>
+                    <td class="hide-on-mobile" *ngIf="searchFunction(article)">{{ article.status }}</td>
+                </tr>
+            </ng-container>
+
+        </table>
 
 
-</mat-card>
+    </mat-card>
+
+</div>

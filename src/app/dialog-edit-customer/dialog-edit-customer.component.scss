@@ -89,8 +89,38 @@
 
 .input-status {
     width: 40%;
+    height: fit-content;
 }
 
 .input-infotext {
     width: 60%;
+}
+
+
+@media (max-width: 550px) {
+
+    .container-input-names,
+    .container-input-email-phone,
+    .container-input-address-city,
+    .container-input-status-infotext {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .input-c-number,
+    .input-c-name,
+    .input-zip,
+    .input-city,
+    .input-status,
+    .input-infotext {
+        width: unset;
+    }
+
+    .container-input-names {
+        margin-bottom: 0;
+    }
+
+    .input-c-number {
+        margin-bottom: 24px;
+    }
 }

@@ -46,9 +46,9 @@ export class OrdersComponent implements OnDestroy, OnInit {
   subOrdersList() {
     let q;
     if (this.inputFilterCustomer) {
-      q = query(this.getOrdersRef(), where("customer.id", "==", this.inputFilterCustomer));
+      q = query(this.getOrdersRef(), where("customer.id", "==", this.inputFilterCustomer), orderBy('orderNumber'));
     } else {
-      q = query(this.getOrdersRef());
+      q = query(this.getOrdersRef(), orderBy('orderNumber'));
     }
 
     return onSnapshot(q, (list) => {

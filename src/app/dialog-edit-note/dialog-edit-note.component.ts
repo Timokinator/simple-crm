@@ -71,7 +71,7 @@ export class DialogEditNoteComponent implements OnInit {
       (err) => { console.log(err); }
     ).then(
       () => {
-        console.log("Update")
+        //console.log("Update")
         this.loading = false;
       }
     );

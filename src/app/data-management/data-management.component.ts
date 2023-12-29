@@ -222,8 +222,16 @@ export class DataManagementComponent {
 
 
 
+  // Search function
 
-
+  searchFunction(obj: any) {
+    if (obj.name.toLowerCase().includes(this.searchInput.toLowerCase())
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 
   ngonDestroy() {

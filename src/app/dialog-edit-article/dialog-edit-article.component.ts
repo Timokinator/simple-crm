@@ -216,8 +216,8 @@ export class DialogEditArticleComponent implements OnInit, OnDestroy {
       (err) => { console.log(err); }
     ).then(
       () => {
-        console.log("Update")
-        console.log(this.article);
+        //console.log("Update")
+        //console.log(this.article);
         this.loading = false;
       }
     );

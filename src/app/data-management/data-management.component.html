@@ -17,10 +17,12 @@
             </tr>
 
             <tr *ngFor="let category of listCategories">
-                <td>{{ category.name }}</td>
-                <td class="text-align-end">
-                    <mat-icon class="icon-edit-delete" color="primary" (click)="openDialogEditCategory(category)">edit</mat-icon>
-                    <mat-icon class="icon-edit-delete" color="warn" (click)="openDialogDeleteCategory(category)">delete</mat-icon>
+                <td *ngIf="searchFunction(category)">{{ category.name }}</td>
+                <td *ngIf="searchFunction(category)" class="text-align-end">
+                    <mat-icon class="icon-edit-delete" color="primary"
+                        (click)="openDialogEditCategory(category)">edit</mat-icon>
+                    <mat-icon class="icon-edit-delete" color="warn"
+                        (click)="openDialogDeleteCategory(category)">delete</mat-icon>
                 </td>
             </tr>
 
@@ -53,10 +55,12 @@
             </tr>
 
             <tr *ngFor="let supplier of listSupplier">
-                <td>{{ supplier.name }}</td>
-                <td class="text-align-end">
-                    <mat-icon class="icon-edit-delete" color="primary" (click)="openDialogEditSupplier(supplier)">edit</mat-icon>
-                    <mat-icon class="icon-edit-delete" color="warn" (click)="openDialogDeleteSupplier(supplier)">delete</mat-icon>
+                <td *ngIf="searchFunction(supplier)">{{ supplier.name }}</td>
+                <td *ngIf="searchFunction(supplier)" class="text-align-end">
+                    <mat-icon class="icon-edit-delete" color="primary"
+                        (click)="openDialogEditSupplier(supplier)">edit</mat-icon>
+                    <mat-icon class="icon-edit-delete" color="warn"
+                        (click)="openDialogDeleteSupplier(supplier)">delete</mat-icon>
                 </td>
             </tr>
 

@@ -4,6 +4,18 @@
     align-items: flex-start;
     gap: 24px;
     flex-wrap: wrap;
+
+
+    @media (max-width: 500px) {
+        flex-wrap: unset;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+
+
+
 }
 
 
@@ -68,4 +80,20 @@ mat-icon {
 .center {
     display: flex;
     align-items: center;
+}
+
+
+@media (max-width: 500px) {
+    mat-card {
+        width: 90%;
+    }
+
+    .icon-edit-delete {
+        width: 36px;
+        height: 36px;
+        font-size: 36px;
+    }
+
+
+
 }

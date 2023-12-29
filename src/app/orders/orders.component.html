@@ -15,7 +15,7 @@
             <th class="hide-on-mobile-customer-detail">Customer</th>
             <th>Status</th>
             <th>Delivery date</th>
-            <th class="text-align-right hide-on-mobile-customer-detail">Total $</th>
+            <th class="text-align-right hide-on-mobile-customer-detail hide-on-mobile">Total $</th>
         </tr>
 
         <ng-container *ngFor="let order of listOrders; let i = index">
@@ -24,7 +24,8 @@
                 <td class="hide-on-mobile-customer-detail" *ngIf="searchFunction(order)">{{ order.customer.name }}</td>
                 <td *ngIf="searchFunction(order)">{{ order.status }}</td>
                 <td *ngIf="searchFunction(order)">{{ convertDate(order.deliveryDate) }}</td>
-                <td class="order-sum-text-right hide-on-mobile-customer-detail" *ngIf="searchFunction(order)">{{
+                <td class="order-sum-text-right hide-on-mobile-customer-detail hide-on-mobile"
+                    *ngIf="searchFunction(order)">{{
                     order.sum | currency:
                     'USD':'symbol':'1.2-2' }}</td>
             </tr>
@@ -35,14 +36,14 @@
                     <div class="container-order-details">
                         <h2 class="header-line-order-details">Order Details
                             <div class="container-icons-header-line">
-                                <mat-icon
+                                <mat-icon class="icon-edit-delete"
                                     (click)="order.status == 'Pending' || order.status == 'Processing' ? editOrder(order) : null"
                                     color="primary"
                                     [ngClass]="{'color-grey': order.status == 'Shipped' || order.status == 'Delivered'}"
                                     [matTooltip]="order.status == 'Delivered' || order.status == 'Shipped' ? 'Not possible on this status' : ''"
                                     [matTooltipPosition]="'above'">edit</mat-icon>
 
-                                <mat-icon
+                                <mat-icon class="icon-edit-delete"
                                     [ngClass]="{'color-grey': order.status == 'Shipped' || order.status == 'Delivered'}"
                                     (click)="order.status == 'Pending' || order.status == 'Processing' ? deleteOrder(order) : null"
                                     color="warn"
@@ -58,7 +59,7 @@
 
                                 <table class="table-details">
                                     <tr class="first-row">
-                                        <th>Article #</th>
+                                        <th>#</th>
                                         <th>Desc</th>
                                         <th class="text-align-right">Price</th>
                                         <th class="text-align-right">Qty</th>
@@ -74,6 +75,18 @@
                                         <td class="text-align-right">{{ article.sum | currency:
                                             'USD':'symbol':'1.2-2' }}</td>
                                     </tr>
+
+                                    <tr class="show-on-mobile">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-align-right"><b>Total
+                                                $</b></td>
+                                        <td></td>
+                                        <td class="order-sum-text-right"><b>
+                                                {{ order.sum | currency: 'USD':'symbol':'1.2-2' }}</b></td>
+                                    </tr>
+
+
                                 </table>
 
 

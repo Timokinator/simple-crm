@@ -164,21 +164,64 @@ h3 {
 }
 
 
+
+@media (max-width: 550px) {
+    .icon-edit-delete {
+        width: 40px;
+        height: 40px;
+        font-size: 40px;
+    }
+
+
+    .hide-on-mobile {
+        display: none;
+    }
+
+
+    th,
+    td {
+        white-space: unset;
+    }
+
+    th {
+        font-size: 12px !important;
+    }
+
+    td {
+        font-size: 12px !important;
+    }
+
+
+
+}
+
+@media (min-width: 550px) {
+    .show-on-mobile {
+        display: none;
+    }
+
+}
+
+
+
+
+
+
 :host-context(.styles-for-customer-details) {
     .hide-on-mobile-customer-detail {
-        @media (max-width: 850px) {
+        @media (max-width: 550px) {
             display: none;
         }
     }
 
     td {
-        @media (max-width: 850px) {
+        @media (max-width: 550px) {
             font-size: 10px;
         }
     }
 
     th {
-        @media (max-width: 850px) {
+        @media (max-width: 550px) {
             font-size: 12px;
         }
     }

@@ -8,8 +8,8 @@
     <div class="container-input-title">
         <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
-            <input (keyup)="checkValidation()" required id="title" name="title" class="form-control" minlength="1" maxlength="32"
-                #name="ngModel" [disabled]="loading" [(ngModel)]="note.title" matInput placeholder="">
+            <input (keyup)="checkValidation()" required id="title" name="title" class="form-control" minlength="1"
+                maxlength="32" #name="ngModel" [disabled]="loading" [(ngModel)]="note.title" matInput placeholder="">
         </mat-form-field>
 
     </div>
@@ -26,7 +26,7 @@
         <mat-form-field>
             <mat-label>User</mat-label>
             <mat-select (selectionChange)="checkValidation()" [(ngModel)]="note.user" required [disabled]="loading">
-                <mat-option *ngFor="let user of listUser" value="{{ user.id }}">
+                <mat-option *ngFor="let user of listUser" [value]="user.id">
                     {{ user.firstName }}
                     {{ user.lastName }}
                 </mat-option>
